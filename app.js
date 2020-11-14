@@ -3,11 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+
+//Setup Database
+const url = "mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority";
+const connect = mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true});
+connect.then((db) => {
+  console.log("Connected correctly to server");
+}, (err) => { console.log(err); });
+
+const Cameras = require('./models/cameras');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
