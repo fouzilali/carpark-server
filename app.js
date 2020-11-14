@@ -19,8 +19,7 @@ connect.then((db) => {
 }, (err) => { console.log(err); });
 
 const Cameras = require('./models/cameras');
-
-
+const parkingSpots = require('./models/parkingSpots');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
