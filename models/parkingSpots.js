@@ -3,44 +3,44 @@ const Schema = mongoose.Schema;
 
 const licensePlateSchema = new Schema({
     userProfile: {
-        type: String, 
+        type: String,
     }
-}, {timestamp: true});
+}, { timestamp: true });
 
 const parkingSpotSchema = new Schema({
     spotID: {
-        type: String, 
+        type: String,
         unique: true,
         required: true
     },
-    cameraID:{
-    type: String, 
+    cameraID: {
+        type: String,
     },
     vacant: {
-    type: Boolean,
-    updatedAt:{
-        type: Date,
-        default: Date.now
+        type: Boolean,
+        updatedAt: {
+            type: Date,
+            default: Date.now
+        },
+        required: true
     },
-    required: true
-    },
-    licensePlate:{
+    licensePlate: {
         type: String,
         default: ""
     },
     boundingBox: {
-    x1: {
-        type: Number,
-    },
-    x2:{
-        type: Number,
-    },
-    y1:{
-        type: Number,
-    },
-    y2:{
-        type: Number,
-    }
+        x1: {
+            type: Number,
+        },
+        x2: {
+            type: Number,
+        },
+        y1: {
+            type: Number,
+        },
+        y2: {
+            type: Number,
+        }
     },
 
 });
