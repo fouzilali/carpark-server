@@ -7,9 +7,8 @@ var app = express();
 
 var db = require('./database')
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+var views = require('./views/views');
+views(app);
 
 app.use(logger('dev'));
 app.use(express.json());
