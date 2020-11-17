@@ -4,7 +4,11 @@
     node app.js # run server
     # open localhost:3000
 
-## TODOS:
+## API
+
+https://docs.google.com/document/d/1pIdR6F_JqRwzT5WQwP6-qQdHoFrq54f41aaOVLchKHk/edit
+
+## TODOS
 
  - Write all the Routing function in `routes/`
  - Write all the Query function in `database.js`
