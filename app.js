@@ -25,9 +25,6 @@ error_handlers(app);
 
 module.exports = app;
 
-const Cameras = require('./models/cameras');
-const parkingSpots = require('./models/parkingSpots');
-
 const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -6,3 +6,8 @@ const connect = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopolog
 connect.then((db) => {
     console.log(`DB: Connected to ${url}`);
 }, (err) => { console.log(err); });
+
+const Cameras = require('./models/cameras');
+const parkingSpots = require('./models/parkingSpots');
+
+// TODO: make functions for querying the database
