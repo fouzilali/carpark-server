@@ -12,6 +12,7 @@ const cameraSchema = new Schema({
     },
     isActive: {
         type: Boolean,
+        default: false,
         updatedAt: {
             type: Date,
             default: Date.now
@@ -30,6 +31,6 @@ const cameraSchema = new Schema({
     }
 });
 
+var Cameras = mongoose.model('Camera', cameraSchema)
 
-
-module.exports = cameraSchema;
+module.exports = Cameras;
