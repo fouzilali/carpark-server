@@ -25,7 +25,7 @@ const parkingSpotSchema = new Schema({
             type: Date,
             default: Date.now
         },
-        required: true
+        // required: true
     },
     licensePlate: {
         type: String,
@@ -48,8 +48,9 @@ const parkingSpotSchema = new Schema({
 
 });
 
+var ParkingSpots = mongoose.model('ParkingSpot', parkingSpotSchema);
 
 
 
 
-module.exports = parkingSpotSchema;
+module.exports = ParkingSpots;
