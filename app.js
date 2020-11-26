@@ -3,7 +3,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('./logger.js');
 var fs = require('fs');
-
 var app = express();
 
 var mongoose = require('mongoose');
@@ -17,6 +16,8 @@ connect.then((db) => {
 
 const Cameras = require('./models/cameras');
 const parkingSpots = require('./models/parkingSpots');
+
+
 
 
 var views = require('./views/views');

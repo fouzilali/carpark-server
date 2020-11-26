@@ -4,12 +4,25 @@ const Cameras = require('../models/cameras');
 const ParkingSpots = require('../models/parkingSpots');
 const setupRouter = express.Router();
 const mongoose = require('mongoose');
+var fs = require('fs'); 
+var path = require('path'); 
+var multer = require('multer');
 // TODO: 'setup' page
 
-//update the imiage part
+//upload image helper
+var storage = multer.diskStorage({ 
+    destination: (req, file, cb) => { 
+        cb(null, 'uploads') 
+    }, 
+    filename: (req, file, cb) => { 
+        cb(null, file.fieldname + '-' + Date.now()) 
+    } 
+  }); 
+  
+var upload = multer({ storage: storage }); 
+
 setupRouter.post('/addCamera', async(req,res,next) =>{
     try{
-        console.log(mongoose.connection.readyState)
         let cam = {
             cameraID: req.body.cameraID,
             parkingSpots: req.body.parkingSpots,
@@ -22,14 +35,30 @@ setupRouter.post('/addCamera', async(req,res,next) =>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 });
 
+setupRouter.post('/addCameraImage', upload.single('image'), async(req, res, next) => {  
+    try{
+        let camera  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
+        var img = { 
+            name: req.body.name, 
+            desc: req.body.desc, 
+            img: { 
+                data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), 
+                contentType: 'image/png'
+            } 
+        }        
+        camera.setupImg.create(img);
+    }catch(err){
+        console.error(err);
+    }
+}); 
+
 setupRouter.post('/addParkingSpot', async(req,res,next) =>{
     try{
-        let ps = {
-            
+        let ps = {            
                 spotID: req.body.spotID,
                 cameraID: req.body.cameraID,
                 vacant : req.body.vacant,
@@ -43,7 +72,7 @@ setupRouter.post('/addParkingSpot', async(req,res,next) =>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 } );
 
@@ -58,10 +87,9 @@ setupRouter.put('/updateCamera', async(req,res,next)=>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 });
-
 
 setupRouter.put('/updateParkingSpot', async(req,res,next)=>{
     try{
@@ -78,7 +106,7 @@ setupRouter.put('/updateParkingSpot', async(req,res,next)=>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 });
 
@@ -94,7 +122,7 @@ setupRouter.put('/updateCameraStatus', async(req,res,next)=>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 });
 
@@ -106,7 +134,7 @@ setupRouter.delete('/deleteCamera', async(req,res,next)=>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 });
 
@@ -118,10 +146,57 @@ setupRouter.delete('/deleteSpot', async(req,res,next)=>{
         res.json(result);
     }catch(err){
         console.error(err);
-        res.json(err).send
+        res.json(err)
     }
 });
 
+setupRouter.get('/getCamera',async(req,res,next) =>{
+    try{
+        result  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
+    }catch(err){
+        console.error(err);
+        res.json(err)
+    }
+});
+
+setupRouter.get('/getParkingSpot',async(req,res,next) =>{
+    try{
+        result  = await  ParkingSpots.findOne({spotID: req.body.spotID}); 
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
+    }catch(err){
+        console.error(err);
+        res.json(err)
+    }
+});
+
+setupRouter.get('./getCameraImage', async(req,res,next)=>{
+    try{
+        result  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result.setupImg);
+    }catch(err){
+        console.error(err);
+        res.json(err)
+    }
+});
+
+setupRouter.get('/getCameraStatus',async(req,res,next) =>{
+    try{
+        result  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result.isActive);
+    }catch(err){
+        console.error(err);
+        res.json(err)
+    }
+});
 
 
 

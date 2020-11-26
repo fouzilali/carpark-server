@@ -48,6 +48,7 @@ const parkingSpotSchema = new Schema({
 
 });
 
+
 var ParkingSpots = mongoose.model('ParkingSpot', parkingSpotSchema);
 
 
