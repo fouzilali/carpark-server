@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'scptest1'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0abeacaeba674cc2bbe40eb5537cac91 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e4402394381c4df3883f1bde23124783 }}
         package: .
