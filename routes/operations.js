@@ -1,17 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-// TODO: 'operation' stage API functions
+// TODO: 'operation' stage API fucntions
 
-router.put('/spotFilled', function (req, res, next) {
+router.put('/spotFilled', async(req, res, next) =>{
     // spotFilled(CameraID, LPNumber, PixelLocation, time)
     try{
-        result  = await  ParkingSpots.findOne({spotID : req.body.spotID}, function(err, doc){
-            doc.spotID = req.body.spotID;
+        result  = await  ParkingSpots.findOne({spotID : req.body.spotID}, async(err, doc) =>{
+            doc.spotID = 'A1';
             doc.cameraID = req.body.cameraID;
             doc.vacant = false;
             doc.licensePlate = req.body.licensePlate;
-            doc.boundingBox = req.body.boundingBox;
             doc.save();
         }); 
         res.statusCode = 200;
@@ -22,10 +21,10 @@ router.put('/spotFilled', function (req, res, next) {
         res.json(err);
     }
 })
-router.put('/spotVacated', function (req, res, next) {
+router.put('/spotVacated', async(req, res, next) => {
     // spotVacated(CameraID, PixelLocation, time)
     try{
-        result  = await  ParkingSpots.findOne({spotID : req.body.spotID}, function(err, doc){
+        result  = await  ParkingSpots.findOne({spotID : req.body.spotID}, async(err, doc) =>{
             doc.spotID = req.body.spotID,
             doc.cameraID = req.body.cameraID,
             doc.vacant = true,
@@ -42,7 +41,7 @@ router.put('/spotVacated', function (req, res, next) {
     }
 })
 
-router.get('/isFilled', function (req, res, next) {
+router.get('/isFilled', async(req, res, next) => {
     try{
         result  = await  ParkingSpots.findOne({spotID: req.body.spotID}); 
         res.statusCode = 200;
@@ -53,7 +52,7 @@ router.get('/isFilled', function (req, res, next) {
         res.json(err);
     }
 })
-router.get('/getLPNumber', function (req, res, next) {
+router.get('/getLPNumber', async(req, res, next) => {
     try{
         result  = await  ParkingSpots.findOne({spotID: req.body.spotID}); 
         res.statusCode = 200;
@@ -63,7 +62,7 @@ router.get('/getLPNumber', function (req, res, next) {
         console.error(err);
         res.json(err);
     }})
-router.get('/isVacated', function (req, res, next) {
+router.get('/isVacated', async(req, res, next) => {
     // isVacated(ParkingSpot) -> bool
     try{
         result  = await  ParkingSpots.findOne({spotID: req.body.spotID}); 
@@ -75,10 +74,10 @@ router.get('/isVacated', function (req, res, next) {
         res.json(err);
     }
 })
-router.get('/userProfile', function (req, res, next) {
+router.get('/userProfile', async(req, res, next) => {
     // userProfile(licensePlate)-> userProfile
 })
-router.get('/getTimeSpent', function (req, res, next) {
+router.get('/getTimeSpent', async(req, res, next) => {
     // getTimeSpent(licensePlate/userProfile)
 })
 
