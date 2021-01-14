@@ -1,6 +1,13 @@
 var got = require('got');
 
 /**
+ * Async Promise verion of sleep
+ * 
+ * @param {int} ms how long to sleep ofr
+ */
+const sleep = ms => new Promise(res => setTimeout(res, ms));
+
+/**
  * Returns a random number between min (inclusive) and max (exclusive)
  */
 function randRange(min, max) {
@@ -40,43 +47,50 @@ function randomLP() {
     return '' + a + b + n;
 }
 
-async function mockOperations(serveraddr = 'localhost:3000') {
+async function mockOperations(serveraddr = 'http://localhost:3000') {
     let lps = [];
     let cameras = Array.from({ length: 40 }, () => randInt(0, 1000000));
     const server = got.extend({ prefixUrl: serveraddr });
 
-    while (true) {
+    do {
         try {
             let cam = randChoose(cameras);
             let req = {
                 cameraID: cam,
-
             };
-            if (randBool()) {
+            if (randBool() && lps.length != 0) {
                 // spotFilled
                 let lp = randomLP();
                 lps.push(lp);
+                let req = {
+                    cameraID: cam,
+                    licensePlate: lp
+                };
 
-                req.licensePlate = lp;
-
-                const response = await server.put('spotFilled', {
+                const response = await server.put('operation/spotFilled', {
                     json: req
-                })
+                }).json()
+                console.log(response);
             } else {
                 // spotVacated
                 let lp = randChoose(lps);
+                let req = {
+                    cameraID: cam,
+                    licensePlate: lp
+                };
 
-                const response = await server.put('spotVacated', {
+                const response = await server.put('operation/spotVacated', {
                     json: req
-                })
+                }).json()
+                console.log(response);
             }
 
         } catch (error) {
-
+            console.log(error.response.body);
         }
 
         await sleep(1000);
-    }
+    } while (false);
 }
 
 module.exports = {
