@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 var fs = require('fs'); 
 var path = require('path'); 
 var multer = require('multer');
-// TODO: 'setup' page
 
 //upload image helper
 var storage = multer.diskStorage({ 
@@ -21,6 +20,15 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }); 
 
+/**
+ * This function is for adding camera's to the server's
+ * database of connected cameras
+ * @param {string} CameraID
+ * @param {Array} spotIDs
+ * @param {boolean} active?
+ * @param {Object} setupImage
+ * @returns {Object} Camera  
+ */
 setupRouter.post('/addCamera', async(req,res,next) =>{
     try{
         let cam = {
@@ -39,6 +47,17 @@ setupRouter.post('/addCamera', async(req,res,next) =>{
     }
 });
 
+/**
+ * This function is for sending the image to the server
+ * from the raspberry pi
+ * @param {string} CameraID
+ * @param {string} name
+ * @param {string} description?
+ * @param {Object} setupImage
+ * 
+ * This is currently not completely tested and will be 
+ * finished along with the front-end demo
+ */
 setupRouter.post('/addCameraImage', upload.single('image'), async(req, res, next) => {  
     try{
         let camera  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
@@ -56,6 +75,16 @@ setupRouter.post('/addCameraImage', upload.single('image'), async(req, res, next
     }
 }); 
 
+/**
+ * This function is for adding parking spots to the 
+ * parking spot database
+ * @param {string} CameraID
+ * @param {string} spotIDs
+ * @param {boolean} vacant?
+ * @param {Object} licensePlate
+ * @param {Object} boundingBox_edges
+ * @returns {Object} Camera  
+ */
 setupRouter.post('/addParkingSpot', async(req,res,next) =>{
     try{
         let ps = {            
@@ -76,6 +105,13 @@ setupRouter.post('/addParkingSpot', async(req,res,next) =>{
     }
 } );
 
+/**
+ * This function is for updating the parking spots 
+ * dedicaed to an existing camera
+ * @param {string} CameraID
+ * @param {Array} added_spotIDs
+ * @returns {Object} Camera  
+ */
 setupRouter.put('/updateCamera', async(req,res,next)=>{
     try{
         result  = await  Cameras.findOne({cameraID : req.body.cameraID}, function(err, doc){
@@ -91,6 +127,16 @@ setupRouter.put('/updateCamera', async(req,res,next)=>{
     }
 });
 
+/**
+ * This function is for updating the information 
+ * of an existing parking spot
+ * @param {string} CameraID
+ * @param {string} spotIDs
+ * @param {boolean} vacant?
+ * @param {Object} licensePlate
+ * @param {Object} boundingBox_edges
+ * @returns {Object} Camera    
+ */
 setupRouter.put('/updateParkingSpot', async(req,res,next)=>{
     try{
         result  = await  ParkingSpots.findOne({spotID : req.body.spotID}, function(err, doc){
@@ -110,6 +156,16 @@ setupRouter.put('/updateParkingSpot', async(req,res,next)=>{
     }
 });
 
+/**
+ * This function is for updating the information 
+ * of an existing parking spot
+ * @param {string} CameraID
+ * @param {string} spotIDs
+ * @param {boolean} vacant?
+ * @param {Object} licensePlate
+ * @param {Object} boundingBox_edges
+ * @returns {Object} Camera    
+ */
 setupRouter.put('/updateCameraStatus', async(req,res,next)=>{
     try{
         result  = await Cameras.findOne({cameraID : req.body.cameraID}, function(err, doc){
@@ -126,6 +182,11 @@ setupRouter.put('/updateCameraStatus', async(req,res,next)=>{
     }
 });
 
+/**
+ * This function is for deleting a camera from the 
+ * list of connected cameras
+ * @param {string} CameraID
+ */
 setupRouter.delete('/deleteCamera', async(req,res,next)=>{
     try{
         result  = await Cameras.deleteOne({cameraID : req.body.cameraID}); 
@@ -138,6 +199,11 @@ setupRouter.delete('/deleteCamera', async(req,res,next)=>{
     }
 });
 
+/**
+ * This function is for deleting a parking spot from the 
+ * camera it is connected to 
+ * @param {string} spotID
+ */
 setupRouter.delete('/deleteSpot', async(req,res,next)=>{
     try{
         result  = await ParkingSpots.deleteOne({spotID : req.body.spotID}); 
@@ -150,6 +216,12 @@ setupRouter.delete('/deleteSpot', async(req,res,next)=>{
     }
 });
 
+/**
+ * This function is for getting a camera
+ * from the existing list of cameras
+ * @param {string} CameraID
+ * @returns {Object} camera
+ */
 setupRouter.get('/getCamera',async(req,res,next) =>{
     try{
         result  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
@@ -162,6 +234,12 @@ setupRouter.get('/getCamera',async(req,res,next) =>{
     }
 });
 
+/**
+ * This function is for getting a parkingSpot from 
+ * the existing list of parking spots
+ * @param {string} spotID
+ * @returns {Object} parkingSpot
+ */
 setupRouter.get('/getParkingSpot',async(req,res,next) =>{
     try{
         result  = await  ParkingSpots.findOne({spotID: req.body.spotID}); 
@@ -174,6 +252,12 @@ setupRouter.get('/getParkingSpot',async(req,res,next) =>{
     }
 });
 
+/**
+ * This function is for getting the image view of 
+ * a camera
+ * @param {string} CameraID
+ * @returns {Object} camera_Image
+ */
 setupRouter.get('./getCameraImage', async(req,res,next)=>{
     try{
         result  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
@@ -186,6 +270,12 @@ setupRouter.get('./getCameraImage', async(req,res,next)=>{
     }
 });
 
+/**
+ * This function is for getting the status of 
+ * a camera
+ * @param {string} CameraID
+ * @returns {Object} camera
+ */
 setupRouter.get('/getCameraStatus',async(req,res,next) =>{
     try{
         result  = await  Cameras.findOne({cameraID: req.body.cameraID}); 
