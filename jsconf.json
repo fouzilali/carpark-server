@@ -1,0 +1,15 @@
+{
+    "source": {
+        "include": ["carpark-server/routes/operations.js","carpark-server/routes/setup_page.js"],
+        "exclude": [],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "template": "templates/default",  
+        "encoding": "utf8",               
+        "destination": "./out/",          
+        "recurse": true,                  
+        "tutorials": "path/to/tutorials"
+    }    
+}
