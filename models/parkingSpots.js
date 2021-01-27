@@ -35,13 +35,25 @@ const parkingSpotSchema = new Schema({
         x1: {
             type: Number,
         },
-        x2: {
-            type: Number,
-        },
         y1: {
             type: Number,
         },
+        x2: {
+            type: Number,
+        },
         y2: {
+            type: Number,
+        },
+        x3: {
+            type: Number,
+        },
+        y3: {
+            type: Number,
+        },
+        x4: {
+            type: Number,
+        },
+        y4: {
             type: Number,
         }
     },

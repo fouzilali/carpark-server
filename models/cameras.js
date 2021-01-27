@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var imageSchema = Schema({ 
-    name: String, 
+var imageSchema = Schema({
+    name: String,
     desc: String,
     date: Date,
-    img: 
-    { 
-        data: Buffer, 
-        contentType: String 
-    } 
-}); 
+    img:
+    {
+        data: Buffer,
+        contentType: String
+    }
+});
 
 const cameraSchema = new Schema({
     cameraID: {
@@ -30,8 +30,7 @@ const cameraSchema = new Schema({
         },
         required: true
     },
-
-    setupImg: {imageSchema}
+    setupImg: { imageSchema }
 });
 
 var Cameras = mongoose.model('Camera', cameraSchema)

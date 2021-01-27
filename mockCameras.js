@@ -30,9 +30,11 @@ function randInt(min, max) {
 function randBool() {
     return Math.random() > 0.5;
 }
-
+function randIndex(arr) {
+    return randInt(0, arr.length - 1);
+}
 function randChoose(arr) {
-    return arr[randInt(0, arr.length - 1)];
+    return arr[randIndex(arr)];
 }
 
 /**
@@ -49,8 +51,38 @@ function randomLP() {
 
 async function mockOperations(serveraddr = 'http://localhost:3000') {
     let lps = [];
-    let cameras = Array.from({ length: 40 }, () => randInt(0, 1000000));
+    let cameras = Array.from({ length: 1 }, () => randInt(0, 1000000));
     const server = got.extend({ prefixUrl: serveraddr });
+
+    // Initialize some spots
+    cameras.forEach(cameraID => {
+        cameraIDString = cameraID.toString();
+        server.post('setup/addParkingSpot', {
+            json: {
+                spotID: cameraIDString,
+                cameraID: cameraIDString,
+                boundingBox: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 0,
+                    x3: 0,
+                    y3: 0,
+                    x4: 0,
+                    y4: 0,
+                },
+            }
+        });
+        server.post('setup/addCamera', {
+            json: {
+                cameraID: cameraIDString,
+                parkingSpots: [
+                    cameraIDString
+                ],
+                isActive: true
+            }
+        });
+    });
 
     do {
         try {
@@ -58,12 +90,13 @@ async function mockOperations(serveraddr = 'http://localhost:3000') {
             let req = {
                 cameraID: cam,
             };
-            if (randBool() && lps.length != 0) {
+            if ((Math.random() < 0.7) || lps.length == 0) {
                 // spotFilled
                 let lp = randomLP();
                 lps.push(lp);
                 let req = {
                     cameraID: cam,
+                    spotID: cam, // Temp
                     licensePlate: lp
                 };
 
@@ -73,9 +106,13 @@ async function mockOperations(serveraddr = 'http://localhost:3000') {
                 console.log(response);
             } else {
                 // spotVacated
-                let lp = randChoose(lps);
+                let i = randIndex(lps);
+                let lp = lps[i];
+                lps.splice(i);
+
                 let req = {
                     cameraID: cam,
+                    spotID: cam, // Temp
                     licensePlate: lp
                 };
 
@@ -90,10 +127,12 @@ async function mockOperations(serveraddr = 'http://localhost:3000') {
         }
 
         await sleep(1000);
-    } while (false);
+    } while (true);
 }
 
 module.exports = {
     "randomLP": randomLP,
     "mockOperations": mockOperations
 };
+
+mockOperations()
