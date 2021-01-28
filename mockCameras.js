@@ -85,11 +85,10 @@ async function mockOperations(serveraddr = 'http://localhost:3000') {
     });
 
     do {
+        await sleep(1000);
+
         try {
             let cam = randChoose(cameras);
-            let req = {
-                cameraID: cam,
-            };
             if ((Math.random() < 0.7) || lps.length == 0) {
                 // spotFilled
                 let lp = randomLP();
@@ -121,13 +120,10 @@ async function mockOperations(serveraddr = 'http://localhost:3000') {
                 }).json()
                 console.log(response);
             }
-
         } catch (error) {
             console.log(error.response.body);
         }
-
-        await sleep(1000);
-    } while (true);
+    } while (false);
 }
 
 module.exports = {

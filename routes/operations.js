@@ -4,6 +4,14 @@ var router = express.Router();
 const ParkingSpots = require('../models/parkingSpots');
 const pointInQuad = require('../pointInQuad');
 
+async function whichSpot(point) {
+    let spots = await ParkingSpots.find({}).select(["spotID", "boundingBox"]).exec();
+    spots.forEach((spot) => {
+        let bbox = spot.boundingBox;
+        let id = spot.spotID;
+        logger.info(spot);
+    })
+}
 
 /**
  * This function is for updating the status of the parking spot 
@@ -17,7 +25,8 @@ const pointInQuad = require('../pointInQuad');
  */
 router.put('/spotFilled', async (req, res, next) => {
     try {
-        const sptID = req.body.spotID; // TODO: change to coordinate mapping
+        const spotID = req.body.spotID; // TODO: change to coordinate mapping
+        await whichSpot(null);
         // const spotID = 
         result = await ParkingSpots.findOne({ spotID: spotID }, async (err, doc) => {
             doc.spotID = spotID;
