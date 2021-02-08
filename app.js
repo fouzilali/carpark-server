@@ -47,7 +47,7 @@ error_handlers(app);
 
 module.exports = app;
 
-const port = 3000;
+const port = 12000;
 app.listen(port, () => {
   logger.info(`Example app listening at http://localhost:${port}`)
 })
