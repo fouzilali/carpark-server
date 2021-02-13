@@ -4,8 +4,27 @@ import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import clsx from "clsx";
+import { FixedSizeList } from "react-window";
+import {
+  Row,
+  Col,
+  CardBody,
+  CardTitle,
+  Form,
+  FormInput,
+  FormSelect,
+  FormGroup,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText
+} from "shards-react";
+
+import { Button as ShardsButton } from "shards-react";
+
 import {
   Container,
+  Chip,
   CssBaseline,
   Typography,
   Paper,
@@ -17,10 +36,13 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Box
+  Box,
+  Divider,
+  AccordionActions,
+  ListItem,
+  ListItemText
 } from "@material-ui/core";
 
-import { Row, Col, CardBody, CardTitle} from "shards-react";
 import PageTitle from "./../components/common/PageTitle";
 
 const useStyles = makeStyles({
@@ -45,15 +67,70 @@ const useStylesAccordian = makeStyles(theme => ({
     width: "100%"
   },
   heading: {
+    fontSize: theme.typography.pxToRem(15)
+  },
+  secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+    color: theme.palette.text.secondary
+  },
+  icon: {
+    verticalAlign: "bottom",
+    height: 20,
+    width: 20
+  },
+  details: {
+    alignItems: "center"
+  },
+  column: {
+    flexBasis: "33.33%"
+  },
+  columnSecondary: {
+    flexBasis: "10%"
+  },
+  columnForm: {
+    flexBasis: "66%"
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2)
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline"
+    }
+  }
+}));
+
+function renderRow(props) {
+  const { index, style } = props;
+  const handleDelete = () => {};
+  return (
+    <ListItem style={style} key={index}>
+      <Chip onDelete={handleDelete} label={`Spot ${index + 1}`} />
+    </ListItem>
+  );
+}
+
+renderRow.propTypes = {
+  index: PropTypes.number.isRequired,
+  style: PropTypes.object.isRequired
+};
+
+const useStylesList = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    height: 400,
+    maxWidth: 300,
+    backgroundColor: theme.palette.background.paper
   }
 }));
 
 const CameraSetup = () => {
   const classes = useStyles();
   const classesAccordian = useStylesAccordian();
-  const title = "Cameras Available"
+  const title = "Cameras Available";
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <React.Fragment>
@@ -69,78 +146,107 @@ const CameraSetup = () => {
         <Row>
           {/* Users Overview */}
           <Col lg="6" md="6" sm="6" className="mb-4">
-            <Card className={classes.root}>                
-                <CardBody>
+            <Card className={classes.root}>
+              <CardBody>
                 {/* <Row noGutters className="page-header py-2 px-4"> */}
-                 <CardTitle>{title}</CardTitle>
+                <CardTitle>{title}</CardTitle>
                 {/* </Row> */}
                 <div className={classesAccordian.root}>
-                  <Accordion>
+                  <Accordion defaultExpanded>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
+                      aria-controls="panel1c-content"
+                      id="panel1c-header"
                     >
-                      <Typography className={classesAccordian.heading}>
-                        <Grid
-                          container
-                          direction="row"
-                          justify="space-around"
-                          alignItems="center"
+                      <div className={classesAccordian.column}>
+                        <Typography className={classesAccordian.heading}>
+                          #camera
+                        </Typography>
+                      </div>
+                      <div className={classesAccordian.columnSecondary}>
+                        <Typography
+                          className={classesAccordian.secondaryHeading}
                         >
-                          <Box textAlign="left">#camera     |</Box>
-                          <Box textAlign="center"> IP: 192.168.1.1      |</Box>
-                          <Box textAlign="right"> Mac: 00:1B:44:11:3A:B7</Box>                          
-                        </Grid>
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        No Parking Spots Added to this Camera Yet.
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
-                    >
-                      <Typography className={classesAccordian.heading}>
-                      <Grid
-                          container
-                          direction="row"
-                          justify="space-around"
-                          alignItems="center"
+                          MAC:
+                        </Typography>
+                      </div>
+                      <div className={classesAccordian.column}>
+                        <Typography
+                          className={classesAccordian.secondaryHeading}
                         >
-                          <Box textAlign="left">#camera |</Box>
-                          <Box textAlign="center"> IP: 192.168.1.1 |</Box>
-                          <Box textAlign="right"> Mac: 00:1B:54:11:3Z:B6</Box>
-                        </Grid>
-                      </Typography>
+                          00:1B:44:11:3A:B7
+                        </Typography>
+                      </div>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse malesuada lacus ex, sit amet blandit leo
-                        lobortis eget.
-                      </Typography>
+                    <AccordionDetails className={classesAccordian.details}>
+                      <div className={classesAccordian.columnForm}>
+                        <Col>
+                          <Form>
+                            <FormGroup>
+                              <InputGroup className="mb-3">
+                                <FormInput
+                                  placeholder="Enter Camera ID"
+                                  onChange={() => {}}
+                                />
+                                <InputGroupAddon type="append">
+                                  <ShardsButton theme="white">
+                                    {" "}
+                                    <i className="material-icons">lock</i>
+                                  </ShardsButton>
+                                </InputGroupAddon>
+                              </InputGroup>
+                              <Row>
+                                <Col lg="5"></Col>
+                                <Col sm="12" lg="7">
+                                  <ShardsButton justify="right">
+                                    {" "}
+                                    Update Camera ID
+                                  </ShardsButton>
+                                </Col>
+                              </Row>
+                            </FormGroup>
+                            <FormGroup>
+                              <InputGroup className="mb-3">
+                                <FormInput
+                                  placeholder="Add Parking Spot IDs "
+                                  onChange={() => {}}
+                                />
+                              </InputGroup>
+                              <Row>
+                                <Col lg="8"></Col>
+                                <Col sm="12" lg="4">
+                                  <ShardsButton outline justify="right">
+                                    Add
+                                  </ShardsButton>
+                                </Col>
+                              </Row>
+                            </FormGroup>
+                          </Form>
+                        </Col>
+                      </div>
+                      <Divider orientation="vertical" flexItem />
+                      <Col>
+                        <FixedSizeList
+                          height={200}
+                          width={200}
+                          itemSize={46}
+                          itemCount={15}
+                        >
+                          {renderRow}
+                        </FixedSizeList>
+                      </Col>
                     </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel3a-content"
-                      id="panel3a-header"
-                    >
-                      <Typography className={classesAccordian.heading}>
-                        Disabled Accordion
-                      </Typography>
-                    </AccordionSummary>
+                    <Divider />
+                    <AccordionActions>
+                      <Button size="small">Cancel</Button>
+                      <Button size="small" color="primary">
+                        Save
+                      </Button>
+                    </AccordionActions>
                   </Accordion>
                 </div>
-                </CardBody>
-                <CardActions>
+              </CardBody>
+              <CardActions>
                 <Button size="small">Learn More</Button>
               </CardActions>
             </Card>
