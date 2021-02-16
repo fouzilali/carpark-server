@@ -18,6 +18,11 @@ const cameraSchema = new Schema({
         required: true,
         unique: true
     },
+    mac:{
+        type: String,
+        required: true,
+        unique: true
+    },
     parkingSpots: {
         type: [String],
     },

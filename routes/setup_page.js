@@ -30,6 +30,24 @@ var upload = multer({ storage: storage });
  * @param {Object} setupImage
  * @returns {Object} Camera  
  */
+
+setupRouter.post('/announceCamera', async(req,res, next) => {
+    try {
+        let cam = {
+            cameraID: 'TBD',
+            mac: req.body.mac,
+            isActive: req.body.isActive,
+            setupImg: req.body.setupImg
+        }
+        result = await Cameras.create(cam);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err)
+    }
+});
 setupRouter.post('/addCamera', async (req, res, next) => {
     try {
         let cam = {
