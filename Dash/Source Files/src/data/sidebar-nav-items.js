@@ -17,6 +17,11 @@ export default function() {
       to: "/ParkingSpotSetup"
     },
     {
+      title: "Demo Page",
+      htmlBefore: '<i class="material-icons">videocam</i>',
+      to: "/DemoPage"
+    },
+    {
       title: "Blog Posts",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/blog-posts",
