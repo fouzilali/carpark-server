@@ -21,7 +21,8 @@
     "react-scripts": "2.1.1",
     "react-window": "^1.8.6",
     "shards-react": "^1.0.0",
-    "shortid": "^2.2.14"
+    "shortid": "^2.2.14",
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
