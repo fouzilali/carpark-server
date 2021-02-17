@@ -132,6 +132,7 @@ const CameraSetup = () => {
   const classesAccordian = useStylesAccordian();
   const title = "Cameras Available";
   const bull = <span className={classes.bullet}>•</span>;
+  
   return (
     <React.Fragment>
       <CssBaseline />
