@@ -14,6 +14,7 @@ import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import CameraSetup from "./views/CameraSetup";
 import ParkingSpotSetup from "./views/ParkingSpotSetup"
+import DemoPage from "./views/DemoPage"
 
 export default [
   {
@@ -31,6 +32,11 @@ export default [
     path: "/cameraSetup",
     layout: DefaultLayout,
     component: CameraSetup
+  },
+  {
+    path: "/DemoPage",
+    layout: DefaultLayout,
+    component: DemoPage
   },
   {
     path: "/ParkingSpotSetup",
