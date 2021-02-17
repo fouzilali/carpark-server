@@ -12,6 +12,11 @@ export default function() {
       to: "/cameraSetup"
     },
     {
+      title: "Parking Spots Setup",
+      htmlBefore: '<i class="material-icons">videocam</i>',
+      to: "/ParkingSpotSetup"
+    },
+    {
       title: "Blog Posts",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/blog-posts",

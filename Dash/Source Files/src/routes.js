@@ -13,6 +13,7 @@ import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import CameraSetup from "./views/CameraSetup";
+import ParkingSpotSetup from "./views/ParkingSpotSetup"
 
 export default [
   {
@@ -30,6 +31,11 @@ export default [
     path: "/cameraSetup",
     layout: DefaultLayout,
     component: CameraSetup
+  },
+  {
+    path: "/ParkingSpotSetup",
+    layout: DefaultLayout,
+    component: ParkingSpotSetup
   },
   {
     path: "/user-profile-lite",
