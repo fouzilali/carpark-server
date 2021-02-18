@@ -199,7 +199,7 @@ const DemoPage = () => {
 					url='https://www.gtice.is/wp-content/uploads/2015/06/Snaefellsnes_Tour_Kirkjufell_by_KateI.jpg'
 					imageWidth={ 600 }
 					//options={ options }
-					disabledOptionLevels={ [] }
+					disabledOptionLevels={ [] }   
 				/>
 			</div>
 			{/* <div className='mb-5'>

@@ -12170,9 +12170,9 @@
     "minimist" "^1.2.0"
     "strip-json-comments" "~2.0.1"
 
-"react-annotation-tool@^1.1.5":
-  "integrity" "sha512-lHP6Zy6yhWbDuVVoPBr/Kl8Uu73pqpgzmh0DoGFv5CilgGVSzxwC4x16Sy0druW4C5JDsgePQu/qjVWokLAvpA=="
-  "resolved" "https://registry.npmjs.org/react-annotation-tool/-/react-annotation-tool-1.1.5.tgz"
+"react-annotation-tool@file:../react-annotation-tool-master/react-annotation-tool-1.1.5.tgz":
+  "integrity" "sha512-scVB+kGmphK9TFD1QhTVBIWr+kE5b7TzDXajvaXU+wLnXwhRStYYDF+8+G7LcYJQpVzln43qcUEa/6EuL9gmQg=="
+  "resolved" "file:../react-annotation-tool-master/react-annotation-tool-1.1.5.tgz"
   "version" "1.1.5"
   dependencies:
     "bootstrap" "^4.3.1"
