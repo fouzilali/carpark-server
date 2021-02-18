@@ -34,7 +34,7 @@ var upload = multer({ storage: storage });
 setupRouter.post('/announceCamera', async(req,res, next) => {
     try {
         let cam = {
-            cameraID: 'TBD',
+            cameraID: req.body.mac,
             mac: req.body.mac,
             isActive: req.body.isActive,
             setupImg: req.body.setupImg
@@ -48,6 +48,7 @@ setupRouter.post('/announceCamera', async(req,res, next) => {
         res.json(err)
     }
 });
+
 setupRouter.post('/addCamera', async (req, res, next) => {
     try {
         let cam = {
@@ -213,7 +214,7 @@ setupRouter.delete('/deleteCamera', async (req, res, next) => {
         res.json(result);
     } catch (err) {
         console.error(err);
-        res.json(err)
+        res.json(err);
     }
 });
 
@@ -230,7 +231,7 @@ setupRouter.delete('/deleteSpot', async (req, res, next) => {
         res.json(result);
     } catch (err) {
         console.error(err);
-        res.json(err)
+        res.json(err);
     }
 });
 
@@ -248,7 +249,7 @@ setupRouter.get('/getCamera', async (req, res, next) => {
         res.json(result);
     } catch (err) {
         console.error(err);
-        res.json(err)
+        res.json(err);
     }
 });
 
@@ -258,6 +259,7 @@ setupRouter.get('/getCamera', async (req, res, next) => {
  * @param {string} spotID
  * @returns {Object} parkingSpot
  */
+
 setupRouter.get('/getParkingSpot', async (req, res, next) => {
     try {
         result = await ParkingSpots.findOne({ spotID: req.body.spotID });
@@ -276,6 +278,7 @@ setupRouter.get('/getParkingSpot', async (req, res, next) => {
  * @param {string} CameraID
  * @returns {Object} camera_Image
  */
+
 setupRouter.get('./getCameraImage', async (req, res, next) => {
     try {
         result = await Cameras.findOne({ cameraID: req.body.cameraID });
@@ -284,7 +287,7 @@ setupRouter.get('./getCameraImage', async (req, res, next) => {
         res.json(result.setupImg);
     } catch (err) {
         console.error(err);
-        res.json(err)
+        res.json(err);
     }
 });
 
@@ -294,6 +297,7 @@ setupRouter.get('./getCameraImage', async (req, res, next) => {
  * @param {string} CameraID
  * @returns {Object} camera
  */
+
 setupRouter.get('/getCameraStatus', async (req, res, next) => {
     try {
         result = await Cameras.findOne({ cameraID: req.body.cameraID });
@@ -302,11 +306,9 @@ setupRouter.get('/getCameraStatus', async (req, res, next) => {
         res.json(result.isActive);
     } catch (err) {
         console.error(err);
-        res.json(err)
+        res.json(err);
     }
 });
-
-
 
 module.exports = setupRouter;
 
