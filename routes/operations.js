@@ -4,31 +4,26 @@ var router = express.Router();
 const ParkingSpots = require("../models/parkingSpots");
 const pointInQuad = require("../pointInQuad");
 
-async function whichSpot(lpr) {
+async function whichSpot(lpr, mac) {
     // {
     //     'lp': lp,
-    //     'cls': cls,
     //     'x': xywh[0],
     //     'y': xywh[1],
     //     'w': xywh[2],
     //     'h': xywh[3],
-    //     'conf': conf
     // }
     let spots = await ParkingSpots.find({})
+    // let spots = await ParkingSpots.find({mac: mac})
         .select(["spotID", "boundingBox"])
         .exec();
-    spots.forEach(spot => {
+    return spots.find(spot => {
         logger.info(spot);
         const bbox = spot.boundingBox;
         const id = spot.spotID;
-        const inside = pointInQuad(lpr, bbox);
+        const inside = pointInQuad(bbox, lpr);
         logger.info("Inside? " + inside);
-
-        if (inside) {
-            return id;
-        }
-    });
-    return null;
+        return inside;
+    }).spotID;
 }
 
 /**
@@ -43,19 +38,18 @@ async function whichSpot(lpr) {
  */
 router.put("/spotFilled", async (req, res, next) => {
     try {
-        const spotID = req.body.spotID; // TODO: change to coordinate mapping
-        spotID = await whichSpot(req.body.lpr);
-        if (spotID === null) {
-            // OOPS
-            return;
-        }
+        let spotID = req.body.spotID; // TODO: change to coordinate mapping
+        spotID = await whichSpot(req.body, req.body.mac);
+        // if (spotID === null) {
+        //     // OOPS
+        //     return;
+        // }
         // const spotID =
         result = await ParkingSpots.findOne(
             { spotID: spotID },
             async (err, doc) => {
-                doc.spotID = spotID;
                 doc.vacant = false;
-                doc.licensePlate = req.body.lpr.lp;
+                doc.licensePlate = req.body.lp;
                 doc.save();
             }
         );
@@ -80,17 +74,11 @@ router.put("/spotFilled", async (req, res, next) => {
  */
 router.put("/spotVacated", async (req, res, next) => {
     try {
-        logger.info("Updating spot:" + JSON.stringify(req.body));
-        const spotID = req.body.spotID; // TODO: change to coordinate mapping
-        // const spotID =
         result = await ParkingSpots.findOne(
-            { spotID: spotID },
+            { licensePlate: req.body.lp },
             async (err, doc) => {
-                doc.spotID = spotID;
-                doc.cameraID = req.body.cameraID;
                 doc.vacant = true;
                 doc.licensePlate = null;
-                doc.boundingBox = null;
                 doc.save();
             }
         );

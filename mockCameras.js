@@ -108,8 +108,6 @@ async function mockOperations(serveraddr = "http://localhost:3000") {
                 lps.push(lp);
                 let req = {
                     cameraID: cam,
-                    spotID: cam, // Temp
-                    licensePlate: lp,
                 };
 
                 const response = await server
