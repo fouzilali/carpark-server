@@ -21,11 +21,10 @@ const parkingSpotSchema = new Schema({
     },
     vacant: {
         type: Boolean,
-        updatedAt: {
-            type: Date,
-            default: Date.now
-        },
-        // required: true
+        // updatedAt: {
+        //     type: Date,
+        //     default: Date.now
+        // },
     },
     licensePlate: {
         type: String,

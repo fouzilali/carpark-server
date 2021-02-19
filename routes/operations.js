@@ -136,6 +136,19 @@ router.get('/isVacated', async (req, res, next) => {
     }
 });
 
+router.get('/allSpots', async (req, res, next) => {
+    try {
+        console.log("called")
+        result = await ParkingSpots.find({});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
+});
+
 
 // These two are for further features that will be implemented after the initial integration
 //with the raspberry pi and front-end.

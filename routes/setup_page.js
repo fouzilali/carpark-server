@@ -272,6 +272,20 @@ setupRouter.get('/getParkingSpot', async (req, res, next) => {
     }
 });
 
+setupRouter.get('/allSpots', async (req, res, next) => {
+    try {
+        console.log("called")
+        result = await ParkingSpots.find({});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
+});
+
 /**
  * This function is for getting the image view of 
  * a camera
