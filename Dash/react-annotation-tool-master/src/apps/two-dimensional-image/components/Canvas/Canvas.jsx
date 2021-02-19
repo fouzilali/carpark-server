@@ -84,6 +84,7 @@ const Canvas = ({
 		vertices.forEach((v, i) => {
 			if (i === 0) {
 				startPoint.x = v.x; startPoint.y = v.y;
+				console.log(x);
 			}
 			if (isAdding && focusedName === name && i === 0) {
 				verticesUI.push(

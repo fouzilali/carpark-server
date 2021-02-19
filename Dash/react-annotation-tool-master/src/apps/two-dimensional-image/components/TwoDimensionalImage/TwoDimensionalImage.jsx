@@ -22,6 +22,7 @@ import AnnotationList from '../AnnotationList/AnnotationList.jsx';
 import UndoRedoButton from '../UndoRedoButton/UndoRedoButton.jsx';
 import Canvas from '../Canvas/Canvas.jsx';
 import i18nextInstance from './i18n';
+import axios from "axios";
 
 const SHORTCUTS = {
 	MAGNIFIER: {
@@ -179,6 +180,7 @@ class TwoDimensionalImage extends Component {
 	}
 
 	handleCanvasStageMouseDown = (e) => {
+		console.log("print something")
 		const stage = e.target.getStage();
 		const uniqueKey = getUniqueKey();
 		const color = colors[getRandomInt(colors.length)];
@@ -192,6 +194,10 @@ class TwoDimensionalImage extends Component {
 			// prevent x, y exceeding boundary
 			x = x < 0 ? 0 : x; x = x > imageWidth ? imageWidth : x;
 			y = y < 0 ? 0 : y; y = y > imageHeight ? imageHeight : y;
+			myJson = {boundingBox: {x1: x, y1: y, x2: x, y2: y, x3: x, y3: y, x4: x, y4: y,}};
+			axios.put('http://localhost:12000/setup/updateParkingSpot', myJson);
+			console.log("x is = ");
+			console.log(x);
 			this.UndoRedoState.save(prevState);
 			// first time adding
 			if (!focusedName) {
@@ -248,6 +254,8 @@ class TwoDimensionalImage extends Component {
 				let x = activeVertex.x(); let y = activeVertex.y();
 				x = x < 0 ? 0 : x; x = x > imageWidth ? imageWidth : x;
 				y = y < 0 ? 0 : y; y = y > imageHeight ? imageHeight : y;
+				console.log("x is = ");
+				console.log(x);
 				return { ...v, x, y };
 			});
 			annotations[group.name()].vertices = vertices;

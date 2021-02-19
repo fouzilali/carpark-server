@@ -157,13 +157,14 @@ setupRouter.put('/updateCamera', async (req, res, next) => {
  * @returns {Object} Camera    
  */
 setupRouter.put('/updateParkingSpot', async (req, res, next) => {
+    console.log(req.body.boundingBox)
     try {
         result = await ParkingSpots.findOne({ spotID: req.body.spotID }, function (err, doc) {
-            doc.spotID = req.body.spotID,
-                doc.cameraID = req.body.cameraID,
-                doc.vacant = req.body.vacant,
-                doc.licensePlate = req.body.licensePlate,
-                doc.boundingBox = req.body.boundingBox
+            //doc.spotID = req.body.spotID,
+            //doc.cameraID = req.body.cameraID,
+            //doc.vacant = req.body.vacant,
+            //doc.licensePlate = req.body.licensePlate,
+            doc.boundingBox = req.body.boundingBox
             doc.save();
         });
         res.statusCode = 200;
