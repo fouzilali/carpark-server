@@ -17,7 +17,7 @@ function pointInQuad(quad, point) {
 
         return inside;
     };
-    return helper(point, [[quad.x1, quad.y1], [quad.x2, quad.y2], [quad.x3, quad.y3], [quad.x4, quad.y4]]);
+    return helper([point.x, point.y], [[quad.x1, quad.y1], [quad.x2, quad.y2], [quad.x3, quad.y3], [quad.x4, quad.y4]]);
 }
 
 module.exports = pointInQuad;
