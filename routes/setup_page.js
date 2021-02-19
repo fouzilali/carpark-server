@@ -37,7 +37,7 @@ setupRouter.post('/announceCamera', async(req,res, next) => {
             cameraID: req.body.mac,
             mac: req.body.mac,
             isActive: req.body.isActive,
-            setupImg: req.body.setupImg
+            setupImg: null
         }
         result = await Cameras.create(cam);
         res.statusCode = 200;
@@ -55,7 +55,7 @@ setupRouter.post('/addCamera', async (req, res, next) => {
             cameraID: req.body.cameraID,
             parkingSpots: req.body.parkingSpots,
             isActive: req.body.isActive,
-            setupImg: req.body.setupImg
+            setupImg: null
         }
         result = await Cameras.create(cam);
         res.statusCode = 200;
@@ -70,7 +70,7 @@ setupRouter.post('/addCamera', async (req, res, next) => {
 /**
  * This function is for sending the image to the server
  * from the raspberry pi
- * @param {string} CameraID
+ * @param {string} mac MAC address of the Camera RasPi
  * @param {string} name
  * @param {string} description?
  * @param {Object} setupImage
@@ -80,7 +80,9 @@ setupRouter.post('/addCamera', async (req, res, next) => {
  */
 setupRouter.post('/addCameraImage', upload.single('image'), async (req, res, next) => {
     try {
-        let camera = await Cameras.findOne({ cameraID: req.body.cameraID });
+        console.log('wat');
+        let camera = await Cameras.findOne({ mac: req.body.mac });
+        console.log(camera);
         var img = {
             name: req.body.name,
             desc: req.body.desc,
@@ -89,7 +91,12 @@ setupRouter.post('/addCameraImage', upload.single('image'), async (req, res, nex
                 contentType: 'image/png'
             }
         }
-        camera.setupImg.create(img);
+        console.log(img);
+        result = await camera.setupImg.create(img);
+        console.log(result);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
     } catch (err) {
         console.error(err);
     }
@@ -157,13 +164,14 @@ setupRouter.put('/updateCamera', async (req, res, next) => {
  * @returns {Object} Camera    
  */
 setupRouter.put('/updateParkingSpot', async (req, res, next) => {
+    console.log(req.body.boundingBox)
     try {
         result = await ParkingSpots.findOne({ spotID: req.body.spotID }, function (err, doc) {
-            doc.spotID = req.body.spotID,
-                doc.cameraID = req.body.cameraID,
-                doc.vacant = req.body.vacant,
-                doc.licensePlate = req.body.licensePlate,
-                doc.boundingBox = req.body.boundingBox
+            //doc.spotID = req.body.spotID,
+            //doc.cameraID = req.body.cameraID,
+            //doc.vacant = req.body.vacant,
+            //doc.licensePlate = req.body.licensePlate,
+            doc.boundingBox = req.body.boundingBox
             doc.save();
         });
         res.statusCode = 200;
