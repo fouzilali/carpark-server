@@ -13,6 +13,7 @@ import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import CameraSetup from "./views/CameraSetup";
+import Operations from "./views/Operations"
 import ParkingSpotSetup from "./views/ParkingSpotSetup"
 import DemoPage from "./views/DemoPage"
 
@@ -32,6 +33,11 @@ export default [
     path: "/cameraSetup",
     layout: DefaultLayout,
     component: CameraSetup
+  },
+  {
+    path: "/Operations",
+    layout: DefaultLayout,
+    component: Operations
   },
   {
     path: "/DemoPage",

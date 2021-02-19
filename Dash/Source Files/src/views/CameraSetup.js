@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
@@ -44,6 +44,7 @@ import {
 } from "@material-ui/core";
 
 import PageTitle from "./../components/common/PageTitle";
+import { disable } from "debug";
 
 const useStyles = makeStyles({
   root: {
@@ -113,6 +114,10 @@ function renderRow(props) {
   );
 }
 
+function renderAccordian(props) {
+
+}
+
 renderRow.propTypes = {
   index: PropTypes.number.isRequired,
   style: PropTypes.object.isRequired
@@ -128,11 +133,20 @@ const useStylesList = makeStyles(theme => ({
 }));
 
 const CameraSetup = () => {
+  const [cameraID, setCameraID] = useState('#');
+  const [cameraMAC, setCameraMAC] = useState("00:AA:11:BB:22:CC");
+  const [disabled, setDisabled] = useState(false);
+  const textInput = useRef(null);
   const classes = useStyles();
   const classesAccordian = useStylesAccordian();
   const title = "Cameras Available";
-  const bull = <span className={classes.bullet}>•</span>;
   
+  function handleGameClick() {
+    setDisabled(!disabled);
+  } 
+  const handleCIDUpdate = e => {
+   setCameraID("textInput.current.focus()");
+  }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -161,21 +175,17 @@ const CameraSetup = () => {
                     >
                       <div className={classesAccordian.column}>
                         <Typography className={classesAccordian.heading}>
-                          #camera
+                          Camera:{cameraID}
                         </Typography>
                       </div>
                       <div className={classesAccordian.columnSecondary}>
-                        <Typography
-                          className={classesAccordian.secondaryHeading}
-                        >
-                          MAC:
+                        <Typography className={classesAccordian.secondaryHeading}>
+                        MAC: 
                         </Typography>
                       </div>
                       <div className={classesAccordian.column}>
-                        <Typography
-                          className={classesAccordian.secondaryHeading}
-                        >
-                          00:1B:44:11:3A:B7
+                        <Typography className={classesAccordian.secondaryHeading}>
+                          {cameraMAC}
                         </Typography>
                       </div>
                     </AccordionSummary>
@@ -186,12 +196,13 @@ const CameraSetup = () => {
                             <FormGroup>
                               <InputGroup className="mb-3">
                                 <FormInput
+                                  type = "text"
+                                  ref = {textInput}
                                   placeholder="Enter Camera ID"
-                                  onChange={() => {}}
+                                  disabled={disabled}
                                 />
                                 <InputGroupAddon type="append">
-                                  <ShardsButton theme="white">
-                                    {" "}
+                                  <ShardsButton theme="white" onClick={handleGameClick}>
                                     <i className="material-icons">lock</i>
                                   </ShardsButton>
                                 </InputGroupAddon>
@@ -199,8 +210,7 @@ const CameraSetup = () => {
                               <Row>
                                 <Col lg="5"></Col>
                                 <Col sm="12" lg="7">
-                                  <ShardsButton justify="right">
-                                    {" "}
+                                  <ShardsButton type ="submit" justify="right">
                                     Update Camera ID
                                   </ShardsButton>
                                 </Col>
@@ -231,8 +241,7 @@ const CameraSetup = () => {
                           height={200}
                           width={200}
                           itemSize={46}
-                          itemCount={15}
-                        >
+                          itemCount={15}>
                           {renderRow}
                         </FixedSizeList>
                       </Col>
@@ -257,5 +266,6 @@ const CameraSetup = () => {
     </React.Fragment>
   );
 };
+
 
 export default CameraSetup;
