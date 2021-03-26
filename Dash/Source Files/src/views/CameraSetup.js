@@ -267,5 +267,4 @@ const CameraSetup = () => {
   );
 };
 
-
 export default CameraSetup;

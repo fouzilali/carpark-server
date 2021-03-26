@@ -196,7 +196,7 @@ const DemoPage = () => {
 					isDynamicOptionsEnable
 					//defaultAnnotations={ imageAnnotations }
 					isLabelOn
-					url='https://www.gtice.is/wp-content/uploads/2015/06/Snaefellsnes_Tour_Kirkjufell_by_KateI.jpg'
+					url='https://github.com/IndianBoy42/yolov5/raw/hklpr/inference/input/ALE03087.JPG'
 					imageWidth={ 600 }
 					//options={ options }
 					disabledOptionLevels={ [] }   

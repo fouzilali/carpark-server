@@ -4,23 +4,66 @@ const Cameras = require('../models/cameras');
 const ParkingSpots = require('../models/parkingSpots');
 const setupRouter = express.Router();
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+const multer = require('multer');
+const crypto = require('crypto');
+const GridFsStorage = require('multer-gridfs-storage');
 var fs = require('fs');
 var path = require('path');
-var multer = require('multer');
+// var multer = require('multer');
 const logger = require('../logger');
 
-//upload image helper
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
+ // //upload image helper
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// });
+
+// var upload = multer({ storage: storage });
+
+//imageupload helpers
+
+const storage = new GridFsStorage({
+    url: "mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority",
+    file: (req , file) => {
+      return new Promise((resolve, reject) =>{
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+        //   buf.toString('hex') + path.extname(file.originalname)
+          const filename = 'hello.jpg';
+          console.log(req.body);
+          const fileInfo = {
+            filename: filename,
+            fileID: req.fileID,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
+        });
+      });
     }
+  });
+  
+var upload = multer({ storage });
+
+const url = "mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority";
+const connect = mongoose.createConnection(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 
-var upload = multer({ storage: storage });
+let gfs; 
 
+connect.once('open', ()=>{
+    gfs = new mongoose.mongo.GridFSBucket(connect.db, {
+        bucketName: "uploads"
+    });
+});
 /**
  * This function is for adding camera's to the server's
  * database of connected cameras
@@ -78,28 +121,42 @@ setupRouter.post('/addCamera', async (req, res, next) => {
  * This is currently not completely tested and will be 
  * finished along with the front-end demo
  */
-setupRouter.post('/addCameraImage', upload.single('image'), async (req, res, next) => {
-    try {
-        console.log('wat');
-        let camera = await Cameras.findOne({ mac: req.body.mac });
-        console.log(camera);
-        var img = {
-            name: req.body.name,
-            desc: req.body.desc,
-            img: {
-                data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-                contentType: 'image/png'
-            }
-        }
-        console.log(img);
-        result = await camera.setupImg.create(img);
-        console.log(result);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(result);
-    } catch (err) {
-        console.error(err);
-    }
+
+setupRouter.post('/addCameraImage', upload.single('file'), (req, res, next) => {
+        console.log(req.body);
+        
+        let newImage = new Image({
+            caption: req.body.caption,
+            filename: req.file.filename,
+            fileId: req.file.id,
+        });
+
+        newImage.save()
+            .then((image) => {
+                res.status(200).json({
+                    success: true,
+                    image,
+                });
+            }).catch(err=> res.status(500).json(err));
+    //     let camera = await Cameras.findOne({ mac: req.body.mac });
+    //     console.log(camera);
+    //     var img = {
+    //         name: req.body.name,
+    //         desc: req.body.desc,
+    //         img: {
+    //             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+    //             contentType: 'image/png'
+    //         }
+    //     }
+    //     console.log(img);
+    //     result = await camera.setupImg.create(img);
+    //     console.log(result);
+    //     res.statusCode = 200;
+    //     res.setHeader('Content-Type', 'application/json');
+    //     res.json(result);
+    // } catch (err) {
+    //     console.error(err);
+    // }
 });
 
 /**
@@ -302,15 +359,25 @@ setupRouter.get('/allSpots', async (req, res, next) => {
  */
 
 setupRouter.get('./getCameraImage', async (req, res, next) => {
-    try {
-        result = await Cameras.findOne({ cameraID: req.body.cameraID });
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(result.setupImg);
-    } catch (err) {
-        console.error(err);
-        res.json(err);
-    }
+    gfs.find({filename: req.params.filename }).toArray((err,files) => {
+        if (!files[0]||files.length === 0){
+            return res.status(200).json({
+                success: false,
+                message: 'No Files Available'
+            });
+        }
+
+        if (files[0].contentType === 'image/jpeg'
+            || files[0].contentType === 'image/png'
+            || files[0].contentType === 'image/svg+xml'){
+                gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+            } else {
+                res.status(404).json({
+                    err: 'Not an image',
+                });
+            }
+
+    });
 });
 
 /**

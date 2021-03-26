@@ -3,10 +3,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('./logger.js');
 var fs = require('fs');
+const methodOverride = require('method-override');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
 
 var app = express();
 
 var mongoose = require('mongoose');
+app.use(methodOverride('_method'));
 
 //Setup Database
 const url = "mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority";
@@ -14,6 +18,9 @@ const connect = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopolog
 connect.then((db) => {
   console.log(`DB: Connected to ${url}`);
 }, (err) => { console.log(err); });
+
+//Setup image storage 
+
 
 const Cameras = require('./models/cameras');
 const parkingSpots = require('./models/parkingSpots');
