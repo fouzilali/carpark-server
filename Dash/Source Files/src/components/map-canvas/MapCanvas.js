@@ -7,7 +7,7 @@ import ParkingSpot from "./ParkingSpot";
 const example = require("./example-spots.json");
 
 export default function MapCanvas() {
-  const [fills, setFills] = useState([]);
+  const [state, setState] = useState(true);
   return (
     <MapInteractionCSS>
       <svg width="100%" height="800px">
@@ -15,9 +15,6 @@ export default function MapCanvas() {
           width="100%"
           height="100%"
           path={require("../../images/LG5.svg")}
-          onSVGReady={() => {
-            console.log(example);
-          }}
         >
           {/* {(() => {
           let proxies = [];
@@ -52,8 +49,16 @@ export default function MapCanvas() {
           onMouseEnter={interact}
         ></SvgProxy> */}
         </SvgLoader>
-        {example.spots.map(spot => (
-          <ParkingSpot w="100" h="100" x="0" y={spot * 100}></ParkingSpot>
+        {example.spots.map((spot, i) => (
+          <ParkingSpot
+            key={i}
+            w={100}
+            h={state ? 120 : 80}
+            x={0}
+            y={spot * 100}
+            onMouseEnter={() => setState(true)}
+            onMouseLeave={() => setState(false)}
+          ></ParkingSpot>
         ))}
       </svg>
     </MapInteractionCSS>
