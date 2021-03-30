@@ -2,6 +2,9 @@ import { SvgLoader, SvgProxy } from "react-svgmt";
 import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import { MapInteractionCSS } from "react-map-interaction";
+import ParkingSpot from "./ParkingSpot";
+
+const example = require("./example-spots.json");
 
 export default function MapCanvas() {
   const [fills, setFills] = useState([]);
@@ -12,6 +15,9 @@ export default function MapCanvas() {
           width="100%"
           height="100%"
           path={require("../../images/LG5.svg")}
+          onSVGReady={() => {
+            console.log(example);
+          }}
         >
           {/* {(() => {
           let proxies = [];
@@ -46,14 +52,9 @@ export default function MapCanvas() {
           onMouseEnter={interact}
         ></SvgProxy> */}
         </SvgLoader>
-        <SvgLoader
-          x="0"
-          y="200"
-          width="80"
-          height="80"
-          alt="example"
-          path={require("../../images/shards-dashboards-logo.svg")}
-        />
+        {example.spots.map(spot => (
+          <ParkingSpot w="100" h="100" x="0" y={spot * 100}></ParkingSpot>
+        ))}
       </svg>
     </MapInteractionCSS>
   );
