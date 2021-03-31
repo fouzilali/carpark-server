@@ -1,3 +1,15 @@
 {
-  "spots": [1, 2, 3, 4]
+  "spots": [
+    {
+      "id": "0",
+      "shortName": "A1",
+      "longName": "Section A, Spot 1",
+      "xywh": [0, 0, 5, 5]
+    },
+    {
+      "id": "1", "shortName": "A2",
+      "longName": "Section A, Spot 2",
+      "xywh": [5, 0, 5, 5]
+    }
+  ]
 }

@@ -9,15 +9,16 @@ const logoB = require("../../images/shards-dashboards-logo-danger.svg");
 
 // TODO: LOD by size (how to get real size???)
 // TODO: on hover details
-function ParkingSpot({ x, y, w, h, onMouseEnter, onMouseLeave }) {
+function ParkingSpot({ x, y, w, h, lp, onMouseEnter, onMouseLeave }) {
   //   console.log(`dims is ${size.height} x ${size.width}`);
-  const svg =
-    h > 100 ? (
-      <SvgLoader x={x} y={y} width={w} height={h} alt="example" path={logoA} />
-    ) : (
-      <SvgLoader x={x} y={y} width={w} height={h} alt="example" path={logoB} />
-    );
-
+  console.log(lp);
+  const svg = (
+    <SvgLoader x={x} y={y} width={w} height={h} alt="example" path={logoA}>
+      <text x="0" y="0">
+        {lp ? lp : "VACANT"}
+      </text>
+    </SvgLoader>
+  );
   return (
     <svg onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {svg}

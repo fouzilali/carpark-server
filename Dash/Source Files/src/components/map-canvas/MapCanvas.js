@@ -5,12 +5,13 @@ import { MapInteractionCSS } from "react-map-interaction";
 import ParkingSpot from "./ParkingSpot";
 
 const example = require("./example-spots.json");
+const exdata = require("./example-data.json");
 
 export default function MapCanvas() {
   const [state, setState] = useState(true);
   return (
     <MapInteractionCSS>
-      <svg width="100%" height="800px">
+      <svg width="600px" height="600px">
         <SvgLoader
           width="100%"
           height="100%"
@@ -52,10 +53,11 @@ export default function MapCanvas() {
         {example.spots.map((spot, i) => (
           <ParkingSpot
             key={i}
-            w={100}
-            h={state ? 120 : 80}
-            x={0}
-            y={spot * 100}
+            x={spot.xywh[0] * 100}
+            y={spot.xywh[1] * 100}
+            w={spot.xywh[2] * 100}
+            h={spot.xywh[3] * 100}
+            lp={exdata[spot.id].lp}
             onMouseEnter={() => setState(true)}
             onMouseLeave={() => setState(false)}
           ></ParkingSpot>
