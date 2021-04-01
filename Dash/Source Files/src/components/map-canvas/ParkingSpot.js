@@ -11,7 +11,6 @@ const logoB = require("../../images/shards-dashboards-logo-danger.svg");
 // TODO: on hover details
 function ParkingSpot({ x, y, w, h, lp, onMouseEnter, onMouseLeave }) {
   //   console.log(`dims is ${size.height} x ${size.width}`);
-  console.log(lp);
   const svg = (
     <SvgLoader x={x} y={y} width={w} height={h} alt="example" path={logoA}>
       <text x="0" y="0">

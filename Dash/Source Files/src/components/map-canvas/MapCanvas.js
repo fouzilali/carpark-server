@@ -8,7 +8,6 @@ const example = require("./example-spots.json");
 const exdata = require("./example-data.json");
 
 export default function MapCanvas() {
-  const [state, setState] = useState(true);
   return (
     <MapInteractionCSS>
       <svg width="600px" height="600px">
@@ -58,8 +57,6 @@ export default function MapCanvas() {
             w={spot.xywh[2] * 100}
             h={spot.xywh[3] * 100}
             lp={exdata[spot.id].lp}
-            onMouseEnter={() => setState(true)}
-            onMouseLeave={() => setState(false)}
           ></ParkingSpot>
         ))}
       </svg>
