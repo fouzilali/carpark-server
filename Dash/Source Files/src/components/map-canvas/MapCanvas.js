@@ -1,64 +1,91 @@
 import { SvgLoader, SvgProxy } from "react-svgmt";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { MapInteractionCSS } from "react-map-interaction";
+import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "./ParkingSpot";
+import axios from "axios";
 
-const example = require("./example-spots.json");
-const exdata = require("./example-data.json");
+const MapInteractionCSS = props => {
+  return (
+    <MapInteraction {...props}>
+      {({ translation, scale }) => {
+        // Translate first and then scale.  Otherwise, the scale would affect the translation.
+        const transform = `translate(${translation.x}px, ${translation.y}px) scale(${scale})`;
+        props.setScale(scale);
+        return (
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              position: "relative", // for absolutely positioned children
+              overflow: "hidden",
+              touchAction: "none", // Not supported in Safari :(
+              msTouchAction: "none",
+              cursor: "all-scroll",
+              WebkitUserSelect: "none",
+              MozUserSelect: "none",
+              msUserSelect: "none"
+            }}
+          >
+            <div
+              style={{
+                display: "inline-block", // size to content
+                transform: transform,
+                transformOrigin: "0 0 "
+              }}
+            >
+              {props.children}
+            </div>
+          </div>
+        );
+      }}
+    </MapInteraction>
+  );
+};
 
 export default function MapCanvas() {
+  // const spots = example.spots;
+  const [spots, setSpots] = useState({ array: [] });
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get("http://localhost:12000/setup/allSpots");
+      console.log(`allSpots got`);
+      console.log(result);
+      setSpots({ array: result.data });
+      console.log(spots);
+    };
+    fetchData();
+  }, []);
+  const [scale, setScale] = useState(1);
   return (
-    <MapInteractionCSS>
-      <svg width="600px" height="600px">
+    <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
+      <svg width="2000px" height="2000px">
         <SvgLoader
           width="100%"
-          height="100%"
+          // height="100%"
+          // height="auto"
+          // preserveAspectRatio={true}
           path={require("../../images/LG5.svg")}
-        >
-          {/* {(() => {
-          let proxies = [];
-          for (let i = 0; i < 1000; i++) {
-            const [fill, setFill] = useState("none");
-            proxies.push(
-              <SvgProxy
-                selector={`path:nth-of-type(${i})`}
-                onElementSelected={nodes => {
-                  console.log("Event: element selected", nodes);
-                }}
-                onMouseEnter={() => setFill("blue")}
-                onMouseLeave={() => setFill("none")}
-                fill={fill}
-              ></SvgProxy>
-            );
+        ></SvgLoader>
+        {spots.array.map((spot, i) => {
+          if (!spot) {
+            return;
           }
-          return proxies;
-        })()} */}
-
-          {/* <SvgProxy
-          selector="path"
-          onElementSelected={nodes => {
-            console.log("Event: element selected", nodes);
-            setFills(
-              nodes.map(node => {
-                console.log(node.fill);
-                return node.fill;
-              })
-            );
-          }}
-          onMouseEnter={interact}
-        ></SvgProxy> */}
-        </SvgLoader>
-        {example.spots.map((spot, i) => (
-          <ParkingSpot
-            key={i}
-            x={spot.xywh[0] * 100}
-            y={spot.xywh[1] * 100}
-            w={spot.xywh[2] * 100}
-            h={spot.xywh[3] * 100}
-            lp={exdata[spot.id].lp}
-          ></ParkingSpot>
-        ))}
+          const x = i * 10;
+          const xywh = spot.xywh || [x, x, 4, 4];
+          return (
+            <ParkingSpot
+              key={i}
+              x={xywh[0] * 10}
+              y={xywh[1] * 10}
+              w={xywh[2] * 10}
+              h={xywh[3] * 10}
+              scale={scale}
+              id={spot.spotID}
+              cacheSpot={spot}
+            ></ParkingSpot>
+          );
+        })}
       </svg>
     </MapInteractionCSS>
   );
