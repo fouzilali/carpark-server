@@ -13,16 +13,17 @@ import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import CameraSetup from "./views/CameraSetup";
-import Operations from "./views/Operations"
-import ParkingSpotSetup from "./views/ParkingSpotSetup"
-import DemoPage from "./views/DemoPage"
+import Operations from "./views/Operations";
+import ParkingSpotSetup from "./views/ParkingSpotSetup";
+import DemoPage from "./views/DemoPage";
+import MapCanvas from "./components/map-canvas/MapCanvas.js";
 
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/blog-overview" />
+    component: () => <Redirect to="/Operations" />
   },
   {
     path: "/blog-overview",
@@ -78,5 +79,6 @@ export default [
     path: "/blog-posts",
     layout: DefaultLayout,
     component: BlogPosts
-  }
+  },
+  { path: "/parking-map", layout: DefaultLayout, component: MapCanvas }
 ];

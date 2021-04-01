@@ -21,7 +21,12 @@ export default function() {
       htmlBefore: '<i class="material-icons">videocam</i>',
       to: "/Operations"
     },
-    
+    {
+      title: "Map",
+      htmlBefore: '<i class="material-icons">map</i>',
+      to: "/parking-map"
+    },
+
     // {
     //   title: "Demo Page",
     //   htmlBefore: '<i class="material-icons">videocam</i>',
@@ -55,7 +60,7 @@ export default function() {
     {
       title: "Errors",
       htmlBefore: '<i class="material-icons">error</i>',
-      to: "/errors",
+      to: "/errors"
     }
   ];
 }
