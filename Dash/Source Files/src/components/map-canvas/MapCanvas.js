@@ -10,6 +10,7 @@ const MapInteractionCSS = props => {
     <MapInteraction {...props}>
       {({ translation, scale }) => {
         // Translate first and then scale.  Otherwise, the scale would affect the translation.
+        scale = scale * scale;
         const transform = `translate(${translation.x}px, ${translation.y}px) scale(${scale})`;
         props.setScale(scale);
         return (
@@ -59,7 +60,8 @@ export default function MapCanvas() {
   const [scale, setScale] = useState(1);
   return (
     <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
-      <svg width="2000px" height="2000px">
+      {/* <svg width="100%" height="100%"> */}
+      <svg width="1000px" height="1000px">
         <SvgLoader
           width="100%"
           // height="100%"
@@ -72,7 +74,7 @@ export default function MapCanvas() {
             return;
           }
           const x = i * 10;
-          const xywh = spot.xywh || [x, x, 4, 4];
+          const xywh = spot.xywh || [x, x, 4, 2];
           return (
             <ParkingSpot
               key={i}

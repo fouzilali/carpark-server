@@ -37,7 +37,8 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
     }, []);
   }
   const vacant = !spot.licensePlate;
-  const dim = Math.min(w, h);
+  const dim = Math.max(w, h);
+  // const dim = Math.min(w, h);
   const [lod, setLOD] = useState(
     dim * scale < 50
       ? MINM_DETAILS
@@ -53,14 +54,14 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
       }
       break;
     case SOME_DETAILS:
-      if (w * scale > 100) {
+      if (w * scale > 200) {
         setLOD(FULL_DETAILS);
       } else if (w * scale < 90) {
         setLOD(MINM_DETAILS);
       }
       break;
     case FULL_DETAILS:
-      if (w * scale < 90) {
+      if (w * scale < 180) {
         setLOD(SOME_DETAILS);
       }
       break;
@@ -70,7 +71,7 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
   }
 
   const rectBlue = "#007BFF";
-  const strokeWidth = Math.max(dim / scale / 4, 0);
+  const strokeWidth = Math.max(dim / scale / 8, 2);
 
   const [hover, setHover] = useState(false);
 
@@ -90,29 +91,39 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
     );
   };
   const FullDetails = ({ wid, hgt }) => {
-    return (
-      <g>
-        <BoundingRect fill="transparent" wid={wid} hgt={hgt}></BoundingRect>
+    const Txt = ({ line, text }) => {
+      const fh = Math.max(wid, hgt) / 6;
+      return (
         <text
           dominantBaseline="hanging"
           x={strokeWidth * 2}
-          y={strokeWidth * 2}
+          y={strokeWidth * 2 + line * fh}
           width={wid}
           height={hgt}
-          fontSize={hgt / 6}
+          fontSize={fh}
         >
-          {!vacant ? spot.licensePlate : "VACANT"}
+          {text}
         </text>
+      );
+    };
+    return (
+      <g>
+        <BoundingRect fill="white" wid={wid} hgt={hgt}></BoundingRect>
+        <Txt text={!vacant ? spot.licensePlate : "VACANT"} line={0}></Txt>
+        <Txt text={spot.spotID} line={1}></Txt>
+        <Txt text={spot.cameraID} line={2}></Txt>
+        {/* <Txt text={!vacant ? spot.licensePlate : "VACANT"} line={2}></Txt> */}
+        {/* <Txt text={!vacant ? spot.licensePlate : "VACANT"} line={3}></Txt> */}
       </g>
     );
   };
 
   return (
     <svg
-      onMouseEnter={() => setHover(true)}
+      onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      width={w * 10}
-      height={h * 10}
+      width={Math.max(300 / scale, 2 * w)}
+      height={Math.max(300 / scale, 2 * h)}
       x={x}
       y={y}
       ref={target}
@@ -129,14 +140,14 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
           case SOME_DETAILS:
             return (
               <g>
-                <BoundingRect fill="transparent"></BoundingRect>
+                <BoundingRect fill="white"></BoundingRect>
                 <text
                   dominantBaseline="hanging"
                   x={strokeWidth * 2}
                   y={strokeWidth * 2}
                   width={w}
-                  height={h / 2}
-                  fontSize={h / 7}
+                  height={h}
+                  fontSize={dim / 7}
                 >
                   {!vacant ? spot.licensePlate : "VACANT"}
                 </text>

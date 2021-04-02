@@ -25,7 +25,7 @@ export default function() {
       title: "Map",
       htmlBefore: '<i class="material-icons">map</i>',
       to: "/parking-map"
-    },
+    }
 
     // {
     //   title: "Demo Page",
@@ -57,10 +57,10 @@ export default function() {
     //   htmlBefore: '<i class="material-icons">person</i>',
     //   to: "/user-profile-lite",
     // },
-    {
-      title: "Errors",
-      htmlBefore: '<i class="material-icons">error</i>',
-      to: "/errors"
-    }
+    // {
+    //   title: "Errors",
+    //   htmlBefore: '<i class="material-icons">error</i>',
+    //   to: "/errors"
+    // }
   ];
 }
