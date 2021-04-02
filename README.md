@@ -8,9 +8,9 @@
 
 https://docs.google.com/document/d/1pIdR6F_JqRwzT5WQwP6-qQdHoFrq54f41aaOVLchKHk/edit
 
-## TODOS
+## Apr 16 Setup steps
 
- - Write all the Routing function in `routes/`
- - Write all the Query function in `database.js`
- - Make some basic pages
- - Write mapping function for LP coords to parking spot
+- After cloning, run "npm install from ./carpark-server" 
+- "npm run start" to start the backend server on localhost
+- "cd Dash/Source Files" , This folder contains the front-end React App
+-  "npm run start" to start the front-end
