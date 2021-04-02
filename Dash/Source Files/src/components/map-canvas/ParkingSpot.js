@@ -48,19 +48,19 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
 
   switch (lod) {
     case MINM_DETAILS:
-      if (w * scale > 50) {
+      if (w * scale > 100) {
         setLOD(SOME_DETAILS);
       }
       break;
     case SOME_DETAILS:
-      if (w * scale > 120) {
+      if (w * scale > 100) {
         setLOD(FULL_DETAILS);
-      } else if (w * scale < 40) {
+      } else if (w * scale < 90) {
         setLOD(MINM_DETAILS);
       }
       break;
     case FULL_DETAILS:
-      if (w * scale < 100) {
+      if (w * scale < 90) {
         setLOD(SOME_DETAILS);
       }
       break;
@@ -99,7 +99,7 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
           y={strokeWidth * 2}
           width={wid}
           height={hgt}
-          fontSize="0.2em"
+          fontSize={hgt / 6}
         >
           {!vacant ? spot.licensePlate : "VACANT"}
         </text>
@@ -136,7 +136,7 @@ function ParkingSpot({ x, y, w, h, id, scale, cacheSpot }) {
                   y={strokeWidth * 2}
                   width={w}
                   height={h / 2}
-                  fontSize="1em"
+                  fontSize={h / 7}
                 >
                   {!vacant ? spot.licensePlate : "VACANT"}
                 </text>
