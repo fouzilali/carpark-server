@@ -36,7 +36,7 @@ const storage = new GridFsStorage({
             return reject(err);
           }
         //   buf.toString('hex') + path.extname(file.originalname)
-          const filename = 'hello.jpg';
+          const filename = file.originalname;
           console.log(req.body);
           const fileInfo = {
             filename: filename,
@@ -124,20 +124,6 @@ setupRouter.post('/addCamera', async (req, res, next) => {
 
 setupRouter.post('/addCameraImage', upload.single('file'), (req, res, next) => {
         console.log(req.body);
-        
-        let newImage = new Image({
-            caption: req.body.caption,
-            filename: req.file.filename,
-            fileId: req.file.id,
-        });
-
-        newImage.save()
-            .then((image) => {
-                res.status(200).json({
-                    success: true,
-                    image,
-                });
-            }).catch(err=> res.status(500).json(err));
     //     let camera = await Cameras.findOne({ mac: req.body.mac });
     //     console.log(camera);
     //     var img = {
@@ -175,7 +161,8 @@ setupRouter.post('/addParkingSpot', async (req, res, next) => {
             spotID: req.body.spotID,
             cameraID: req.body.cameraID,
             vacant: req.body.vacant,
-            licensePlate: req.body.licensePlate,
+            lpNumber: req.body.lpNumber,
+            reserved: req.body.reserved,
             boundingBox: req.body.boundingBox
         };
         result = await ParkingSpots.create(ps);
@@ -262,7 +249,7 @@ setupRouter.put('/updateCameraStatus', async (req, res, next) => {
         res.json(result);
     } catch (err) {
         console.error(err);
-        res.json(err)
+        res.json(err);
     }
 });
 
@@ -306,6 +293,8 @@ setupRouter.delete('/deleteSpot', async (req, res, next) => {
  * @param {string} CameraID
  * @returns {Object} camera
  */
+
+
 setupRouter.get('/getCamera', async (req, res, next) => {
     try {
         result = await Cameras.findOne({ cameraID: req.body.cameraID });
@@ -317,6 +306,19 @@ setupRouter.get('/getCamera', async (req, res, next) => {
         res.json(err);
     }
 });
+
+setupRouter.get('/getAllCameras', async (req, res, next) => {
+    try {
+        result = await Cameras.find({});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
+});
+
 
 /**
  * This function is for getting a parkingSpot from 
@@ -358,8 +360,10 @@ setupRouter.get('/allSpots', async (req, res, next) => {
  * @returns {Object} camera_Image
  */
 
-setupRouter.get('./getCameraImage', async (req, res, next) => {
-    gfs.find({filename: req.params.filename }).toArray((err,files) => {
+setupRouter.get('/getCameraImage', async (req, res, next) => {
+    let filename = String(req.body.filename)+".jpg";
+    console.log(filename);
+    gfs.find({filename: "wallpaper2.jpg"}).toArray((err,files) => {
         if (!files[0]||files.length === 0){
             return res.status(200).json({
                 success: false,
@@ -376,7 +380,6 @@ setupRouter.get('./getCameraImage', async (req, res, next) => {
                     err: 'Not an image',
                 });
             }
-
     });
 });
 
