@@ -9,25 +9,24 @@ class Operations extends Component {
    constructor(props) {
       super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
       this.state = { //state is by default an object
-          parkingSpots: [
-        //     { id: 1, name: 'Wasif', age: 21, email: 'wasif@email.com' },
-        //     { id: 2, name: 'Ali', age: 19, email: 'ali@email.com' },
-        //     { id: 3, name: 'Saad', age: 16, email: 'saad@email.com' },
-        //     { id: 4, name: 'Asad', age: 25, email: 'asad@email.com' }
-         ]
+          parkingSpots: []
       }
    }
 
    componentDidMount() {
-    axios.get('http://localhost:12000/setup/allSpots')
-      .then(response => {
-        this.setState({ parkingSpots : response.data })
-        console.log(this.state.parkingSpots);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
+    setInterval(() => {
+      axios.get('http://localhost:12000/setup/allSpots')
+        .then(response => {
+          this.setState({ parkingSpots : response.data })
+          console.log(this.state.parkingSpots);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }, 3000);
+  };
+
+  
 
    renderTableData() {
     return this.state.parkingSpots.map((spot, index) => {
