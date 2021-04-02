@@ -55,7 +55,14 @@ export default function MapCanvas() {
       setSpots({ array: result.data });
       console.log(spots);
     };
-    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
   const [scale, setScale] = useState(1);
   return (
