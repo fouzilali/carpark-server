@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { hot } from 'react-hot-loader';
 import { TwoDimensionalImage, TwoDimensionalVideo } from "react-annotation-tool";
 //import './DemoPage.css';
 
 const DemoPage = () => {
 	const handleSubmit = r => console.log(r);
+	const [bbox, setBbox] = useState({ a: "d" });
+
+	useEffect(() => {
+		console.log(bbox);
+	}, [bbox]);
 	// const imageAnnotations = [{
 	// 	id: 'jlyjm4py',
 	// 	name: 'jlyjm4py',
@@ -35,7 +40,7 @@ const DemoPage = () => {
 	// 			children: [
 	// 				{
 	// 					id:
-    //                     '1-1',
+	//                     '1-1',
 	// 					value: 'Face',
 	// 					children: [
 	// 						{
@@ -187,20 +192,28 @@ const DemoPage = () => {
 		<div>
 			<div className='mb-5'>
 				<TwoDimensionalImage
+					output={setBbox}
 					hasNextButton
-					onNextClick={ handleSubmit }
+					onNextClick={handleSubmit}
 					hasPreviousButton
-					onPreviousClick={ handleSubmit }
+					onPreviousClick={handleSubmit}
 					hasSkipButton
-					onSkipClick={ handleSubmit }
+					onSkipClick={handleSubmit}
 					isDynamicOptionsEnable
 					//defaultAnnotations={ imageAnnotations }
 					isLabelOn
 					url='https://github.com/IndianBoy42/yolov5/raw/hklpr/inference/input/ALE03087.JPG'
-					imageWidth={ 600 }
+					imageWidth={600}
 					//options={ options }
-					disabledOptionLevels={ [] }   
-				/>
+					disabledOptionLevels={[]}
+				>
+				</TwoDimensionalImage>
+				{(() => {
+						useEffect(() => {
+							console.log(bbox);
+						}, [bbox]);
+						return <div id="debugging-bbox">{bbox.a}</div>;
+					})()}
 			</div>
 			{/* <div className='mb-5'>
 				<TwoDimensionalVideo

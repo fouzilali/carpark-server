@@ -318,6 +318,18 @@ setupRouter.get('/getCamera', async (req, res, next) => {
     }
 });
 
+setupRouter.get('/getAllCameras', async (req, res, next) => {
+    try {
+        result = await Cameras.find({});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
+});
+
 /**
  * This function is for getting a parkingSpot from 
  * the existing list of parking spots
