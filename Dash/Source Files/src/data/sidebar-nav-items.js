@@ -6,11 +6,20 @@ export default function() {
     //   htmlBefore: '<i class="material-icons">edit</i>',
     //   htmlAfter: ""
     // },
+
+
     {
       title: "Camera Setup",
       htmlBefore: '<i class="material-icons">videocam</i>',
       to: "/cameraSetup"
     },
+
+    {
+      title: "Camera Setup 2",
+      htmlBefore: '<i class="material-icons">videocam</i>',
+      to: "/cameraSetup2"
+    },
+
     {
       title: "Parking Spots Setup",
       htmlBefore: '<i class="material-icons">videocam</i>',

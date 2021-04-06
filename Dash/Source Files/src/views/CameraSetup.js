@@ -155,10 +155,7 @@ const CameraSetup = () => {
    setCameraID("textInput.current.focus()");
   }
 
-  const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
-  
+ 
   /*Use like so*/
 
   async function fetchData() {
@@ -173,6 +170,8 @@ const CameraSetup = () => {
   useEffect( ()=>{
     console.log(allCams);
   },[allCams]);
+
+  
 
 
 
