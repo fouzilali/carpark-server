@@ -124,26 +124,9 @@ setupRouter.post('/addCamera', async (req, res, next) => {
 
 setupRouter.post('/addCameraImage', upload.single('file'), (req, res, next) => {
         console.log(req.body);
-    //     let camera = await Cameras.findOne({ mac: req.body.mac });
-    //     console.log(camera);
-    //     var img = {
-    //         name: req.body.name,
-    //         desc: req.body.desc,
-    //         img: {
-    //             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-    //             contentType: 'image/png'
-    //         }
-    //     }
-    //     console.log(img);
-    //     result = await camera.setupImg.create(img);
-    //     console.log(result);
-    //     res.statusCode = 200;
-    //     res.setHeader('Content-Type', 'application/json');
-    //     res.json(result);
-    // } catch (err) {
-    //     console.error(err);
-    // }
-});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json("connected");});
 
 /**
  * This function is for adding parking spots to the 
@@ -363,7 +346,7 @@ setupRouter.get('/allSpots', async (req, res, next) => {
 setupRouter.get('/getCameraImage', async (req, res, next) => {
     let filename = String(req.body.filename)+".jpg";
     console.log(filename);
-    gfs.find({filename: "wallpaper2.jpg"}).toArray((err,files) => {
+    gfs.find({filename: filename}).toArray((err,files) => {
         if (!files[0]||files.length === 0){
             return res.status(200).json({
                 success: false,
@@ -374,7 +357,7 @@ setupRouter.get('/getCameraImage', async (req, res, next) => {
         if (files[0].contentType === 'image/jpeg'
             || files[0].contentType === 'image/png'
             || files[0].contentType === 'image/svg+xml'){
-                gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+                gfs.openDownloadStreamByName(filename).pipe(res);
             } else {
                 res.status(404).json({
                     err: 'Not an image',

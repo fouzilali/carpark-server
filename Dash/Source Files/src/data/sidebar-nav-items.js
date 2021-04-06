@@ -25,13 +25,12 @@ export default function() {
       title: "Map",
       htmlBefore: '<i class="material-icons">map</i>',
       to: "/parking-map"
-    }
-
-    // {
-    //   title: "Demo Page",
-    //   htmlBefore: '<i class="material-icons">videocam</i>',
-    //   to: "/DemoPage"
-    // },
+    },
+    {
+      title: "Demo Page",
+      htmlBefore: '<i class="material-icons">videocam</i>',
+      to: "/DemoPage"
+    },
     // {
     //   title: "Blog Posts",
     //   htmlBefore: '<i class="material-icons">vertical_split</i>',
