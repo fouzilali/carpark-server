@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import clsx from "clsx";
+import axios from "axios";
 import { FixedSizeList } from "react-window";
 import {
   Row,
@@ -45,6 +46,8 @@ import {
 
 import PageTitle from "./../components/common/PageTitle";
 import { disable } from "debug";
+import SelectInput from "@material-ui/core/Select/SelectInput";
+
 
 const useStyles = makeStyles({
   root: {
@@ -140,13 +143,38 @@ const CameraSetup = () => {
   const classes = useStyles();
   const classesAccordian = useStylesAccordian();
   const title = "Cameras Available";
+  const [allCams, setAllCams] = useState([]);
+  const [hasError, setErrors] = useState(false);
   
   function handleGameClick() {
     setDisabled(!disabled);
   } 
+
+  
   const handleCIDUpdate = e => {
    setCameraID("textInput.current.focus()");
   }
+
+ 
+  /*Use like so*/
+
+  async function fetchData() {
+    const res = await axios.get("http://localhost:12000/setup/getAllCameras");
+    setAllCams(res.data);    
+  };
+  
+  useEffect(() => {
+    fetchData();    
+  },[]);
+
+  useEffect( ()=>{
+    console.log(allCams);
+  },[allCams]);
+
+  
+
+
+
   return (
     <React.Fragment>
       <CssBaseline />

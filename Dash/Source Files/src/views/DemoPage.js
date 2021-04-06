@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { hot } from 'react-hot-loader';
 import { TwoDimensionalImage, TwoDimensionalVideo } from "react-annotation-tool";
 //import './DemoPage.css';
@@ -87,17 +87,17 @@ const DemoPage = () => {
 	return (
 			<div className='mb-5'>
 				<TwoDimensionalImage
+					output={setBbox}
 					hasNextButton
-					onNextClick={ handleSubmit }
+					onNextClick={handleSubmit}
 					hasPreviousButton
-					onPreviousClick={ handleSubmit }
+					onPreviousClick={handleSubmit}
 					hasSkipButton
-					onSkipClick={ handleSubmit }
+					onSkipClick={handleSubmit}
 					isDynamicOptionsEnable
 					defaultAnnotations={ imageAnnotations }
 					isLabelOn
-					url={'https://github.com/IndianBoy42/yolov5/raw/hklpr//input/ALE03087.JPG',
-					'https://www.gtice.is/wp-content/uploads/2015/06/Snaefellsnes_Tour_Kirkjufell_by_KateI.jpg'}
+					url={'https://github.com/IndianBoy42/yolov5/raw/hklpr//input/ALE03087.JPG'}
 					imageWidth={ 600 }
 					options={ options }
 					disabledOptionLevels={ [] }   

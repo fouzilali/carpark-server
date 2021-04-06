@@ -302,7 +302,6 @@ setupRouter.get('/getAllCameras', async (req, res, next) => {
     }
 });
 
-
 /**
  * This function is for getting a parkingSpot from 
  * the existing list of parking spots

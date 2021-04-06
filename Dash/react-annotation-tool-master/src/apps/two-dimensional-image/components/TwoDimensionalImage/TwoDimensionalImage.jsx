@@ -51,7 +51,6 @@ class TwoDimensionalImage extends Component {
 			isLabelOn,
 			imageWidth,
 		} = props;
-
 		const entities = { options: {}, annotations: {} };
 		let rootOptionId = '';
 		let annotations = [];
@@ -218,6 +217,7 @@ class TwoDimensionalImage extends Component {
 			entities.annotations[focusedName].vertices.push(Vertex({
 				id: `${uniqueKey}`, name: `${uniqueKey}`, x, y,
 			}));
+			this.props.output(annotations);
 			return { entities: { ...entities, annotations: entities.annotations } };
 		});
 	}
@@ -246,6 +246,7 @@ class TwoDimensionalImage extends Component {
 			const {
 				isAdding, entities, imageWidth, imageHeight,
 			} = prevState;
+			console.log("someshit1");
 			if (isAdding) return {};
 			const { annotations } = entities;
 			const vertices = annotations[group.name()].vertices.map((v) => {
@@ -259,8 +260,10 @@ class TwoDimensionalImage extends Component {
 				return { ...v, x, y };
 			});
 			annotations[group.name()].vertices = vertices;
+			this.props.output({a:'c'});
 			return { entities: { ...entities, annotations } };
 		});
+		console.log("someshit");
 	}
 
 	handleCanvasFocusing = (e) => {
@@ -511,6 +514,7 @@ class TwoDimensionalImage extends Component {
 
 TwoDimensionalImage.propTypes = {
 	className: PropTypes.string,
+	bbox: PropTypes.object,
 	url: PropTypes.string,
 	imageWidth: PropTypes.number,
 	defaultAnnotations: PropTypes.arrayOf(PropTypes.object),
@@ -533,6 +537,7 @@ TwoDimensionalImage.propTypes = {
 };
 TwoDimensionalImage.defaultProps = {
 	className: '',
+	bbox: {},
 	url: '',
 	imageWidth: 400,
 	defaultAnnotations: [],
