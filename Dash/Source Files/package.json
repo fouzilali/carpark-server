@@ -26,6 +26,7 @@
     "react-scripts": "2.1.1",
     "react-sizeme": "^3.0.1",
     "react-svgmt": "^1.1.11",
+    "react-swipeable-views": "^0.13.9",
     "react-window": "^1.8.6",
     "shards-react": "^1.0.0",
     "shortid": "^2.2.14",

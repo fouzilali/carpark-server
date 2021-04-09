@@ -18,7 +18,6 @@ class Operations extends Component {
       axios.get('http://localhost:12000/setup/allSpots')
         .then(response => {
           this.setState({ parkingSpots : response.data })
-          console.log(this.state.parkingSpots);
         })
         .catch((error) => {
           console.log(error);

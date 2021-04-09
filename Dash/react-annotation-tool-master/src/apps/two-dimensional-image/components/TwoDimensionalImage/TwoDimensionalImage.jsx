@@ -434,8 +434,8 @@ class TwoDimensionalImage extends Component {
 		) : '';
 		const skipButtonUI = hasSkipButton ? (
 			<Button color='secondary' onClick={ () => this.handleSubmit('Skip') }>
-				Skip
-				<small>{`(${SHORTCUTS.BUTTON.SKIP.key})`}</small>
+				Submit
+				{/* ${SHORTCUTS.BUTTON.SKIP.key} */}
 			</Button>
 		) : '';
 

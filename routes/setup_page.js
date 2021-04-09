@@ -36,7 +36,7 @@ const storage = new GridFsStorage({
             return reject(err);
           }
         //   buf.toString('hex') + path.extname(file.originalname)
-          const filename = file.originalname;
+          const filename = file.originalname.split('.')[0];
           console.log(req.body);
           const fileInfo = {
             filename: filename,
@@ -343,7 +343,7 @@ setupRouter.get('/allSpots', async (req, res, next) => {
  */
 
 setupRouter.get('/getCameraImage', async (req, res, next) => {
-    let filename = String(req.body.filename)+".jpg";
+    let filename = String(req.query.filename);
     console.log(filename);
     gfs.find({filename: filename}).toArray((err,files) => {
         if (!files[0]||files.length === 0){
