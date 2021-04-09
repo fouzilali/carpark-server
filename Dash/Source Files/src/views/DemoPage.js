@@ -13,6 +13,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import axios from "axios";
 
 
 function TabPanel(props) {
@@ -87,89 +88,110 @@ const DemoPage = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const allCams = [
-    {
-      cameraID: "A1",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "A1", children: [] },
-          { id: "2", value: "A2", children: [] },
-          { id: "3", value: "A3", children: [] },
-          { id: "4", value: "A4", children: [] },
-          { id: "5", value: "A5", children: [] }
-        ]
-      }
-    },
-    {
-      cameraID: "A2",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "B1", children: [] },
-          { id: "2", value: "B2", children: [] },
-          { id: "3", value: "B3", children: [] },
-          { id: "4", value: "B4", children: [] },
-          { id: "5", value: "B5", children: [] }
-        ]
-      }
-    },
-    {
-      cameraID: "A3",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "C1", children: [] },
-          { id: "2", value: "C2", children: [] },
-          { id: "3", value: "C3", children: [] },
-          { id: "4", value: "C4", children: [] },
-          { id: "5", value: "C5", children: [] }
-        ]
-      }
-    },
-    {
-      cameraID: "A4",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "D1", children: [] },
-          { id: "2", value: "D2", children: [] },
-          { id: "3", value: "D3", children: [] },
-          { id: "4", value: "D4", children: [] },
-          { id: "5", value: "D5", children: [] }
-        ]
-      }
-    },
-    {
-      cameraID: "A5",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "E1", children: [] },
-          { id: "2", value: "E2", children: [] },
-          { id: "3", value: "E3", children: [] },
-          { id: "4", value: "E4", children: [] },
-          { id: "5", value: "E5", children: [] }
-        ]
-      }
-    }
-  ];
+  const [allCams, setAllCams] = React.useState([{}]);
+    // {
+    //   cameraID: "A1",
+    //   parkingSpots: {
+    //     id: "0",
+    //     value: "root",
+    //     children: [
+    //       { id: "1", value: "A1", children: [] },
+    //       { id: "2", value: "A2", children: [] },
+    //       { id: "3", value: "A3", children: [] },
+    //       { id: "4", value: "A4", children: [] },
+    //       { id: "5", value: "A5", children: [] }
+    //     ]
+    //   }
+    // },
+    // {
+    //   cameraID: "A2",
+    //   parkingSpots: {
+    //     id: "0",
+    //     value: "root",
+    //     children: [
+    //       { id: "1", value: "B1", children: [] },
+    //       { id: "2", value: "B2", children: [] },
+    //       { id: "3", value: "B3", children: [] },
+    //       { id: "4", value: "B4", children: [] },
+    //       { id: "5", value: "B5", children: [] }
+    //     ]
+    //   }
+    // },
+    // {
+    //   cameraID: "A3",
+    //   parkingSpots: {
+    //     id: "0",
+    //     value: "root",
+    //     children: [
+    //       { id: "1", value: "C1", children: [] },
+    //       { id: "2", value: "C2", children: [] },
+    //       { id: "3", value: "C3", children: [] },
+    //       { id: "4", value: "C4", children: [] },
+    //       { id: "5", value: "C5", children: [] }
+    //     ]
+    //   }
+    // },
+    // {
+    //   cameraID: "A4",
+    //   parkingSpots: {
+    //     id: "0",
+    //     value: "root",
+    //     children: [
+    //       { id: "1", value: "D1", children: [] },
+    //       { id: "2", value: "D2", children: [] },
+    //       { id: "3", value: "D3", children: [] },
+    //       { id: "4", value: "D4", children: [] },
+    //       { id: "5", value: "D5", children: [] }
+    //     ]
+    //   }
+    // },
+    // {
+    //   cameraID: "A5",
+    //   parkingSpots: {
+    //     id: "0",
+    //     value: "root",
+    //     children: [
+    //       { id: "1", value: "E1", children: [] },
+    //       { id: "2", value: "E2", children: [] },
+    //       { id: "3", value: "E3", children: [] },
+    //       { id: "4", value: "E4", children: [] },
+    //       { id: "5", value: "E5", children: [] }
+    //     ]
+    //   }
+    // }
+  // ]);
 
-    async function fetchData() {
-      try {
-        const res = await fetch("https://swapi.co/api/planets/4/");
-        
-      } catch (err) {
-        console.log(err);
+  async function fetchData() {
+    try {
+      const res = await axios.get("http://localhost:12000/setup/getAllCameras");
+      // console.log(res.data);
+      let cams = [];
+      for (var cam of res.data){
+        cams.push({
+          cameraID: cam.cameraID,
+          parkingSpots: {
+          id: "0",
+          value: "root",
+          children: cam.parkingSpots.map((spot,index) => {
+            return({
+              id: `${index}`,
+              value: spot,
+              children: []
+            });
+          })
+        }
+        })
       }
+      return cams;
+    } catch (err) {
+      console.log(err);
     }
+  }
   
-  
+  useEffect(() => {
+    fetchData().then(data => setAllCams(data));
+  },[]);
+    
 
 
   const handleChange = (event, newValue) => {

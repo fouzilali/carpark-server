@@ -96,6 +96,7 @@ setupRouter.post('/addCamera', async (req, res, next) => {
     try {
         let cam = {
             cameraID: req.body.cameraID,
+            mac: req.body.mac,
             parkingSpots: req.body.parkingSpots,
             isActive: req.body.isActive,
             setupImg: null
