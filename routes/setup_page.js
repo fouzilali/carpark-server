@@ -141,13 +141,23 @@ setupRouter.post('/addCameraImage', upload.single('file'), (req, res, next) => {
  */
 setupRouter.post('/addParkingSpot', async (req, res, next) => {
     try {
+        console.log(req);
         let ps = {
             spotID: req.body.spotID,
             cameraID: req.body.cameraID,
             vacant: req.body.vacant,
             lpNumber: req.body.lpNumber,
             reserved: req.body.reserved,
-            boundingBox: req.body.boundingBox
+            boundingBox: {
+                x1: null,
+                x2: null,
+                x3: null,
+                x4: null,
+                y1: null,
+                y2: null,
+                y3: null,
+                y4: null
+            }
         };
         result = await ParkingSpots.create(ps);
         res.statusCode = 200;

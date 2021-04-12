@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect, useMutationEffect } from "react";
 import { hot } from "react-hot-loader";
 import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
 import {
@@ -18,7 +18,31 @@ import axios from "axios";
 
 function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
-  const handleSubmit = r => console.log(r);
+  const handleSubmit = (r) => {
+    let data = [];
+    r.annotations.map((annotation, index)=>{
+      data.push({spotID: annotation.selectedOptions[1].value,
+                 boundingBox: {
+                        x1: annotation.vertices[0].x,
+                        y1: annotation.vertices[0].y,
+                        x2: annotation.vertices[1].x,
+                        y2: annotation.vertices[1].y,
+                        x3: annotation.vertices[2].x,
+                        y3: annotation.vertices[2].y,
+                        x4: annotation.vertices[3].x,
+                        y4: annotation.vertices[3].y
+                 }
+      })
+    });
+    data.forEach( spot => {
+      try{
+        const res = axios.put('http://localhost:12000/setup/updateParkingSpot',spot);
+      }
+      catch (err){
+        console.log(err)
+      }
+    });
+  };
   return (
     <div
       role="tabpanel"
@@ -37,7 +61,6 @@ function TabPanel(props) {
             url={url}
             imageWidth={800}
             options={PSpotOptions}
-            disabledOptionLevels={[]}
           />
         </div>
       )}
@@ -47,14 +70,16 @@ function TabPanel(props) {
 
 function renderAllTabHeads(allCams, a11yProps) {
   return allCams.map((cam, index) => {
-    return <Tab label={`Camera: ${cam.cameraID}`} {...a11yProps(index)} />;
+    return <Tab key={index} label={`Camera: ${cam.cameraID}`} {...a11yProps(index)} />;
   });
 }
 // 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
 function renderAllTabs(allCams, value, dir) {
   return allCams.map((cam, index) => {
+    // console.log(cam.parkingSpots)
     return (
       <TabPanel
+        key = {index}
         value={value}
         index={index}
         PSpotOptions={cam.parkingSpots}
@@ -88,78 +113,78 @@ const DemoPage = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const [allCams, setAllCams] = React.useState([{}]);
-    // {
-    //   cameraID: "A1",
-    //   parkingSpots: {
-    //     id: "0",
-    //     value: "root",
-    //     children: [
-    //       { id: "1", value: "A1", children: [] },
-    //       { id: "2", value: "A2", children: [] },
-    //       { id: "3", value: "A3", children: [] },
-    //       { id: "4", value: "A4", children: [] },
-    //       { id: "5", value: "A5", children: [] }
-    //     ]
-    //   }
-    // },
-    // {
-    //   cameraID: "A2",
-    //   parkingSpots: {
-    //     id: "0",
-    //     value: "root",
-    //     children: [
-    //       { id: "1", value: "B1", children: [] },
-    //       { id: "2", value: "B2", children: [] },
-    //       { id: "3", value: "B3", children: [] },
-    //       { id: "4", value: "B4", children: [] },
-    //       { id: "5", value: "B5", children: [] }
-    //     ]
-    //   }
-    // },
-    // {
-    //   cameraID: "A3",
-    //   parkingSpots: {
-    //     id: "0",
-    //     value: "root",
-    //     children: [
-    //       { id: "1", value: "C1", children: [] },
-    //       { id: "2", value: "C2", children: [] },
-    //       { id: "3", value: "C3", children: [] },
-    //       { id: "4", value: "C4", children: [] },
-    //       { id: "5", value: "C5", children: [] }
-    //     ]
-    //   }
-    // },
-    // {
-    //   cameraID: "A4",
-    //   parkingSpots: {
-    //     id: "0",
-    //     value: "root",
-    //     children: [
-    //       { id: "1", value: "D1", children: [] },
-    //       { id: "2", value: "D2", children: [] },
-    //       { id: "3", value: "D3", children: [] },
-    //       { id: "4", value: "D4", children: [] },
-    //       { id: "5", value: "D5", children: [] }
-    //     ]
-    //   }
-    // },
-    // {
-    //   cameraID: "A5",
-    //   parkingSpots: {
-    //     id: "0",
-    //     value: "root",
-    //     children: [
-    //       { id: "1", value: "E1", children: [] },
-    //       { id: "2", value: "E2", children: [] },
-    //       { id: "3", value: "E3", children: [] },
-    //       { id: "4", value: "E4", children: [] },
-    //       { id: "5", value: "E5", children: [] }
-    //     ]
-    //   }
-    // }
-  // ]);
+  const [allCams, setAllCams] = React.useState({array: [
+    {
+      cameraID: "A1",
+      parkingSpots: {
+        id: "0",
+        value: "root",
+        children: [
+          { id: "1", value: "A1", children: [] },
+          { id: "2", value: "A2", children: [] },
+          { id: "3", value: "A3", children: [] },
+          { id: "4", value: "A4", children: [] },
+          { id: "5", value: "A5", children: [] }
+        ]
+      }
+    },
+    {
+      cameraID: "A2",
+      parkingSpots: {
+        id: "0",
+        value: "root",
+        children: [
+          { id: "1", value: "B1", children: [] },
+          { id: "2", value: "B2", children: [] },
+          { id: "3", value: "B3", children: [] },
+          { id: "4", value: "B4", children: [] },
+          { id: "5", value: "B5", children: [] }
+        ]
+      }
+    },
+    {
+      cameraID: "A3",
+      parkingSpots: {
+        id: "0",
+        value: "root",
+        children: [
+          { id: "1", value: "C1", children: [] },
+          { id: "2", value: "C2", children: [] },
+          { id: "3", value: "C3", children: [] },
+          { id: "4", value: "C4", children: [] },
+          { id: "5", value: "C5", children: [] }
+        ]
+      }
+    },
+    {
+      cameraID: "A4",
+      parkingSpots: {
+        id: "0",
+        value: "root",
+        children: [
+          { id: "1", value: "D1", children: [] },
+          { id: "2", value: "D2", children: [] },
+          { id: "3", value: "D3", children: [] },
+          { id: "4", value: "D4", children: [] },
+          { id: "5", value: "D5", children: [] }
+        ]
+      }
+    },
+    {
+      cameraID: "A5",
+      parkingSpots: {
+        id: "0",
+        value: "root",
+        children: [
+          { id: "1", value: "E1", children: [] },
+          { id: "2", value: "E2", children: [] },
+          { id: "3", value: "E3", children: [] },
+          { id: "4", value: "E4", children: [] },
+          { id: "5", value: "E5", children: [] }
+        ]
+      }
+    }
+  ]});
 
   async function fetchData() {
     try {
@@ -174,7 +199,7 @@ const DemoPage = () => {
           value: "root",
           children: cam.parkingSpots.map((spot,index) => {
             return({
-              id: `${index}`,
+              id: `${index+1}`,
               value: spot,
               children: []
             });
@@ -189,11 +214,13 @@ const DemoPage = () => {
   }
   
   useEffect(() => {
-    fetchData().then(data => setAllCams(data));
+    fetchData().then(data=>setAllCams({array: data}));
   },[]);
+
+  // useEffect( ()=>{
+  //   console.log(allCams);
+  // },[allCams]);
     
-
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -214,6 +241,7 @@ const DemoPage = () => {
     "Step 2: Please track the cell bound by this box";
   const emptyAnnotationReminderText =
     "Step 1: Click the button above to add a new box around a cell";
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -225,7 +253,7 @@ const DemoPage = () => {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          {renderAllTabHeads(allCams, a11yProps)}
+          {renderAllTabHeads(allCams.array, a11yProps)}
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -233,11 +261,11 @@ const DemoPage = () => {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        {renderAllTabs(allCams, value, theme.direction)}
+        {renderAllTabs(allCams.array, value, theme.direction)}
       </SwipeableViews>
     </div>
 
   );
 };
 
-export default hot(module)(DemoPage);
+export default DemoPage;

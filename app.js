@@ -1,4 +1,6 @@
 var express = require('express');
+var WebSocket = require('ws');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
@@ -9,6 +11,11 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 
 var app = express();
+var server = require('http').createServer(app);
+const wss = new WebSocket.Server({ server: server});
+
+app.use(cors());
+
 
 var mongoose = require('mongoose');
 app.use(methodOverride('_method'));
@@ -21,13 +28,8 @@ connect.then((db) => {
 }, (err) => { console.log(err); });
 
 //Setup image storage 
-
-
 const Cameras = require('./models/cameras');
 const parkingSpots = require('./models/parkingSpots');
-
-
-
 
 var views = require('./views/views');
 views(app);
@@ -37,11 +39,17 @@ app.use(requestLogger('dev'));
 app.use(requestLogger('common', {
   stream: fs.createWriteStream('./requests.log', { flags: 'a' })
 }));
-// var winston = require('winston'), expressWinston = require('express-winston');
-// app.use(expressWinston.logger({
-//   winstonInstance: logger,
-//   expressFormat: true
-// }))
+
+//Websocket for Raspberry Pi connection
+
+wss.on('connection', function connection(ws) {
+  console.log('A new Camera has been anounced')
+  ws.send('Welcome New Client');
+
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+});
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -57,6 +65,8 @@ error_handlers(app);
 module.exports = app;
 
 const port = 12000;
-app.listen(port, () => {
+server.listen(port, () => {
   logger.info(`Example app listening at http://localhost:${port}`)
 })
+
+module.export = app;
