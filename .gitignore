@@ -1,4 +1,7 @@
 /node_modules
 *.log
-.vscode/
 .deployment
+package-lock.json
+yarn.lock
+ws.code-workspace
+.vscode/
