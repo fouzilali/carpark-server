@@ -12,7 +12,7 @@ const MapInteractionCSS = props => {
         // Translate first and then scale.  Otherwise, the scale would affect the translation.
         scale = scale * scale;
         const transform = `translate(${translation.x}px, ${translation.y}px) scale(${scale})`;
-        props.setScale(scale);
+        // props.setScale(scale);
         return (
           <div
             style={{
@@ -47,51 +47,64 @@ const MapInteractionCSS = props => {
 export default function MapCanvas() {
   // const spots = example.spots;
   const [spots, setSpots] = useState({ array: [] });
+  const [scale, setScale] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:12000/setup/allSpots");
       console.log(`allSpots got`);
-      console.log(result);
-      setSpots({ array: result.data });
-      console.log(spots);
+      console.log(result.data);
+      // setSpots({ array: result.data });
     };
 
     const interval = setInterval(() => {
       fetchData();
     }, 1000);
 
+    setSpots({
+      array: [
+        {
+          spotID: "A1",
+          cameraID: "C1",
+          lpNumber: "AB1234",
+          vacant: false,
+          mapXY: { x: 250, y: 250 }
+        },
+        {
+          spotID: "A2",
+          cameraID: "C1",
+          lpNumber: "",
+          vacant: true,
+          mapXY: { x: 50, y: 50 }
+        }
+      ]
+    });
+
     return () => {
       clearInterval(interval);
     };
   }, []);
-  const [scale, setScale] = useState(1);
   return (
     <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
       {/* <svg width="100%" height="100%"> */}
       <svg width="1000px" height="1000px">
         <SvgLoader
           width="100%"
-          // height="100%"
-          // height="auto"
-          // preserveAspectRatio={true}
           path={require("../../images/LG5.svg")}
         ></SvgLoader>
         {spots.array.map((spot, i) => {
           if (!spot) {
-            return;
+            return null;
           }
-          const x = i * 10;
-          const xywh = spot.xywh || [x, x, 4, 2];
+          const mapXY = spot.mapXY || { x: i, y: i };
           return (
             <ParkingSpot
               key={i}
-              x={xywh[0] * 10}
-              y={xywh[1] * 10}
-              w={xywh[2] * 10}
-              h={xywh[3] * 10}
+              x={mapXY.x}
+              y={mapXY.y}
               scale={scale}
+              // scale={1}
               id={spot.spotID}
-              cacheSpot={spot}
+              spot={spot}
             ></ParkingSpot>
           );
         })}
