@@ -48,8 +48,9 @@ router.put("/spotFilled", async (req, res, next) => {
         result = await ParkingSpots.findOne(
             { spotID: spotID },
             async (err, doc) => {
+                console.log(doc.spotID);
                 doc.vacant = false;
-                doc.licensePlate = req.body.lp;
+                doc.lpNumber = req.body.lp;
                 doc.save();
             }
         );
@@ -75,10 +76,10 @@ router.put("/spotFilled", async (req, res, next) => {
 router.put("/spotVacated", async (req, res, next) => {
     try {
         result = await ParkingSpots.findOne(
-            { licensePlate: req.body.lp },
+            { lpNumber: req.body.lp },
             async (err, doc) => {
                 doc.vacant = true;
-                doc.licensePlate = null;
+                doc.lpNumber = null;
                 doc.save();
             }
         );

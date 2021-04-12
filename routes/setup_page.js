@@ -127,7 +127,7 @@ setupRouter.post('/addCameraImage', upload.single('file'), (req, res, next) => {
         console.log(req.body);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json("connected");});
+        res.json({"msg": "connected"});});
 
 /**
  * This function is for adding parking spots to the 
