@@ -14,7 +14,7 @@ import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import CameraSetup from "./views/CameraSetup";
 import Operations from "./views/Operations";
-import ParkingSpotSetup from "./views/ParkingSpotSetup";
+// import ParkingSpotSetup from "./views/ParkingSpotSetup";
 import DemoPage from "./views/DemoPage";
 import MapCanvas from "./components/map-canvas/MapCanvas.js";
 import CameraSetup2 from "./views/CameraSetup2.js";
@@ -59,11 +59,11 @@ export default [
     layout: DefaultLayout,
     component: DemoPage
   },
-  {
-    path: "/ParkingSpotSetup",
-    layout: DefaultLayout,
-    component: ParkingSpotSetup
-  },
+  // {
+  //   path: "/ParkingSpotSetup",
+  //   layout: DefaultLayout,
+  //   component: ParkingSpotSetup
+  // },
   {
     path: "/user-profile-lite",
     layout: DefaultLayout,

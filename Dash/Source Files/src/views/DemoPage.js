@@ -20,8 +20,8 @@ function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
   const handleSubmit = (r) => {
     let data = [];
+    console.log(r);
     const scale = r.imageScaleFactor;
-
     r.annotations.map((annotation, index)=>{
       
       var x1 = annotation.vertices[0].x/scale;

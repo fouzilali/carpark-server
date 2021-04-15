@@ -12,10 +12,10 @@ async function whichSpot(lpr, mac) {
     //     'w': xywh[2],
     //     'h': xywh[3],
     // }
-    let spots = await ParkingSpots.find({})
-    // let spots = await ParkingSpots.find({mac: mac})
-        .select(["spotID", "boundingBox"])
-        .exec();
+    var spots = await ParkingSpots.find({cameraID: mac }, {spotID: 1, boundingBox: 1}).exec();
+        console.log("spotsbegin")
+        console.log(spots);
+        console.log("spotsend")
     return spots.find(spot => {
         logger.info(spot);
         const bbox = spot.boundingBox;
