@@ -29,16 +29,20 @@ class Operations extends Component {
 
    renderTableData() {
     return this.state.parkingSpots.map((spot, index) => {
-       const licensePlate = spot.licensePlate;
+       const licensePlate = spot.lpNumber;
        const spotID = spot.spotID;
        const cameraID = spot.cameraID;
        const vacant = spot.vacant ? "Vacant" : "Occupied";
+       const timeParked = spot.timeParked;
+       const elapsedTime = null;
        return (
           <tr key={spotID}>
              <td>{spotID}</td>
              <td>{cameraID}</td>
              <td>{vacant}</td>
              <td>{licensePlate}</td>
+             <td>{timeParked}</td>
+             <td>{elapsedTime}</td>
           </tr>
        )
     })
@@ -50,7 +54,9 @@ class Operations extends Component {
         <Row noGutters className="page-header py-4">
           <PageTitle sm="4" title="Parking Spots Status" subtitle="Blog Posts" className="text-sm-left" />
         </Row>
-    
+        <Row>
+
+        </Row>
         <Row>
           <Col>
             <Card small className="mb-4">
@@ -60,7 +66,7 @@ class Operations extends Component {
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
                   <thead className="bg-light">
-                    <tr>
+                     <tr>
                       <th scope="col" className="border-0">
                         Spot ID
                       </th>
@@ -74,12 +80,104 @@ class Operations extends Component {
                         Licence Plate Number
                       </th>
                       <th scope="col" className="border-0">
+                        Elapsed Time 
+                      </th> 
+                      <th scope="col" className="border-0">
                         Time Parked
-                      </th>
+                      </th>                    
                     </tr>
                   </thead>
                   <tbody>
-                  {this.renderTableData()}
+                  {/*<tr key={1}>
+                  <td>A1</td>
+                  <td>c123</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>A2</td>
+                  <td>c123</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>A3</td>
+                  <td>c123</td>
+                  <td>Occupied</td>
+                  <td>UE 2122</td>
+                  <td>10H 19M</td>
+                  <td>9H 41M</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>A4</td>
+                  <td>c123</td>
+                  <td>Occupied</td>
+                  <td>ZD 2672</td>
+                  <td>9H 45M</td>
+                  <td>10H 15M</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>B4</td>
+                  <td>D634</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>C5</td>
+                  <td>D634</td>
+                  <td>Occupied</td>
+                  <td>HX 9834</td>
+                  <td>4H 30M</td>
+                  <td>15H 30M</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>C6</td>
+                  <td>F174</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>E5</td>
+                  <td>D634</td>
+                  <td>Occupied</td>
+                  <td>EF 9801</td>
+                  <td>30M</td>
+                  <td>19H 30M</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>G6</td>
+                  <td>D634</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>G7</td>
+                  <td>F834</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr>
+                  <tr key={1}>
+                  <td>B4</td>
+                  <td>D634</td>
+                  <td>Vacant</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  </tr> */}
+                  
+                  {this.renderTableData()} 
                   </tbody>
                 </table>
               </CardBody>

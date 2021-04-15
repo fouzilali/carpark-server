@@ -14,16 +14,21 @@ export default function() {
       to: "/cameraSetup"
     },
 
-    {
-      title: "Camera Setup 2",
-      htmlBefore: '<i class="material-icons">videocam</i>',
-      to: "/cameraSetup2"
-    },
+    // {
+    //   title: "Camera Setup 2",
+    //   htmlBefore: '<i class="material-icons">videocam</i>',
+    //   to: "/cameraSetup2"
+    // },
 
     {
       title: "Parking Spots Setup",
       htmlBefore: '<i class="material-icons">videocam</i>',
       to: "/DemoPage"
+    },
+    {
+      title: "Parking Map Setup",
+      htmlBefore: '<i class="material-icons">videocam</i>',
+      to: "/MapSetup"
     },
     {
       title: "Operations",
@@ -35,11 +40,11 @@ export default function() {
       htmlBefore: '<i class="material-icons">map</i>',
       to: "/parking-map"
     },
-    {
-      title: "Demo Page",
-      htmlBefore: '<i class="material-icons">videocam</i>',
-      to: "/DemoPage"
-    },
+    // {
+    //   title: "Demo Page",
+    //   htmlBefore: '<i class="material-icons">videocam</i>',
+    //   to: "/DemoPage"
+    // },
     // {
     //   title: "Blog Posts",
     //   htmlBefore: '<i class="material-icons">vertical_split</i>',

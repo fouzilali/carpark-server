@@ -152,14 +152,14 @@ setupRouter.post("/addParkingSpot", async (req, res, next) => {
             lpNumber: req.body.lpNumber,
             reserved: req.body.reserved,
             boundingBox: {
-                x1: null,
-                x2: null,
-                x3: null,
-                x4: null,
-                y1: null,
-                y2: null,
-                y3: null,
-                y4: null
+                x1: 0,
+                x2: 0,
+                x3: 0,
+                x4: 0,
+                y1: 0,
+                y2: 0,
+                y3: 0,
+                y4: 0
             }
         };
         result = await ParkingSpots.create(ps);

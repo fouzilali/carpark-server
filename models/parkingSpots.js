@@ -44,8 +44,6 @@ const parkingSpotSchema = new Schema({
     },
     timeEntered: {
         type: Date,
-        required: true,
-        default: Date.now(),
     },
     boundingBox: {
         x1: { type: Number },

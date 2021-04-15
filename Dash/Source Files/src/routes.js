@@ -18,6 +18,7 @@ import ParkingSpotSetup from "./views/ParkingSpotSetup";
 import DemoPage from "./views/DemoPage";
 import MapCanvas from "./components/map-canvas/MapCanvas.js";
 import CameraSetup2 from "./views/CameraSetup2.js";
+import MapSetup from "./views/MapSetup.js"
 
 export default [
   {
@@ -47,6 +48,11 @@ export default [
     path: "/Operations",
     layout: DefaultLayout,
     component: Operations
+  },
+  {
+    path: "/MapSetup",
+    layout: DefaultLayout,
+    component: MapSetup
   },
   {
     path: "/DemoPage",

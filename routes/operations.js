@@ -38,7 +38,7 @@ async function whichSpot(lpr, mac) {
  */
 router.put("/spotFilled", async (req, res, next) => {
     try {
-        let spotID = req.body.spotID; // TODO: change to coordinate mapping
+        //let spotID = req.body.spotID; // TODO: change to coordinate mapping
         spotID = await whichSpot(req.body, req.body.mac);
         // if (spotID === null) {
         //     // OOPS
