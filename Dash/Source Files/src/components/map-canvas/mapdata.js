@@ -28,6 +28,7 @@ function randomLP() {
   if (randChoose([true, false])) {
     return "";
   }
+  return "rando";
   let characters = "ABCDEFGHJKLMNPRSTUVWXYZ";
   let a = randChoose(characters);
   let b = randChoose(characters);
@@ -173,25 +174,25 @@ export default {
     {
       spotID: "A2",
       cameraID: "C2",
-      lpNumber: randomLP(),
+      lpNumber: "CK4269",
       mapXY: { x: 282, y: 558 }
     },
     {
       spotID: "A2",
       cameraID: "C1",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 282, y: 616 }
     },
     {
       spotID: "A1",
       cameraID: "C1",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 282, y: 643 }
     },
     {
       spotID: "A2",
       cameraID: "C2",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 152.890625, y: 611 }
     },
     {
@@ -227,43 +228,37 @@ export default {
     {
       spotID: "A1",
       cameraID: "C2",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 241.890625, y: 590 }
     },
     {
       spotID: "A2",
       cameraID: "C1",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 241.890625, y: 616 }
     },
     {
       spotID: "A1",
       cameraID: "C1",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 241.890625, y: 643 }
-    },
-    {
-      spotID: "A2",
-      cameraID: "C2",
-      lpNumber: randomLP(),
-      mapXY: { x: 152.890625, y: 611 }
     },
     {
       spotID: "A1",
       cameraID: "C2",
-      lpNumber: randomLP(),
+      lpNumber: "",
       mapXY: { x: 153.890625, y: 589 }
     },
     {
       spotID: "A2",
       cameraID: "C1",
-      lpNumber: randomLP(),
+      lpNumber: "HA1034",
       mapXY: { x: 153.890625, y: 557 }
     },
     {
       spotID: "A1",
       cameraID: "C1",
-      lpNumber: randomLP(),
+      lpNumber: "HA1024",
       mapXY: { x: 153.890625, y: 537 }
     },
     {
