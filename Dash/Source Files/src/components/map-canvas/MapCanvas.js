@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
+import hostname from "../../hostname";
 
 const MapInteractionCSS = props => {
   return (
@@ -46,38 +47,52 @@ const MapInteractionCSS = props => {
 
 export default function MapCanvas() {
   // const spots = example.spots;
-  const [spots, setSpots] = useState({ array: [] });
+  const [spots, setSpots] = useState({
+    array: [
+      {
+        spotID: "A1",
+        cameraID: "C1",
+        lpNumber: "AB1234",
+        vacant: false,
+        mapXY: { x: 240, y: 511 }
+      },
+      {
+        spotID: "A2",
+        cameraID: "C1",
+        lpNumber: "",
+        vacant: true,
+        mapXY: { x: 240, y: 547 }
+      },
+      {
+        spotID: "A1",
+        cameraID: "C1",
+        lpNumber: "AB1234",
+        vacant: false,
+        mapXY: { x: 150, y: 511 }
+      },
+      {
+        spotID: "A2",
+        cameraID: "C1",
+        lpNumber: "",
+        vacant: true,
+        mapXY: { x: 150, y: 548 }
+      }
+    ]
+  });
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:12000/setup/allSpots");
+      const result = await axios.get(
+        `http://${hostname}:12000/setup/allSpots`
+      );
       console.log(`allSpots got`);
       console.log(result.data);
-      // setSpots({ array: result.data });
+      setSpots({ array: result.data });
     };
 
     const interval = setInterval(() => {
       fetchData();
     }, 1000);
-
-    setSpots({
-      array: [
-        {
-          spotID: "A1",
-          cameraID: "C1",
-          lpNumber: "AB1234",
-          vacant: false,
-          mapXY: { x: 250, y: 250 }
-        },
-        {
-          spotID: "A2",
-          cameraID: "C1",
-          lpNumber: "",
-          vacant: true,
-          mapXY: { x: 50, y: 50 }
-        }
-      ]
-    });
 
     return () => {
       clearInterval(interval);

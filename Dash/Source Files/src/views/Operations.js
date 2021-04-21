@@ -5,30 +5,30 @@ import PageTitle from "../components/common/PageTitle";
 import axios from "axios";
 import PlayArrowOutlinedIcon from '@material-ui/icons/PlayArrowOutlined';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
+import hostname from "../hostname";
 
 class Operations extends Component {
-   constructor(props) {
-      super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-      this.state = { //state is by default an object
-          parkingSpots: []
-      }
-   }
+  constructor(props) {
+    super(props); //since we are extending class Table so we have to use super in order to override Component class constructor
+    this.state = {
+      //state is by default an object
+      parkingSpots: []
+    };
+  }
 
-   componentDidMount() {
+  componentDidMount() {
     setInterval(() => {
-      axios.get('http://localhost:12000/setup/allSpots')
+      axios
+        .get(`http://${hostname}:12000/setup/allSpots`)
         .then(response => {
-          this.setState({ parkingSpots : response.data })
+          this.setState({ parkingSpots: response.data });
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
-        })
+        });
     }, 3000);
-  };
-
-  
-
-  
+  }
+ 
 
    renderTableData() {
 
@@ -119,7 +119,18 @@ class Operations extends Component {
         </Row>
         <Row>
 
+  render() {
+    return (
+      <Container fluid className="main-content-container px-4">
+        <Row noGutters className="page-header py-4">
+          <PageTitle
+            sm="4"
+            title="Parking Spots Status"
+            subtitle="Blog Posts"
+            className="text-sm-left"
+          />
         </Row>
+        <Row></Row>
         <Row>
           <Col>
             <Card small className="mb-4">
@@ -129,7 +140,7 @@ class Operations extends Component {
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
                   <thead className="bg-light">
-                     <tr>
+                    <tr>
                       <th scope="col" className="border-0">
                         Spot ID
                       </th>
@@ -143,15 +154,15 @@ class Operations extends Component {
                         Licence Plate Number
                       </th>
                       <th scope="col" className="border-0">
-                        Elapsed Time 
-                      </th> 
+                        Elapsed Time
+                      </th>
                       <th scope="col" className="border-0">
                         Time Parked
-                      </th>                    
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                  {/*<tr key={1}>
+                    {/*<tr key={1}>
                   <td>A1</td>
                   <td>c123</td>
                   <td>Vacant</td>
@@ -239,17 +250,17 @@ class Operations extends Component {
                   <td>-</td>
                   <td>-</td>
                   </tr> */}
-                  
-                  {this.renderTableData()} 
+
+                    {this.renderTableData()}
                   </tbody>
                 </table>
               </CardBody>
             </Card>
           </Col>
         </Row>
-        </Container>
-      );
-   }
+      </Container>
+    );
+  }
 }
 
 export default Operations;
