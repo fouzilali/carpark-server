@@ -16,9 +16,12 @@ const FULL_DETAILS = 2;
 // TODO: LOD by size (how to get real size???)
 // TODO: on hover details
 function ParkingSpot({ x, y, id, scale, spot }) {
-  const vacant = !spot.licensePlate;
+  function isEmpty(str) {
+    return !str || str.length === 0;
+  }
+  const vacant = isEmpty(spot.lpNumber);
   const iconBlue = "#007BFF";
-  const dim = 10;
+  const dim = 7;
   const strokeWidth = Math.max(dim / scale / 2, 2);
 
   const [hover, setHover] = useState(false);
@@ -28,7 +31,7 @@ function ParkingSpot({ x, y, id, scale, spot }) {
 
   const FullDetails = ({ wid, hgt }) => {
     const Txt = ({ line, text }) => {
-      const fh = Math.max(wid, hgt) / 6;
+      const fh = Math.max(wid, hgt) / 5;
       return (
         <text
           dominantBaseline="hanging"
@@ -50,16 +53,15 @@ function ParkingSpot({ x, y, id, scale, spot }) {
           width={wid ? wid : dim}
           height={hgt ? hgt : dim}
           stroke={iconBlue}
-          fill="none"
+          fill="white"
           strokeWidth={strokeWidth}
           rx={strokeWidth / 2}
           ry={strokeWidth / 2}
         ></rect>
-        <Txt text={!vacant ? spot.licensePlate : "VACANT"} line={0}></Txt>
-        <Txt text={spot.spotID} line={1}></Txt>
-        <Txt text={spot.cameraID} line={2}></Txt>
-        {/* <Txt text={!vacant ? spot.licensePlate : "VACANT"} line={2}></Txt> */}
-        {/* <Txt text={!vacant ? spot.licensePlate : "VACANT"} line={3}></Txt> */}
+        <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={0}></Txt>
+        <Txt text={"ID:" + spot.cameraID + "-" + spot.spotID} line={1}></Txt>
+        {/* <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={2}></Txt> */}
+        {/* <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={3}></Txt> */}
       </g>
     );
   };
@@ -85,7 +87,7 @@ function ParkingSpot({ x, y, id, scale, spot }) {
     >
       {icon}
       {hover ? (
-        <FullDetails wid={200 / scale} hgt={200 / scale}></FullDetails>
+        <FullDetails wid={120 / scale} hgt={70 / scale}></FullDetails>
       ) : null}
     </svg>
   );
