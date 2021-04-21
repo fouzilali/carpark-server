@@ -65,7 +65,6 @@ class Operations extends Component {
 
       var timeDiff = "";
 
-<<<<<<< HEAD
         if(millisec_diff < 120000){
           return "Just Now"
         }
@@ -77,19 +76,6 @@ class Operations extends Component {
         }      
         
         return timeDiff + date_diff.getMinutes() + " Mins ";
-=======
-      if (millisec_diff < 2 * 60 * 1000) {
-        return "Just Now";
-      }
-      if (days > 0) {
-        timeDiff = timeDiff + String(days) + " Days ";
-      }
-      if (date_diff.getHours() > 0) {
-        timeDiff = timeDiff + String(date_diff.getHours()) + " Hours ";
-      }
-
-      return timeDiff + date_diff.getMinutes() + " Mins ";
->>>>>>> refs/remotes/origin/master
     }
 
     function get_time(datetime) {
@@ -97,9 +83,6 @@ class Operations extends Component {
       if (isNaN(time)) {
         return null;
       }
-<<<<<<< HEAD
-      return (time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear()+" "+(time.getHours())+":"+ time.getMinutes())
-=======
       return (
         time.getDate() +
         "-" +
@@ -111,7 +94,6 @@ class Operations extends Component {
         ":" +
         time.getMinutes()
       );
->>>>>>> refs/remotes/origin/master
     }
 
     return this.state.parkingSpots.map((spot, index) => {

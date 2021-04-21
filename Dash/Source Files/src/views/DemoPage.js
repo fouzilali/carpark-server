@@ -227,10 +227,6 @@ const DemoPage = () => {
   useEffect(() => {
     fetchData().then(data=>setAllCams({array: data}));
   },[]);
-
-  // useEffect( ()=>{
-  //   console.log(allCams);
-  // },[allCams]);
     
   const handleChange = (event, newValue) => {
     setValue(newValue);
