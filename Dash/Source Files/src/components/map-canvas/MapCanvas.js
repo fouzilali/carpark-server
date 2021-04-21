@@ -81,14 +81,21 @@ export default function MapCanvas() {
 
     // JUST FOR DEMO
     const demo = setInterval(() => {
-      console.log("POP");
       spots.array.find(spot => spot.spotID === "PS25").lpNumber = "SN7319";
       const data = {
         array: spots.array
       };
       setSpots(data); // force update
-      console.log(spots.array[0]);
       clearInterval(demo);
+
+      const interval2 = setInterval(() => {
+        spots.array.find(spot => spot.spotID === "PS25").lpNumber = "";
+        const data = {
+          array: spots.array
+        };
+        setSpots(data); // force update
+        clearInterval(interval2);
+      }, 10000);
     }, 10000);
 
     return () => {
