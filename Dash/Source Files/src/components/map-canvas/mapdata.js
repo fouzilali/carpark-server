@@ -17,18 +17,17 @@ function randBool() {
 function randIndex(arr) {
   return randInt(0, arr.length - 1);
 }
-function randChoose(arr) {
+export function randChoose(arr) {
   return arr[randIndex(arr)];
 }
 
 /**
  * Generate a random LP number
  */
-function randomLP() {
+export function randomLP() {
   if (randChoose([true, false])) {
     return "";
   }
-  return "rando";
   let characters = "ABCDEFGHJKLMNPRSTUVWXYZ";
   let a = randChoose(characters);
   let b = randChoose(characters);

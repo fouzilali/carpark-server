@@ -6,6 +6,7 @@ import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
 import hostname from "../../hostname";
 import mapdata from "./mapdata";
+import { randChoose, randomLP } from "./mapdata";
 
 const MapInteractionCSS = props => {
   return (
@@ -80,23 +81,31 @@ export default function MapCanvas() {
     }, 1000);
 
     // JUST FOR DEMO
-    const demo = setInterval(() => {
-      spots.array.find(spot => spot.spotID === "PS25").lpNumber = "SN7319";
+    setInterval(() => {
+      const spot = randChoose(spots.array);
+      spot.lpNumber = spot.lpNumber ? "" : randomLP();
       const data = {
         array: spots.array
       };
       setSpots(data); // force update
-      clearInterval(demo);
+    }, 50);
+    // const demo = setInterval(() => {
+    //   spots.array.find(spot => spot.spotID === "PS25").lpNumber = "SN7319";
+    //   const data = {
+    //     array: spots.array
+    //   };
+    //   setSpots(data); // force update
+    //   clearInterval(demo);
 
-      const interval2 = setInterval(() => {
-        spots.array.find(spot => spot.spotID === "PS25").lpNumber = "";
-        const data = {
-          array: spots.array
-        };
-        setSpots(data); // force update
-        clearInterval(interval2);
-      }, 10000);
-    }, 10000);
+    //   const interval2 = setInterval(() => {
+    //     spots.array.find(spot => spot.spotID === "PS25").lpNumber = "";
+    //     const data = {
+    //       array: spots.array
+    //     };
+    //     setSpots(data); // force update
+    //     clearInterval(interval2);
+    //   }, 10000);
+    // }, 10000);
 
     return () => {
       clearInterval(interval);
