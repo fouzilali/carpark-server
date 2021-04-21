@@ -1,5 +1,6 @@
 var express = require("express");
 const logger = require("../logger");
+const Cameras = require("../models/cameras");
 var router = express.Router();
 const ParkingSpots = require("../models/parkingSpots");
 const pointInQuad = require("../pointInQuad");
@@ -12,10 +13,17 @@ async function whichSpot(lpr, mac) {
     //     'w': xywh[2],
     //     'h': xywh[3],
     // }
-    var spots = await ParkingSpots.find({cameraID: mac }, {spotID: 1, boundingBox: 1}).exec();
-        console.log("spotsbegin")
-        console.log(spots);
-        console.log("spotsend")
+    // var spots = await ParkingSpots.find({cameraID: mac}, {spotID: 1, boundingBox: 1}).exec();
+    let camera = await Cameras.findOne({ mac: mac })
+        .select(["cameraID"])
+        .exec();
+    let spots = await ParkingSpots.find({ cameraID: camera.cameraID })
+        .select(["spotID", "boundingBox"])
+        .exec();
+
+    console.log("spotsbegin");
+    console.log(spots);
+    console.log("spotsend");
     return spots.find(spot => {
         logger.info(spot);
         const bbox = spot.boundingBox;
@@ -23,7 +31,7 @@ async function whichSpot(lpr, mac) {
         const inside = pointInQuad(bbox, lpr);
         logger.info("Inside? " + inside);
         return inside;
-    }).spotID;
+    });
 }
 
 /**
@@ -38,22 +46,16 @@ async function whichSpot(lpr, mac) {
  */
 router.put("/spotFilled", async (req, res, next) => {
     try {
-        //let spotID = req.body.spotID; // TODO: change to coordinate mapping
-        spotID = await whichSpot(req.body, req.body.mac);
-        // if (spotID === null) {
-        //     // OOPS
-        //     return;
-        // }
-        // const spotID =
-        result = await ParkingSpots.findOne(
-            { spotID: spotID },
-            async (err, doc) => {
-                console.log(doc.spotID);
-                doc.vacant = false;
-                doc.lpNumber = req.body.lp;
-                doc.save();
+        spot = await whichSpot(req.body, req.body.mac);
+        console.log(spot.spotID);
+        spot.vacant = false;
+        spot.lpNumber = req.body.lp;
+        await spot.save().then(saved => {
+            if (saved !== spot) {
+                throw Error("Failure during saving of Parking Spot document");
             }
-        );
+        });
+
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json(result);
@@ -150,19 +152,18 @@ router.get("/isVacated", async (req, res, next) => {
     }
 });
 
-router.get('/allSpots', async (req, res, next) => {
+router.get("/allSpots", async (req, res, next) => {
     try {
-        console.log("called")
+        console.log("called");
         result = await ParkingSpots.find({});
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Content-Type", "application/json");
         res.json(result);
     } catch (err) {
         console.error(err);
         res.json(err);
     }
 });
-
 
 // These two are for further features that will be implemented after the initial integration
 //with the raspberry pi and front-end.
