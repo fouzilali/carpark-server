@@ -1,9 +1,10 @@
 import React from "react";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
+import { Container, Row, Col, Card, CardHeader, CardBody, Button} from "shards-react";
 import {Component} from "react";
 import PageTitle from "../components/common/PageTitle";
 import axios from "axios";
-
+import PlayArrowOutlinedIcon from '@material-ui/icons/PlayArrowOutlined';
+import StopRoundedIcon from '@material-ui/icons/StopRounded';
 
 class Operations extends Component {
    constructor(props) {
@@ -27,22 +28,80 @@ class Operations extends Component {
 
   
 
+  
+
    renderTableData() {
+
+    function get_time_diff( datetime )
+    {
+        if(typeof datetime !== 'undefined'){
+          var datetime = datetime
+        }else{
+          return null;
+        }
+        var datetime = new Date( datetime ).getTime();
+        var now = new Date().getTime();
+    
+        if( isNaN(datetime) )
+        {
+            return "";
+        }
+    
+        console.log( datetime + " " + now);
+    
+        if (datetime < now) {
+            var millisec_diff = now - datetime;
+        }else{
+            var millisec_diff = datetime - now;
+        }
+    
+        var days = Math.floor(millisec_diff / 1000 / 60 / (60 * 24));
+    
+        var date_diff = new Date( millisec_diff );
+
+        var timeDiff = "";
+
+        if(millisec_diff < 120000){
+          return "Just Now"
+        }
+        if(days > 0){
+          timeDiff = timeDiff + String(days) + " Days "
+        }
+        if(date_diff.getHours() > 0){
+          timeDiff = timeDiff + String(date_diff.getHours()) + " Hours "
+        }      
+        
+        return timeDiff + date_diff.getMinutes() + " Mins ";
+    }
+
+    function get_time( datetime ){
+      const time = new Date(datetime);
+      if(isNaN(time)){
+        return null;
+      }
+      return (time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear()+" "+time.getHours()+":"+ time.getMinutes())
+    }
+
     return this.state.parkingSpots.map((spot, index) => {
-       const licensePlate = spot.lpNumber;
        const spotID = spot.spotID;
        const cameraID = spot.cameraID;
-       const vacant = spot.vacant ? "Vacant" : "Occupied";
-       const timeParked = spot.timeParked;
-       const elapsedTime = null;
+       const vacant = spot.vacant ? <Button outline disabled>&nbsp; Vacant &nbsp;</Button> : <Button disabled outline theme="danger">Occupied</Button> ;
+       var licensePlate = "";
+       var timeParked = "";
+       var elapsedTime = "";
+       if(!(spot.vacant)){
+        licensePlate = spot.lpNumber;
+        timeParked = get_time(spot.timeEntered);
+        elapsedTime = get_time_diff(spot.timeEntered);
+       }
        return (
           <tr key={spotID}>
              <td>{spotID}</td>
              <td>{cameraID}</td>
              <td>{vacant}</td>
              <td>{licensePlate}</td>
-             <td>{timeParked}</td>
              <td>{elapsedTime}</td>
+             <td>{timeParked}</td>
           </tr>
        )
     })
@@ -52,7 +111,11 @@ class Operations extends Component {
       return (
         <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-          <PageTitle sm="4" title="Parking Spots Status" subtitle="Blog Posts" className="text-sm-left" />
+          <PageTitle sm="4" title="Parking Spots Status" className="text-sm-left" />
+          <Col sm="4"/>
+          <Button justify="left"><PlayArrowOutlinedIcon/>Start Cams</Button>
+          <Col sm="1"/> 
+          <Button justify="right" theme="danger" outline><StopRoundedIcon/>Stop Cams</Button>
         </Row>
         <Row>
 

@@ -51,6 +51,7 @@ router.put("/spotFilled", async (req, res, next) => {
                 console.log(doc.spotID);
                 doc.vacant = false;
                 doc.lpNumber = req.body.lp;
+                doc.timeEntered = Date.now();
                 doc.save();
             }
         );
