@@ -5,14 +5,6 @@ import { SizeMe, withSize } from "react-sizeme";
 import axios from "axios";
 import useResizeObserver from "@react-hook/resize-observer";
 
-// Just for testing
-const logoA = require("../../images/shards-dashboards-logo.svg");
-const logoB = require("../../images/shards-dashboards-logo-danger.svg");
-
-const MINM_DETAILS = 0;
-const SOME_DETAILS = 1;
-const FULL_DETAILS = 2;
-
 // TODO: LOD by size (how to get real size???)
 // TODO: on hover details
 function ParkingSpot({ x, y, id, scale, spot }) {
@@ -26,12 +18,9 @@ function ParkingSpot({ x, y, id, scale, spot }) {
 
   const [hover, setHover] = useState(false);
 
-  console.log(`${id}`);
-  console.log(spot);
-
   const FullDetails = ({ wid, hgt }) => {
     const Txt = ({ line, text }) => {
-      const fh = Math.max(wid, hgt) / 5;
+      const fh = Math.max(wid, hgt) / 6;
       return (
         <text
           dominantBaseline="hanging"
@@ -59,7 +48,8 @@ function ParkingSpot({ x, y, id, scale, spot }) {
           ry={strokeWidth / 2}
         ></rect>
         <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={0}></Txt>
-        <Txt text={"ID:" + spot.cameraID + "-" + spot.spotID} line={1}></Txt>
+        <Txt text={spot.cameraID} line={1}></Txt>
+        <Txt text={spot.spotID} line={2}></Txt>
         {/* <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={2}></Txt> */}
         {/* <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={3}></Txt> */}
       </g>
@@ -87,7 +77,7 @@ function ParkingSpot({ x, y, id, scale, spot }) {
     >
       {icon}
       {hover ? (
-        <FullDetails wid={120 / scale} hgt={70 / scale}></FullDetails>
+        <FullDetails wid={180 / scale} hgt={100 / scale}></FullDetails>
       ) : null}
     </svg>
   );

@@ -5,6 +5,7 @@ import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
 import hostname from "../../hostname";
+import mapdata from "./mapdata";
 
 const MapInteractionCSS = props => {
   return (
@@ -45,54 +46,57 @@ const MapInteractionCSS = props => {
   );
 };
 
+const sortSpots = arr => {
+  arr.sort((a, b) => {
+    if (!b.mapXY) {
+      return 1;
+    }
+    if (a.mapXY.x === b.mapXY.x) {
+      return b.mapXY.y - a.mapXY.y;
+    } else {
+      return b.mapXY.x - a.mapXY.x;
+    }
+  });
+};
+
 export default function MapCanvas() {
   // const spots = example.spots;
-  const [spots, setSpots] = useState({
-    array: [
-      {
-        spotID: "A1",
-        cameraID: "C1",
-        lpNumber: "AB1234",
-        vacant: false,
-        mapXY: { x: 240, y: 511 }
-      },
-      {
-        spotID: "A2",
-        cameraID: "C1",
-        lpNumber: "",
-        vacant: true,
-        mapXY: { x: 240, y: 547 }
-      },
-      {
-        spotID: "A1",
-        cameraID: "C1",
-        lpNumber: "AB1234",
-        vacant: false,
-        mapXY: { x: 150, y: 511 }
-      },
-      {
-        spotID: "A2",
-        cameraID: "C1",
-        lpNumber: "",
-        vacant: true,
-        mapXY: { x: 150, y: 548 }
-      }
-    ]
-  });
+  const [spots, setSpots] = useState(
+    (() => {
+      sortSpots(mapdata.array);
+      return mapdata;
+    })()
+  );
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(
-        `http://${hostname}:12000/setup/allSpots`
-      );
-      console.log(`allSpots got`);
-      console.log(result.data);
+      const result = await axios.get(`http://${hostname}:12000/setup/allSpots`);
+      sortSpots(result.data);
       setSpots({ array: result.data });
     };
 
     const interval = setInterval(() => {
-      fetchData();
+      // fetchData();
     }, 1000);
+
+    // JUST FOR DEMO
+    const demo = setInterval(() => {
+      spots.array.find(spot => spot.spotID === "PS25").lpNumber = "SN7319";
+      const data = {
+        array: spots.array
+      };
+      setSpots(data); // force update
+      clearInterval(demo);
+
+      const interval2 = setInterval(() => {
+        spots.array.find(spot => spot.spotID === "PS25").lpNumber = "";
+        const data = {
+          array: spots.array
+        };
+        setSpots(data); // force update
+        clearInterval(interval2);
+      }, 10000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
@@ -101,28 +105,32 @@ export default function MapCanvas() {
   return (
     <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
       {/* <svg width="100%" height="100%"> */}
-      <svg width="1000px" height="1000px">
+      <svg width="1000px" height="898px">
         <SvgLoader
-          width="100%"
+          width="1000px"
+          height="898px"
           path={require("../../images/LG5.svg")}
         ></SvgLoader>
-        {spots.array.map((spot, i) => {
-          if (!spot) {
-            return null;
-          }
-          const mapXY = spot.mapXY || { x: i, y: i };
-          return (
-            <ParkingSpot
-              key={i}
-              x={mapXY.x}
-              y={mapXY.y}
-              scale={scale}
-              // scale={1}
-              id={spot.spotID}
-              spot={spot}
-            ></ParkingSpot>
-          );
-        })}
+        {(() => {
+          console.log("rerender");
+          return spots.array.map((spot, i) => {
+            if (!spot) {
+              return null;
+            }
+            const mapXY = spot.mapXY || { x: i, y: i };
+            return (
+              <ParkingSpot
+                key={i}
+                x={mapXY.x}
+                y={mapXY.y}
+                scale={scale}
+                // scale={1}
+                id={spot.spotID}
+                spot={spot}
+              ></ParkingSpot>
+            );
+          });
+        })()}
       </svg>
     </MapInteractionCSS>
   );
