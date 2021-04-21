@@ -79,3 +79,8 @@ const port = process.env.PORT || "12000";
 server.listen(port, () => {
     logger.info(`Example app listening at http://${hostname}:${port}`);
 });
+
+// const ParkingSpots = require("./models/parkingSpots");
+// ParkingSpots.find({}).then(spots => {
+//     console.log(JSON.stringify(spots));
+// });

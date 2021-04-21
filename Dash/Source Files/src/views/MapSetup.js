@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, useMutationEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useMutationEffect
+} from "react";
 import { hot } from "react-hot-loader";
 import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
 import {
@@ -15,11 +21,10 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import axios from "axios";
 
-
 function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
-  const handleSubmit = (r) => {
-    console.log(r);
+  const handleSubmit = r => {
+    console.log(r.annotations[0].vertices);
     // let data = [];
     // r.annotations.map((annotation, index)=>{
     //   data.push({spotID: annotation.selectedOptions[1].value,
@@ -60,7 +65,7 @@ function TabPanel(props) {
             isDynamicOptionsEnable={false}
             isLabelOn
             url={url}
-            imageWidth={800}
+            imageWidth={1000}
             options={PSpotOptions}
           />
         </div>
@@ -71,7 +76,13 @@ function TabPanel(props) {
 
 function renderAllTabHeads(allCams, a11yProps) {
   return allCams.map((cam, index) => {
-    return <Tab key={index} label={`REGION: ${cam.cameraID}`} {...a11yProps(index)} />;
+    return (
+      <Tab
+        key={index}
+        label={`REGION: ${cam.cameraID}`}
+        {...a11yProps(index)}
+      />
+    );
   });
 }
 // 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
@@ -80,11 +91,11 @@ function renderAllTabs(allCams, value, dir) {
     // console.log(cam.parkingSpots)
     return (
       <TabPanel
-        key = {index}
+        key={index}
         value={value}
         index={index}
         PSpotOptions={cam.parkingSpots}
-        url={require('../images/LG5.svg')}
+        url={require("../images/LG5.svg")}
         dir={dir}
       />
     );
@@ -114,63 +125,67 @@ const MapSetup = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const [allCams, setAllCams] = React.useState({array: [
-    {
-      cameraID: "LG1",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "A1", children: [] },
-          { id: "2", value: "A2", children: [] },
-          { id: "3", value: "A3", children: [] },
-          { id: "4", value: "A4", children: [] },
-          { id: "5", value: "A5", children: [] },
-          { id: "6", value: "B1", children: [] },
-          { id: "7", value: "B2", children: [] },
-          { id: "8", value: "B3", children: [] },
-          { id: "9", value: "B4", children: [] },
-          { id: "10", value: "B5", children: [] }
-        ]
+  const [allCams, setAllCams] = React.useState({
+    array: [
+      {
+        cameraID: "LG1",
+        parkingSpots: {
+          id: "0",
+          value: "root",
+          children: [
+            { id: "1", value: "A1", children: [] },
+            { id: "2", value: "A2", children: [] },
+            { id: "3", value: "A3", children: [] },
+            { id: "4", value: "A4", children: [] },
+            { id: "5", value: "A5", children: [] },
+            { id: "6", value: "B1", children: [] },
+            { id: "7", value: "B2", children: [] },
+            { id: "8", value: "B3", children: [] },
+            { id: "9", value: "B4", children: [] },
+            { id: "10", value: "B5", children: [] }
+          ]
+        }
+      },
+      {
+        cameraID: "LG2",
+        parkingSpots: {
+          id: "0",
+          value: "root",
+          children: [
+            { id: "1", value: "A1", children: [] },
+            { id: "2", value: "A2", children: [] },
+            { id: "3", value: "A3", children: [] },
+            { id: "4", value: "A4", children: [] },
+            { id: "5", value: "A5", children: [] },
+            { id: "6", value: "B1", children: [] },
+            { id: "7", value: "B2", children: [] },
+            { id: "8", value: "B3", children: [] },
+            { id: "9", value: "B4", children: [] },
+            { id: "10", value: "B5", children: [] }
+          ]
+        }
+      },
+      {
+        cameraID: "LG5",
+        parkingSpots: {
+          id: "0",
+          value: "root",
+          children: [
+            { id: "1", value: "A1", children: [] },
+            { id: "2", value: "A2", children: [] },
+            { id: "3", value: "A3", children: [] },
+            { id: "4", value: "A4", children: [] },
+            { id: "5", value: "A5", children: [] },
+            { id: "6", value: "B1", children: [] },
+            { id: "7", value: "B2", children: [] },
+            { id: "8", value: "B3", children: [] },
+            { id: "9", value: "B4", children: [] },
+            { id: "10", value: "B5", children: [] }
+          ]
+        }
       }
-    },
-    {cameraID: "LG2",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "A1", children: [] },
-          { id: "2", value: "A2", children: [] },
-          { id: "3", value: "A3", children: [] },
-          { id: "4", value: "A4", children: [] },
-          { id: "5", value: "A5", children: [] },
-          { id: "6", value: "B1", children: [] },
-          { id: "7", value: "B2", children: [] },
-          { id: "8", value: "B3", children: [] },
-          { id: "9", value: "B4", children: [] },
-          { id: "10", value: "B5", children: [] }
-        ]
-      }
-    },
-    {cameraID: "LG5",
-      parkingSpots: {
-        id: "0",
-        value: "root",
-        children: [
-          { id: "1", value: "A1", children: [] },
-          { id: "2", value: "A2", children: [] },
-          { id: "3", value: "A3", children: [] },
-          { id: "4", value: "A4", children: [] },
-          { id: "5", value: "A5", children: [] },
-          { id: "6", value: "B1", children: [] },
-          { id: "7", value: "B2", children: [] },
-          { id: "8", value: "B3", children: [] },
-          { id: "9", value: "B4", children: [] },
-          { id: "10", value: "B5", children: [] }
-        ]
-      }
-    }
-  ]});
+    ]
+  });
 
   // async function fetchData() {
   //   try {
@@ -198,7 +213,7 @@ const MapSetup = () => {
   //     console.log(err);
   //   }
   // }
-  
+
   // useEffect(() => {
   //   fetchData().then(data=>setAllCams({array: data}));
   // },[]);
@@ -206,7 +221,7 @@ const MapSetup = () => {
   // useEffect( ()=>{
   //   console.log(allCams);
   // },[allCams]);
-    
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -250,7 +265,6 @@ const MapSetup = () => {
         {renderAllTabs(allCams.array, value, theme.direction)}
       </SwipeableViews>
     </div>
-
   );
 };
 
