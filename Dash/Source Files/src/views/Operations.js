@@ -79,13 +79,15 @@ class Operations extends Component {
       if(isNaN(time)){
         return null;
       }
-      return (time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear()+" "+time.getHours()+":"+ time.getMinutes())
+      return (time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear()+" "+(time.getHours()-8)+":"+ time.getMinutes())
     }
 
     return this.state.parkingSpots.map((spot, index) => {
        const spotID = spot.spotID;
        const cameraID = spot.cameraID;
-       const vacant = spot.vacant ? <Button outline disabled>&nbsp; Vacant &nbsp;</Button> : <Button disabled outline theme="danger">Occupied</Button> ;
+       const vacant = spot.vacant ? 
+                    <Button outline disabled><b>&nbsp; Vacant &nbsp;</b></Button> : 
+                    <Button disabled outline theme="danger"><b>Occupied</b></Button> ;
        var licensePlate = "";
        var timeParked = "";
        var elapsedTime = "";
@@ -107,35 +109,25 @@ class Operations extends Component {
     })
     }
 
-   render() { 
-      return (
-        <Container fluid className="main-content-container px-4">
-        <Row noGutters className="page-header py-4">
-          <PageTitle sm="4" title="Parking Spots Status" className="text-sm-left" />
-          <Col sm="4"/>
-          <Button justify="left"><PlayArrowOutlinedIcon/>Start Cams</Button>
-          <Col sm="1"/> 
-          <Button justify="right" theme="danger" outline><StopRoundedIcon/>Stop Cams</Button>
-        </Row>
-        <Row>
-
-  render() {
+    render() {
     return (
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
             title="Parking Spots Status"
-            subtitle="Blog Posts"
             className="text-sm-left"
           />
+          <Col sm="4"/>
+          <Button justify="left"><PlayArrowOutlinedIcon/>Start Cams</Button>
+          <Col sm="1"/> 
+          <Button justify="right" theme="danger" outline><StopRoundedIcon/>Stop Cams</Button>
         </Row>
         <Row></Row>
         <Row>
           <Col>
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
-                <h6 className="m-0">Parking Spots</h6>
               </CardHeader>
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
