@@ -68,7 +68,7 @@ class Operations extends Component {
           timeDiff = timeDiff + String(days) + " Days "
         }
         if(date_diff.getHours() > 0){
-          timeDiff = timeDiff + String(date_diff.getHours()) + " Hours "
+          timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours "
         }      
         
         return timeDiff + date_diff.getMinutes() + " Mins ";
@@ -79,7 +79,7 @@ class Operations extends Component {
       if(isNaN(time)){
         return null;
       }
-      return (time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear()+" "+(time.getHours()-8)+":"+ time.getMinutes())
+      return (time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear()+" "+(time.getHours())+":"+ time.getMinutes())
     }
 
     return this.state.parkingSpots.map((spot, index) => {
