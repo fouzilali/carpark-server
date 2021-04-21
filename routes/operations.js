@@ -25,11 +25,9 @@ async function whichSpot(lpr, mac) {
     console.log(spots);
     console.log("spotsend");
     return spots.find(spot => {
-        logger.info(spot);
         const bbox = spot.boundingBox;
         const id = spot.spotID;
         const inside = pointInQuad(bbox, lpr);
-        logger.info("Inside? " + inside);
         return inside;
     });
 }
