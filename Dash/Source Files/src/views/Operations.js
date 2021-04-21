@@ -65,17 +65,17 @@ class Operations extends Component {
 
       var timeDiff = "";
 
-      if (millisec_diff < 2 * 60 * 1000) {
-        return "Just Now";
-      }
-      if (days > 0) {
-        timeDiff = timeDiff + String(days) + " Days ";
-      }
-      if (date_diff.getHours() > 0) {
-        timeDiff = timeDiff + String(date_diff.getHours()) + " Hours ";
-      }
-
-      return timeDiff + date_diff.getMinutes() + " Mins ";
+        if(millisec_diff < 120000){
+          return "Just Now"
+        }
+        if(days > 0){
+          timeDiff = timeDiff + String(days) + " Days "
+        }
+        if(date_diff.getHours() > 0){
+          timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours "
+        }      
+        
+        return timeDiff + date_diff.getMinutes() + " Mins ";
     }
 
     function get_time(datetime) {
