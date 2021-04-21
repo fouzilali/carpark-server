@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
+import hostname from "../../hostname";
 
 const MapInteractionCSS = props => {
   return (
@@ -81,7 +82,9 @@ export default function MapCanvas() {
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:12000/setup/allSpots");
+      const result = await axios.get(
+        `http://${hostname}:12000/setup/allSpots`
+      );
       console.log(`allSpots got`);
       console.log(result.data);
       setSpots({ array: result.data });
