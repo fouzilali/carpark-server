@@ -159,8 +159,8 @@ setupRouter.post("/addParkingSpot", async (req, res, next) => {
                 y1: 0,
                 y2: 0,
                 y3: 0,
-                y4: 0
-            }
+                y4: 0,
+            },
         };
         result = await ParkingSpots.create(ps);
         res.statusCode = 200;
@@ -349,6 +349,10 @@ setupRouter.get("/allSpots", async (req, res, next) => {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.setHeader(
+            "Access-Control-Allow-Origin",
+            "http://http://35.241.86.83/:3000"
+        );
         res.json(result);
     } catch (err) {
         console.error(err);
