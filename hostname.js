@@ -1,1 +1,1 @@
-module.export = process.env.HOSTNAME || "localhost";
+module.exports = process.env.SERVER_IP || "localhost";

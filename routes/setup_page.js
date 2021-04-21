@@ -12,7 +12,7 @@ var fs = require("fs");
 var path = require("path");
 // var multer = require('multer');
 const logger = require("../logger");
-const { default: hostname } = require("../src/hostname");
+const hostname = require("../hostname.js");
 
 // //upload image helper
 // var storage = multer.diskStorage({
