@@ -70,11 +70,12 @@ var routers = require("./routes/routers");
 routers(app);
 
 var error_handlers = require("./error_handler");
+const hostname = require("./hostname.js");
 error_handlers(app);
 
 module.exports = app;
 
 const port = process.env.PORT || "12000";
 server.listen(port, () => {
-    logger.info(`Example app listening at http://localhost:${port}`);
+    logger.info(`Example app listening at http://${hostname}:${port}`);
 });
