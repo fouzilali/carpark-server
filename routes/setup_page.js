@@ -12,6 +12,7 @@ var fs = require("fs");
 var path = require("path");
 // var multer = require('multer');
 const logger = require("../logger");
+const { default: hostname } = require("../Dash/Source Files/src/hostname");
 
 // //upload image helper
 // var storage = multer.diskStorage({
@@ -348,11 +349,7 @@ setupRouter.get("/allSpots", async (req, res, next) => {
         result = await ParkingSpots.find({});
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        res.setHeader(
-            "Access-Control-Allow-Origin",
-            "http://http://35.241.86.83/:3000"
-        );
+        res.setHeader("Access-Control-Allow-Origin", `http://${hostname}:3000`);
         res.json(result);
     } catch (err) {
         console.error(err);
