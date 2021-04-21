@@ -4,6 +4,7 @@ session="servers"
 CARPARK_SERVER_DIR=${CARPARK_SERVER_DIR:-"."}
 DASH_SERVER_DIR=${DASH_SERVER_DIR:-"$CARPARK_SERVER_DIR/Dash/Source\ Files/"}
 LPR_SERVER_DIR=${LPR_SERVER_DIR:-"../fyp-lpr-gcp-functions"}
+HOSTNAME=$(curl https://checkip.amazonaws.com/)
 
 tmux new-session -d -s $session
 
@@ -19,7 +20,7 @@ tmux send-keys -t "lpr" 'python server.py' C-m
 
 tmux send-keys -t "back" 'bash' C-m 'clear' C-m 
 tmux send-keys -t "back" "cd ${CARPARK_SERVER_DIR}" C-m 
-tmux send-keys -t "back" 'npm run start' C-m 
+tmux send-keys -t "back" "HOSTNAME=${HOSTNAME} npm run server" C-m 
 
 tmux send-keys -t "dash" 'bash' C-m 'clear' C-m 
 tmux send-keys -t "dash" "cd ${DASH_SERVER_DIR}" C-m 
