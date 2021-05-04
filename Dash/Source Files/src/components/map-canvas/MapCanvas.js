@@ -48,13 +48,18 @@ const MapInteractionCSS = props => {
 
 const sortSpots = arr => {
   arr.sort((a, b) => {
-    if (!b.mapXY) {
+    if (b.mapXY && a.mapXY) {
+      if (a.mapXY.x === b.mapXY.x) {
+        return b.mapXY.y - a.mapXY.y;
+      } else {
+        return b.mapXY.x - a.mapXY.x;
+      }
+    } else if (b.mapXY) {
       return 1;
-    }
-    if (a.mapXY.x === b.mapXY.x) {
-      return b.mapXY.y - a.mapXY.y;
+    } else if (b.mapXY) {
+      return -1;
     } else {
-      return b.mapXY.x - a.mapXY.x;
+      return 0;
     }
   });
 };
@@ -62,10 +67,11 @@ const sortSpots = arr => {
 export default function MapCanvas() {
   // const spots = example.spots;
   const [spots, setSpots] = useState(
-    (() => {
-      sortSpots(mapdata.array);
-      return mapdata;
-    })()
+    // (() => {
+    //   sortSpots(mapdata.array);
+    //   return mapdata;
+    // })()
+    { array: [] }
   );
   const [scale, setScale] = useState(1);
   useEffect(() => {
@@ -125,7 +131,7 @@ export default function MapCanvas() {
             if (!spot) {
               return null;
             }
-            const mapXY = spot.mapXY || { x: i, y: i };
+            const mapXY = spot.mapXY || { x: i * 10, y: i * 10 };
             return (
               <ParkingSpot
                 key={i}
