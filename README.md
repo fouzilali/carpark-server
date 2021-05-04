@@ -4,26 +4,25 @@
 
 Whole system can be deployed by:
 ```sh
+sudo apt-get install tmux # make sure tmux is installed 
 ./tmux_start.bash
 ```
 This starts a tmux session running both servers required (backend and LPR)
 
 You can use environment variables to change some of the behaviour
 
-| Variable             | Meaning                     | Default                    |
-| -------------------- | --------------------------- | -------------------------- |
-| `SESSION`            | Name of the tmux session    | `carpark-servers`          |
-| `CARPARK_SERVER_DIR` | Where is the backend server | `.`                        |
-| `LPR_SERVER_DIR`     | Where is the LPR server     | `../fyp-lpr-gcp-functions` |
+| Variable             | Meaning                      | Default                                        |
+| -------------------- | ---------------------------- | ---------------------------------------------- |
+| `SESSION`            | Name of the tmux session     | `carpark-servers`                              |
+| `CARPARK_SERVER_DIR` | Where is the backend server  | `.`                                            |
+| `DASH_SERVER_DIR`    | Where is the frontend server | `$CARPARK_SERVER_DIR/Dash/Source\ Files/`      |
+| `LPR_SERVER_DIR`     | Where is the LPR server      | `$CARPARK_SERVER_DIR/../fyp-lpr-gcp-functions` |
 
-```
-tmux a -t SESSION
-```
-To view the console log
+To view the console log use `tmux a -t SESSION`
 
 Beware by using tmux the servers will continue running if you close the terminal or the SSH connectino. This is by design for deploying.
 
-# Run the backend:
+# Run the backend
 
 The backend can be run by just doing
 ```
@@ -33,9 +32,9 @@ node app.js
 nodemon app.js # For restarting the server on file change
 ```
 
-Make sure to build the frontend or else the changes wont be seen when served from the Backend server
+# Run the frontend Dashboard
 
-The Dashboard can be developed on its own by doing:
+The Dashboard runs on its own server from a subfolder, do:
 ```
 cd Dash/Source\ Files/
 npm run start

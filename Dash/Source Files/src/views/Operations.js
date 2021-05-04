@@ -13,7 +13,6 @@ import PageTitle from "../components/common/PageTitle";
 import axios from "axios";
 import PlayArrowOutlinedIcon from "@material-ui/icons/PlayArrowOutlined";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
-import hostname from "../hostname";
 
 class Operations extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class Operations extends Component {
   componentDidMount() {
     setInterval(() => {
       axios
-        .get(`http://${hostname}:12000/setup/allSpots`)
+        .get("/setup/allSpots")
         .then(response => {
           this.setState({ parkingSpots: response.data });
         })
@@ -65,17 +64,17 @@ class Operations extends Component {
 
       var timeDiff = "";
 
-        if(millisec_diff < 120000){
-          return "Just Now"
-        }
-        if(days > 0){
-          timeDiff = timeDiff + String(days) + " Days "
-        }
-        if(date_diff.getHours() > 0){
-          timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours "
-        }      
-        
-        return timeDiff + date_diff.getMinutes() + " Mins ";
+      if (millisec_diff < 120000) {
+        return "Just Now";
+      }
+      if (days > 0) {
+        timeDiff = timeDiff + String(days) + " Days ";
+      }
+      if (date_diff.getHours() > 0) {
+        timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours ";
+      }
+
+      return timeDiff + date_diff.getMinutes() + " Mins ";
     }
 
     function get_time(datetime) {
