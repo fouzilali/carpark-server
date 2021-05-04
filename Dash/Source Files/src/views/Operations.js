@@ -51,7 +51,7 @@ class Operations extends Component {
         return "";
       }
 
-      console.log(datetime + " " + now);
+      // console.log(datetime + " " + now);
 
       if (datetime < now) {
         var millisec_diff = now - datetime;

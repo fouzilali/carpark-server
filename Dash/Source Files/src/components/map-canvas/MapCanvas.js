@@ -77,18 +77,18 @@ export default function MapCanvas() {
     };
 
     const interval = setInterval(() => {
-      // fetchData();
+      fetchData();
     }, 1000);
 
-    // JUST FOR DEMO
-    setInterval(() => {
-      const spot = randChoose(spots.array);
-      spot.lpNumber = spot.lpNumber ? "" : randomLP();
-      const data = {
-        array: spots.array
-      };
-      setSpots(data); // force update
-    }, 50);
+    // JUST FOR TESTING
+    // setInterval(() => {
+    //   const spot = randChoose(spots.array);
+    //   spot.lpNumber = spot.lpNumber ? "" : randomLP();
+    //   const data = {
+    //     array: spots.array
+    //   };
+    //   setSpots(data); // force update
+    // }, 1000);
     // const demo = setInterval(() => {
     //   spots.array.find(spot => spot.spotID === "PS25").lpNumber = "SN7319";
     //   const data = {
