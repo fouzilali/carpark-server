@@ -54,13 +54,16 @@ const sortSpots = arr => {
       } else {
         return b.mapXY.x - a.mapXY.x;
       }
-    } else if (b.mapXY) {
-      return 1;
-    } else if (b.mapXY) {
-      return -1;
     } else {
-      return 0;
+      return (b.mapXY ? 1 : 0) - (a.mapXY ? 1 : 0);
     }
+    //  else if (b.mapXY) {
+    //   return 1;
+    // } else if (b.mapXY) {
+    //   return -1;
+    // } else {
+    //   return 0;
+    // }
   });
 };
 
@@ -126,7 +129,6 @@ export default function MapCanvas() {
           path={require("../../images/LG5.svg")}
         ></SvgLoader>
         {(() => {
-          console.log("rerender");
           return spots.array.map((spot, i) => {
             if (!spot) {
               return null;

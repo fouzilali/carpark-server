@@ -43,8 +43,11 @@ class Operations extends Component {
       } else {
         return null;
       }
+      console.log("Debug");
+      console.log(datetime, new Date());
       var datetime = new Date(datetime).getTime();
       var now = new Date().getTime();
+      console.log(datetime, now);
 
       if (isNaN(datetime)) {
         return "";
@@ -61,20 +64,21 @@ class Operations extends Component {
       var days = Math.floor(millisec_diff / 1000 / 60 / (60 * 24));
 
       var date_diff = new Date(millisec_diff);
+      console.log(date_diff);
 
-      var timeDiff = "";
-
-      if (millisec_diff < 120000) {
+      if (millisec_diff < 2 * 60 * 1000) {
         return "Just Now";
       }
+
+      var timeDiff = "";
       if (days > 0) {
         timeDiff = timeDiff + String(days) + " Days ";
       }
-      if (date_diff.getHours() > 0) {
-        timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours ";
+      if (date_diff.getUTCHours() > 0) {
+        timeDiff = timeDiff + String(date_diff.getUTCHours()) + " Hours ";
+        // timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours ";
       }
-
-      return timeDiff + date_diff.getMinutes() + " Mins ";
+      return timeDiff + date_diff.getUTCMinutes() + " Mins ";
     }
 
     function get_time(datetime) {
