@@ -28,13 +28,13 @@ function TabPanel(props) {
     console.log(r);
     const scale = r.imageScaleFactor;
     r.annotations.map((annotation, index) => {
-      var x1 = annotation.vertices[0].x / scale;
-      var y1 = annotation.vertices[0].y / scale;
+      var x1 = annotation.vertices[0].x;
+      var y1 = annotation.vertices[0].y;
       const spot = {
         spotID: annotation.selectedOptions[1].value,
         mapXY: {
-          x1: x1,
-          y1: y1
+          x: x1,
+          y: y1
         }
       };
       console.log(spot);
@@ -87,7 +87,7 @@ function renderAllTabHeads(allCams, a11yProps) {
 // 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
 function renderAllTabs(allCams, value, dir) {
   return allCams.map((cam, index) => {
-    console.log(cam.parkingSpots)
+    console.log(cam.parkingSpots);
     return (
       <TabPanel
         key={index}
@@ -125,65 +125,7 @@ const MapSetup = () => {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [allCams, setAllCams] = React.useState({
-    array: [
-      {
-        mapRegion: "LG1",
-        parkingSpots: {
-          id: "0",
-          value: "root",
-          children: [
-            { id: "1", value: "A1", children: [] },
-            { id: "2", value: "A2", children: [] },
-            { id: "3", value: "A3", children: [] },
-            { id: "4", value: "A4", children: [] },
-            { id: "5", value: "A5", children: [] },
-            { id: "6", value: "B1", children: [] },
-            { id: "7", value: "B2", children: [] },
-            { id: "8", value: "B3", children: [] },
-            { id: "9", value: "B4", children: [] },
-            { id: "10", value: "B5", children: [] }
-          ]
-        }
-      },
-      {
-        mapRegion: "LG2",
-        parkingSpots: {
-          id: "0",
-          value: "root",
-          children: [
-            { id: "1", value: "A1", children: [] },
-            { id: "2", value: "A2", children: [] },
-            { id: "3", value: "A3", children: [] },
-            { id: "4", value: "A4", children: [] },
-            { id: "5", value: "A5", children: [] },
-            { id: "6", value: "B1", children: [] },
-            { id: "7", value: "B2", children: [] },
-            { id: "8", value: "B3", children: [] },
-            { id: "9", value: "B4", children: [] },
-            { id: "10", value: "B5", children: [] }
-          ]
-        }
-      },
-      {
-        mapRegion: "LG5",
-        parkingSpots: {
-          id: "0",
-          value: "root",
-          children: [
-            { id: "1", value: "A1", children: [] },
-            { id: "2", value: "A2", children: [] },
-            { id: "3", value: "A3", children: [] },
-            { id: "4", value: "A4", children: [] },
-            { id: "5", value: "A5", children: [] },
-            { id: "6", value: "B1", children: [] },
-            { id: "7", value: "B2", children: [] },
-            { id: "8", value: "B3", children: [] },
-            { id: "9", value: "B4", children: [] },
-            { id: "10", value: "B5", children: [] }
-          ]
-        }
-      }
-    ]
+    array: []
   });
 
   async function fetchData() {
@@ -194,11 +136,11 @@ const MapSetup = () => {
         {
           mapRegion: "LG5",
           parkingSpots: {
-            id: "1",
+            id: "0",
             value: "root",
             children: res.data
               .flatMap(cam =>
-                cam.parkingSpots.map((spot, i) => {
+                cam.parkingSpots.map(spot => {
                   return {
                     id: `0`,
                     value: spot,
@@ -208,7 +150,6 @@ const MapSetup = () => {
               )
               .map((c, i) => {
                 c.id = `${i + 1}`;
-                console.log(c);
                 return c;
               })
           }
