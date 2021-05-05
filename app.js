@@ -6,7 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("./logger.js");
 var fs = require("fs");
-var websock = require("./websock.js");
+var {websocketServer} = require("./websock.js");
 const methodOverride = require("method-override");
 const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
@@ -15,7 +15,7 @@ var app = express();
 var server = require("http").createServer(app);
 
 //setup Websocket
-websock(server)
+websocketServer(server)
 
 app.use(cors());
 
