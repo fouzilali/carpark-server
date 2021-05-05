@@ -11,6 +11,7 @@ function websocketServer(server) {
     parkingSpotSetup: false,
     operation: false,
   };
+
   wss.on("connection", function connection(ws, request, client) {
     console.log("A new camera has been detected");
     ws.send("Welcome New Client");
@@ -19,7 +20,7 @@ function websocketServer(server) {
       var input = JSON.parse(message);
       if (input.msg == "mac") {
         sockets[input.mac] = ws;
-        console.log(input.mac);
+        console.log(sockets);
       }
     });
   });

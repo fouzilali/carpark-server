@@ -47,6 +47,7 @@ router.put("/spotFilled", async (req, res, next) => {
     console.log(spot.spotID);
     spot.vacant = false;
     spot.lpNumber = req.body.lp;
+    spot.timeEntered = new Date();
     await spot.save().then((saved) => {
       if (saved !== spot) {
         throw Error("Failure during saving of Parking Spot document");
