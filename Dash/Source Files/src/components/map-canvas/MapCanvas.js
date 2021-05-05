@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
-import hostname from "../../hostname";
 import mapdata from "./mapdata";
 import { randChoose, randomLP } from "./mapdata";
 
@@ -49,29 +48,38 @@ const MapInteractionCSS = props => {
 
 const sortSpots = arr => {
   arr.sort((a, b) => {
-    if (!b.mapXY) {
-      return 1;
-    }
-    if (a.mapXY.x === b.mapXY.x) {
-      return b.mapXY.y - a.mapXY.y;
+    if (b.mapXY && a.mapXY) {
+      if (a.mapXY.x === b.mapXY.x) {
+        return b.mapXY.y - a.mapXY.y;
+      } else {
+        return b.mapXY.x - a.mapXY.x;
+      }
     } else {
-      return b.mapXY.x - a.mapXY.x;
+      return (b.mapXY ? 1 : 0) - (a.mapXY ? 1 : 0);
     }
+    //  else if (b.mapXY) {
+    //   return 1;
+    // } else if (b.mapXY) {
+    //   return -1;
+    // } else {
+    //   return 0;
+    // }
   });
 };
 
 export default function MapCanvas() {
   // const spots = example.spots;
   const [spots, setSpots] = useState(
-    (() => {
-      sortSpots(mapdata.array);
-      return mapdata;
-    })()
+    // (() => {
+    //   sortSpots(mapdata.array);
+    //   return mapdata;
+    // })()
+    { array: [] }
   );
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`http://${hostname}:12000/setup/allSpots`);
+      const result = await axios.get("/setup/allSpots");
       sortSpots(result.data);
       setSpots({ array: result.data });
     };
@@ -121,12 +129,11 @@ export default function MapCanvas() {
           path={require("../../images/LG5.svg")}
         ></SvgLoader>
         {(() => {
-          console.log("rerender");
           return spots.array.map((spot, i) => {
             if (!spot) {
               return null;
             }
-            const mapXY = spot.mapXY || { x: i, y: i };
+            const mapXY = spot.mapXY || { x: i * 10, y: i * 10 };
             return (
               <ParkingSpot
                 key={i}
