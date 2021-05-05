@@ -21,17 +21,29 @@ function websocketServer(server) {
 
         let mac = null;
 
-        ws.on("close", function closedSocket() {
+	function closedSocket() {
+		console.log("disconnected from " + mac);
             clearInterval(pingInterval);
+                updateCameraStatus(mac, false);
             delete sockets[mac];
-        });
+	}
 
-        ws.on("message", function incoming(message) {
+        ws.on("close", closedSocket);
+
+        ws.on("message", async (message) => {
+	console.log(">" + message)
+	    if (message == "pong") {
+                if (pingResolve) {
+                    pingResolve(true);
+                    pingResolve = null;
+                }
+		return;
+	    }
             var input = JSON.parse(message);
             if (input.msg == "mac") {
                 if (input.mac in sockets) {
                 } else {
-                    ws.send("sendSetupImage");
+                    await ws.send("sendSetupImage");
                 }
                 sockets[input.mac] = ws;
                 mac = input.mac;
@@ -39,28 +51,24 @@ function websocketServer(server) {
 
                 updateCameraStatus(mac, true);
 
-                // Start the ping heartbeat
                 if (pingInterval == null) {
+		// Start the ping heartbeat
                     pingInterval = setInterval(async () => {
-                        ws.send("ping");
+                        await ws.send("ping");
                         const ok = await new Promise(resolve => {
                             pingResolve = resolve;
                             setTimeout(() => {
                                 resolve(false);
-                            });
+                            }, 10000);
                         });
                         /* await */ updateCameraStatus(mac, ok);
                         if (!ok) {
-                            closed();
+				console.log("pong failed")
+                            closedSocket();
                         }
                     }, 10000);
                 }
-            } else if (input.msg == "pong") {
-                if (pingResolve) {
-                    pingResolve(true);
-                    pingResolve = null;
-                }
-            }
+            } 
         });
     });
 }
