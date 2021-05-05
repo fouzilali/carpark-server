@@ -4,7 +4,22 @@ import { easeBounceOut } from "d3-ease";
 import { interpolateString } from "d3-interpolate";
 import PageTitle from "../components/common/PageTitle";
 import PropTypes from "prop-types";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
+import axios from "axios";
+
+import {
+  Form,
+  FormGroup,
+  InputGroup,
+  Container,
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  FormInput
+} from "shards-react";
+
+import { Button as ShardsButton } from "shards-react";
 
 import { Chip, ListItem } from "@material-ui/core";
 
@@ -107,7 +122,42 @@ function slideUp(element, { duration = 750, onComplete } = {}) {
 }
 
 class UserTableRow extends React.Component {
-  state = { expanded: false, value: "" };
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+      value: "",
+      camID: "",
+      sid: "",
+      sids: this.props.camera.parkingSpots.slice(0)
+    };
+    this.updatecamID = this.updatecamID;
+    this.updatesid = this.updatesid;
+    this.updatesids = this.updatesids;
+  }
+
+  updatecamID = cid => {
+    this.setState({ camID: cid });
+  };
+
+  updatesid = parkingSpots => {
+    this.setState({ sid: parkingSpots });
+  };
+
+  updatesids = (e, spot, index) => {
+    e.preventDefault();
+    this.props.addSpot(this.state.sid, this.props.index);
+    var { sids } = Object.assign({}, this.state);
+    console.log("spotarray");
+    sids.push(spot);
+    console.log(sids);
+    slideUp(this.refs.expanderBody, {
+      onComplete: () => {
+        slideDown(this.refs.expanderBody);
+      }
+    });
+    this.setState({ sids: sids });
+  };
 
   toggleExpander = e => {
     if (e.target.type === "checkbox") return;
@@ -142,13 +192,74 @@ class UserTableRow extends React.Component {
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">
               <div>
-                <input
-                  type="text"
-                  placeholder="Write text"
-                  onChange={e =>
-                    this.props.updateCID(e.target.value, this.props.index)
-                  }
-                />
+                <Row>
+                  <Col>
+                    <Form>
+                      <FormGroup>
+                        <InputGroup className="mb-3">
+                          <FormInput
+                            type="text"
+                            placeholder="Enter Camera ID"
+                            onChange={e => this.updatecamID(e.target.value)}
+                          />
+                        </InputGroup>
+                        <Row>
+                          <Col lg="5"></Col>
+                          <Col sm="12" lg="7">
+                            <ShardsButton
+                              type="submit"
+                              justify="right"
+                              onClick={e =>
+                                this.props.updateCID(
+                                  e,
+                                  this.state.camID,
+                                  this.props.index
+                                )
+                              }
+                            >
+                              Update Camera ID
+                            </ShardsButton>
+                          </Col>
+                        </Row>
+                      </FormGroup>
+                      <FormGroup>
+                        <InputGroup className="mb-3">
+                          <FormInput
+                            placeholder="Add Parking Spot IDs "
+                            onChange={e => this.updatesid(e.target.value)}
+                          />
+                        </InputGroup>
+                        <Row>
+                          <Col lg="8"></Col>
+                          <Col sm="12" lg="4">
+                            <ShardsButton
+                              outline
+                              justify="right"
+                              onClick={e =>
+                                this.updatesids(
+                                  e,
+                                  this.state.sid,
+                                  this.props.index
+                                )
+                              }
+                            >
+                              Add
+                            </ShardsButton>
+                          </Col>
+                        </Row>
+                      </FormGroup>
+                    </Form>
+                  </Col>
+                  <Col>
+                    <ul className="list-group">
+                      {this.state.sids.map((listitem, i) => (
+                        <ListItem key={i}>
+                          <Chip label={listitem} />
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </Col>
+                </Row>
               </div>
             </div>
           </td>
@@ -163,51 +274,35 @@ class CameraSetup4 extends React.Component {
     super(props);
 
     this.state = {
-      cameras: [
-        {
-          cameraID: "LG2-RowA1",
-          isActive: "Active",
-          mac: "12:45:88:21:34",
-          spotID: [
-            "LG2-PS1",
-            "LG2-PS2",
-            "LG2-PS3",
-            "LG2-PS4",
-            "LG2-PS5",
-            "LG2-PS6",
-            "LG2-PS7"
-          ]
-        },
-        {
-          cameraID: "LG5-RowC3",
-          isActive: "Active",
-          mac: "21:23:12:45:67",
-          spotID: [
-            "LG5-PS1",
-            "LG5-PS2",
-            "LG5-PS3",
-            "LG5-PS4",
-            "LG5-PS5",
-            "LG5-PS6",
-            "LG5-PS7"
-          ]
-        }
-      ]
+      cameras: []
     };
     this.updateCID = this.updateCID;
     this.addSpot = this.addSpot;
   }
 
-  updateCID = (cid, index) => {
+  componentDidMount() {
+    axios.get("http://localhost:12000/setup/getAllCameras").then(res => {
+      console.log(res.data);
+      this.setState({ cameras: res.data });
+    });
+  }
+
+  updateCID = (e, cid, index) => {
+    e.preventDefault();
     var { cameras } = Object.assign({}, this.state);
     cameras[index - 1].cameraID = cid;
     this.setState({ cameras });
   };
 
   addSpot = (spot, index) => {
+    //console.log("parent")
+    //console.log(spot)
     var { cameras } = Object.assign({}, this.state);
-    cameras[index - 1].spotID.push(spot);
+    cameras[index - 1].parkingSpots.push(spot);
+    //console.log("print")
+    //console.log(cameras[index - 1].parkingSpots)
     this.setState({ cameras });
+    console.log(cameras[index - 1].parkingSpots);
   };
 
   render() {
@@ -235,7 +330,7 @@ class CameraSetup4 extends React.Component {
                       <th className="uk-table-shrink" />
                       <th>Camera ID</th>
                       <th>Mac</th>
-                      <th>Status</th>
+                      {/* <th>Status</th> */}
                     </tr>
                   </thead>
                   <tbody>
