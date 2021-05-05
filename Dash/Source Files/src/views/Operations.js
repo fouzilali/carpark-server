@@ -27,6 +27,11 @@ class Operations extends Component {
     axios.post("/operation/startAllCameras");
   }
 
+  handleStop() {
+    console.log("stop button clicked")
+    axios.post("/operation/startAllCameras")
+  }
+
   componentDidMount() {
     setInterval(() => {
       axios
@@ -140,12 +145,12 @@ class Operations extends Component {
             className="text-sm-left"
           />
           <Col sm="4" />
-          <Button justify="left">
+          <Button justify="left" onClick={this.handleStart}>
             <PlayArrowOutlinedIcon />
             Start Cams
           </Button>
           <Col sm="1" />
-          <Button justify="right" theme="danger" outline>
+          <Button justify="right" onClick={this.handleStop} theme="danger" outline>
             <StopRoundedIcon />
             Stop Cams
           </Button>
@@ -157,7 +162,7 @@ class Operations extends Component {
               <CardHeader className="border-bottom"></CardHeader>
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
-                  <thead className="bg-light">
+                  <thead className="bg-gray">
                     <tr>
                       <th scope="col" className="border-0">
                         Spot ID

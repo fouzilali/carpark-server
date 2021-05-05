@@ -1,9 +1,6 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, useMutationEffect } from "react";
-import { hot } from "react-hot-loader";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
+import React, { useEffect } from "react";
 import {
   TwoDimensionalImage,
-  TwoDimensionalVideo
 } from "react-annotation-tool";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -11,8 +8,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import axios from "axios";
 
 
@@ -21,7 +16,7 @@ function TabPanel(props) {
   const handleSubmit = (r) => {
     let data = [];
     const scale = r.imageScaleFactor;
-    r.annotations.map((annotation, index)=>{
+    r.annotations.map((annotation, index) => {
       
       var x1 = annotation.vertices[0].x/scale;
       var y1 = annotation.vertices[0].y/scale;
@@ -43,10 +38,11 @@ function TabPanel(props) {
                         y4 : y4
                  }
       })
+      return data;
     });
     data.forEach( spot => {
       try{
-        const res = axios.put('http://localhost:12000/setup/updateParkingSpot',spot);
+        axios.put('http://localhost:12000/setup/updateParkingSpot',spot);
       }
       catch (err){
       }
