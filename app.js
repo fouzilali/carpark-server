@@ -6,13 +6,16 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("./logger.js");
 var fs = require("fs");
+var websock = require("./websock.js");
 const methodOverride = require("method-override");
 const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 
 var app = express();
 var server = require("http").createServer(app);
-const wss = new WebSocket.Server({ server: server });
+
+//setup Websocket
+websock(server)
 
 app.use(cors());
 
@@ -50,16 +53,6 @@ app.use(
     })
 );
 
-//Websocket for Raspberry Pi connection
-var SYSTEM_SATUS = off
-wss.on("connection", function connection(ws,request,client) {
-    console.log("A new Camera has been anounced");
-    console.log(wss.clients);
-    ws.send("Welcome New Client");
-    ws.on("message", function incoming(message) {
-        console.log("received: %s", message);
-    });
-});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -72,14 +65,11 @@ routers(app);
 var error_handlers = require("./error_handler");
 error_handlers(app);
 
-module.exports = app;
 
 const port = process.env.PORT || "12000";
 server.listen(port, () => {
     logger.info(`App listening at http://localhost:${port}`);
 });
 
-// const ParkingSpots = require("./models/parkingSpots");
-// ParkingSpots.find({}).then(spots => {
-//     console.log(JSON.stringify(spots));
-// });
+
+module.exports = app;
