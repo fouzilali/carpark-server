@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DemoPage = () => {
+const ParkingSpotSetup = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -229,19 +229,6 @@ const DemoPage = () => {
     setValue(index);
   };
 
-  const previewNoticeList = [
-    "Cells' body range.",
-    "The time that cells <u>split</u>, <u>leave</u>, <u>obscured</u> and <u>show up</u> (if applicable)."
-  ];
-  const previewHeader =
-    "Please scan the video and observe the following to help you complete the task:";
-  const emptyCheckSubmissionWarningText =
-    "Please annotate AND track one unmarked cell to complete this task.";
-  const emptyCheckAnnotationItemWarningText =
-    "Step 2: Please track the cell bound by this box";
-  const emptyAnnotationReminderText =
-    "Step 1: Click the button above to add a new box around a cell";
-
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -267,4 +254,4 @@ const DemoPage = () => {
   );
 };
 
-export default DemoPage;
+export default ParkingSpotSetup;

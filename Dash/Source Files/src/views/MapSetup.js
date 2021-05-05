@@ -1,31 +1,17 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useLayoutEffect,
-  useMutationEffect
-} from "react";
-import { hot } from "react-hot-loader";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
-import {
-  TwoDimensionalImage,
-  TwoDimensionalVideo
-} from "react-annotation-tool";
+import React, { useEffect } from "react";
+import { TwoDimensionalImage } from "react-annotation-tool";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import axios from "axios";
 
 function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
   const handleSubmit = r => {
-    const scale = r.imageScaleFactor;
-    r.annotations.map((annotation, index) => {
+    r.annotations.forEach((annotation, index) => {
       var x1 = annotation.vertices[0].x;
       var y1 = annotation.vertices[0].y;
       const spot = {
@@ -36,10 +22,7 @@ function TabPanel(props) {
         }
       };
       try {
-        const res = axios.put(
-          "http://localhost:12000/setup/updateParkingSpot",
-          spot
-        );
+        axios.put("http://localhost:12000/setup/updateParkingSpot", spot);
       } catch (err) {
         console.log(err);
       }
@@ -166,19 +149,6 @@ const MapSetup = () => {
   const handleChangeIndex = index => {
     setValue(index);
   };
-
-  const previewNoticeList = [
-    "Cells' body range.",
-    "The time that cells <u>split</u>, <u>leave</u>, <u>obscured</u> and <u>show up</u> (if applicable)."
-  ];
-  const previewHeader =
-    "Please scan the video and observe the following to help you complete the task:";
-  const emptyCheckSubmissionWarningText =
-    "Please annotate AND track one unmarked cell to complete this task.";
-  const emptyCheckAnnotationItemWarningText =
-    "Step 2: Please track the cell bound by this box";
-  const emptyAnnotationReminderText =
-    "Step 1: Click the button above to add a new box around a cell";
 
   return (
     <div className={classes.root}>

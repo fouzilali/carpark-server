@@ -3,23 +3,10 @@ import "./styleCS3.css";
 import { easeBounceOut } from "d3-ease";
 import { interpolateString } from "d3-interpolate";
 import PageTitle from "../components/common/PageTitle";
-import { FixedSizeList } from "react-window";
 import PropTypes from "prop-types";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-} from "shards-react";
+import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
 
-import { Button as ShardsButton } from "shards-react";
-
-import {
-  Chip,
-  ListItem,
-} from "@material-ui/core";
+import { Chip, ListItem } from "@material-ui/core";
 
 function renderRow(props) {
   const { index, style } = props;

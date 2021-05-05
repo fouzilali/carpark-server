@@ -1,13 +1,8 @@
-import { SvgLoader, SvgProxy } from "react-svgmt";
-import React, { useState, useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { SizeMe, withSize } from "react-sizeme";
-import axios from "axios";
-import useResizeObserver from "@react-hook/resize-observer";
+import React, { useState } from "react";
 
 // TODO: LOD by size (how to get real size???)
 // TODO: on hover details
-function ParkingSpot({ x, y, id, scale, spot }) {
+function ParkingSpot({ x, y, scale, spot }) {
   function isEmpty(str) {
     return !str || str.length === 0;
   }
@@ -50,8 +45,6 @@ function ParkingSpot({ x, y, id, scale, spot }) {
         <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={0}></Txt>
         <Txt text={spot.cameraID} line={1}></Txt>
         <Txt text={spot.spotID} line={2}></Txt>
-        {/* <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={2}></Txt> */}
-        {/* <Txt text={!vacant ? spot.lpNumber : "VACANT"} line={3}></Txt> */}
       </g>
     );
   };

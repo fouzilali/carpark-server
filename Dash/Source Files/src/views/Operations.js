@@ -47,7 +47,7 @@ class Operations extends Component {
 
   renderTableData() {
     function get_time_diff(datetime) {
-      if (typeof datetime !== "undefined") {
+      if (typeof datetime === "undefined") {
         var datetime = datetime;
       } else {
         return null;
