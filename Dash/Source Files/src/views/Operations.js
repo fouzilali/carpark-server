@@ -23,6 +23,11 @@ class Operations extends Component {
     };
   }
 
+  handleStart(){
+    console.log("start button clicked");
+    axios.post("/operation/startAllCameras")
+  }
+
   componentDidMount() {
     setInterval(() => {
       axios
@@ -142,7 +147,7 @@ class Operations extends Component {
             className="text-sm-left"
           />
           <Col sm="4" />
-          <Button justify="left">
+          <Button justify="left" onclick={}>
             <PlayArrowOutlinedIcon />
             Start Cams
           </Button>
