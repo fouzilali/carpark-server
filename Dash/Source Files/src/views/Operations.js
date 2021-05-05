@@ -23,9 +23,13 @@ class Operations extends Component {
     };
   }
 
-  handleStart(){
-    console.log("start button clicked");
-    axios.post("/operation/startAllCameras")
+  handleStart() {
+    axios.post("/operation/startAllCameras");
+  }
+
+  handleStop() {
+    console.log("stop button clicked");
+    axios.post("/operation/startAllCameras");
   }
 
   componentDidMount() {
@@ -43,22 +47,17 @@ class Operations extends Component {
 
   renderTableData() {
     function get_time_diff(datetime) {
-      if (typeof datetime !== "undefined") {
+      if (typeof datetime === "undefined") {
         var datetime = datetime;
       } else {
         return null;
       }
-      console.log("Debug");
-      console.log(datetime, new Date());
       var datetime = new Date(datetime).getTime();
       var now = new Date().getTime();
-      console.log(datetime, now);
 
       if (isNaN(datetime)) {
         return "";
       }
-
-      // console.log(datetime + " " + now);
 
       if (datetime < now) {
         var millisec_diff = now - datetime;
@@ -69,7 +68,6 @@ class Operations extends Component {
       var days = Math.floor(millisec_diff / 1000 / 60 / (60 * 24));
 
       var date_diff = new Date(millisec_diff);
-      console.log(date_diff);
 
       if (millisec_diff < 2 * 60 * 1000) {
         return "Just Now";
@@ -147,12 +145,17 @@ class Operations extends Component {
             className="text-sm-left"
           />
           <Col sm="4" />
-          <Button justify="left" onclick={}>
+          <Button justify="left" onClick={this.handleStart}>
             <PlayArrowOutlinedIcon />
             Start Cams
           </Button>
           <Col sm="1" />
-          <Button justify="right" theme="danger" outline>
+          <Button
+            justify="right"
+            onClick={this.handleStop}
+            theme="danger"
+            outline
+          >
             <StopRoundedIcon />
             Stop Cams
           </Button>
@@ -164,7 +167,7 @@ class Operations extends Component {
               <CardHeader className="border-bottom"></CardHeader>
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
-                  <thead className="bg-light">
+                  <thead className="bg-gray">
                     <tr>
                       <th scope="col" className="border-0">
                         Spot ID
@@ -186,98 +189,7 @@ class Operations extends Component {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {/*<tr key={1}>
-                  <td>A1</td>
-                  <td>c123</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>A2</td>
-                  <td>c123</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>A3</td>
-                  <td>c123</td>
-                  <td>Occupied</td>
-                  <td>UE 2122</td>
-                  <td>10H 19M</td>
-                  <td>9H 41M</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>A4</td>
-                  <td>c123</td>
-                  <td>Occupied</td>
-                  <td>ZD 2672</td>
-                  <td>9H 45M</td>
-                  <td>10H 15M</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>B4</td>
-                  <td>D634</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>C5</td>
-                  <td>D634</td>
-                  <td>Occupied</td>
-                  <td>HX 9834</td>
-                  <td>4H 30M</td>
-                  <td>15H 30M</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>C6</td>
-                  <td>F174</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>E5</td>
-                  <td>D634</td>
-                  <td>Occupied</td>
-                  <td>EF 9801</td>
-                  <td>30M</td>
-                  <td>19H 30M</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>G6</td>
-                  <td>D634</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>G7</td>
-                  <td>F834</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr>
-                  <tr key={1}>
-                  <td>B4</td>
-                  <td>D634</td>
-                  <td>Vacant</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  </tr> */}
-
-                    {this.renderTableData()}
-                  </tbody>
+                  <tbody>{this.renderTableData()}</tbody>
                 </table>
               </CardBody>
             </Card>

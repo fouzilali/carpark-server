@@ -1,53 +1,32 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useLayoutEffect,
-  useMutationEffect
-} from "react";
-import { hot } from "react-hot-loader";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
-import {
-  TwoDimensionalImage,
-  TwoDimensionalVideo
-} from "react-annotation-tool";
+import React, { useEffect } from "react";
+import { TwoDimensionalImage } from "react-annotation-tool";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import axios from "axios";
 
 function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
   const handleSubmit = r => {
-    console.log(r.annotations[0].vertices);
-    // let data = [];
-    // r.annotations.map((annotation, index)=>{
-    //   data.push({spotID: annotation.selectedOptions[1].value,
-    //              boundingBox: {
-    //                     x1: annotation.vertices[0].x,
-    //                     y1: annotation.vertices[0].y,
-    //                     x2: annotation.vertices[1].x,
-    //                     y2: annotation.vertices[1].y,
-    //                     x3: annotation.vertices[2].x,
-    //                     y3: annotation.vertices[2].y,
-    //                     x4: annotation.vertices[3].x,
-    //                     y4: annotation.vertices[3].y
-    //              }
-    //   })
-    // });
-    // data.forEach( spot => {
-    //   try{
-    //     const res = axios.put('http://localhost:12000/setup/updateParkingSpot',spot);
-    //   }
-    //   catch (err){
-    //     console.log(err)
-    //   }
-    // });
+    r.annotations.forEach((annotation, index) => {
+      var x1 = annotation.vertices[0].x;
+      var y1 = annotation.vertices[0].y;
+      const spot = {
+        spotID: annotation.selectedOptions[1].value,
+        mapXY: {
+          x: x1,
+          y: y1
+        }
+      };
+      try {
+        axios.put("http://localhost:12000/setup/updateParkingSpot", spot);
+      } catch (err) {
+        console.log(err);
+      }
+    });
   };
   return (
     <div
@@ -79,16 +58,14 @@ function renderAllTabHeads(allCams, a11yProps) {
     return (
       <Tab
         key={index}
-        label={`REGION: ${cam.cameraID}`}
+        label={`REGION: ${cam.mapRegion}`}
         {...a11yProps(index)}
       />
     );
   });
 }
-// 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
 function renderAllTabs(allCams, value, dir) {
   return allCams.map((cam, index) => {
-    // console.log(cam.parkingSpots)
     return (
       <TabPanel
         key={index}
@@ -126,101 +103,43 @@ const MapSetup = () => {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [allCams, setAllCams] = React.useState({
-    array: [
-      {
-        cameraID: "LG1",
-        parkingSpots: {
-          id: "0",
-          value: "root",
-          children: [
-            { id: "1", value: "A1", children: [] },
-            { id: "2", value: "A2", children: [] },
-            { id: "3", value: "A3", children: [] },
-            { id: "4", value: "A4", children: [] },
-            { id: "5", value: "A5", children: [] },
-            { id: "6", value: "B1", children: [] },
-            { id: "7", value: "B2", children: [] },
-            { id: "8", value: "B3", children: [] },
-            { id: "9", value: "B4", children: [] },
-            { id: "10", value: "B5", children: [] }
-          ]
-        }
-      },
-      {
-        cameraID: "LG2",
-        parkingSpots: {
-          id: "0",
-          value: "root",
-          children: [
-            { id: "1", value: "A1", children: [] },
-            { id: "2", value: "A2", children: [] },
-            { id: "3", value: "A3", children: [] },
-            { id: "4", value: "A4", children: [] },
-            { id: "5", value: "A5", children: [] },
-            { id: "6", value: "B1", children: [] },
-            { id: "7", value: "B2", children: [] },
-            { id: "8", value: "B3", children: [] },
-            { id: "9", value: "B4", children: [] },
-            { id: "10", value: "B5", children: [] }
-          ]
-        }
-      },
-      {
-        cameraID: "LG5",
-        parkingSpots: {
-          id: "0",
-          value: "root",
-          children: [
-            { id: "1", value: "A1", children: [] },
-            { id: "2", value: "A2", children: [] },
-            { id: "3", value: "A3", children: [] },
-            { id: "4", value: "A4", children: [] },
-            { id: "5", value: "A5", children: [] },
-            { id: "6", value: "B1", children: [] },
-            { id: "7", value: "B2", children: [] },
-            { id: "8", value: "B3", children: [] },
-            { id: "9", value: "B4", children: [] },
-            { id: "10", value: "B5", children: [] }
-          ]
-        }
-      }
-    ]
+    array: []
   });
 
-  // async function fetchData() {
-  //   try {
-  //     const res = await axios.get("http://localhost:12000/setup/getAllCameras");
-  //     // console.log(res.data);
-  //     let cams = [];
-  //     for (var cam of res.data){
-  //       cams.push({
-  //         cameraID: cam.cameraID,
-  //         parkingSpots: {
-  //         id: "0",
-  //         value: "root",
-  //         children: cam.parkingSpots.map((spot,index) => {
-  //           return({
-  //             id: `${index+1}`,
-  //             value: spot,
-  //             children: []
-  //           });
-  //         })
-  //       }
-  //       })
-  //     }
-  //     return cams;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async function fetchData() {
+    try {
+      const res = await axios.get("http://localhost:12000/setup/getAllCameras");
+      return [
+        {
+          mapRegion: "LG5",
+          parkingSpots: {
+            id: "0",
+            value: "root",
+            children: res.data
+              .flatMap(cam =>
+                cam.parkingSpots.map(spot => {
+                  return {
+                    id: `0`,
+                    value: spot,
+                    children: []
+                  };
+                })
+              )
+              .map((c, i) => {
+                c.id = `${i + 1}`;
+                return c;
+              })
+          }
+        }
+      ];
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // useEffect(() => {
-  //   fetchData().then(data=>setAllCams({array: data}));
-  // },[]);
-
-  // useEffect( ()=>{
-  //   console.log(allCams);
-  // },[allCams]);
+  useEffect(() => {
+    fetchData().then(data => setAllCams({ array: data }));
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -229,19 +148,6 @@ const MapSetup = () => {
   const handleChangeIndex = index => {
     setValue(index);
   };
-
-  const previewNoticeList = [
-    "Cells' body range.",
-    "The time that cells <u>split</u>, <u>leave</u>, <u>obscured</u> and <u>show up</u> (if applicable)."
-  ];
-  const previewHeader =
-    "Please scan the video and observe the following to help you complete the task:";
-  const emptyCheckSubmissionWarningText =
-    "Please annotate AND track one unmarked cell to complete this task.";
-  const emptyCheckAnnotationItemWarningText =
-    "Step 2: Please track the cell bound by this box";
-  const emptyAnnotationReminderText =
-    "Step 1: Click the button above to add a new box around a cell";
 
   return (
     <div className={classes.root}>
