@@ -18,7 +18,12 @@ function websocketServer(server) {
         ws.on("message", function incoming(message) {
             var input = JSON.parse(message);
             if (input.msg == "mac") {
-                sockets[input.mac] = ws;
+                if (input.mac in sockets){
+                    sockets[input.mac] = ws;
+                }else{
+                    sockets[input.mac] = ws;
+                    ws.send("sendSetupImage");
+                }
                 console.log(input.mac);
             }
         });
