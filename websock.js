@@ -1,4 +1,5 @@
 var WebSocket = require("ws");
+var { updateCameraStatus } = require("./routes/setup_page");
 
 let wss = null;
 var sockets = {};
@@ -15,17 +16,59 @@ function websocketServer(server) {
         console.log("A new camera has been detected");
         ws.send("Welcome New Client");
 
-        ws.on("message", function incoming(message) {
+        let pingResolve = null;
+        let pingInterval = null;
+
+        let mac = null;
+
+	function closedSocket() {
+		console.log("disconnected from " + mac);
+            clearInterval(pingInterval);
+                updateCameraStatus(mac, false);
+            delete sockets[mac];
+	}
+
+        ws.on("close", closedSocket);
+
+        ws.on("message", async (message) => {
+	console.log(">" + message)
+	    if (message == "pong") {
+                if (pingResolve) {
+                    pingResolve(true);
+                    pingResolve = null;
+                }
+		return;
+	    }
             var input = JSON.parse(message);
             if (input.msg == "mac") {
-                if (input.mac in sockets){
-                    sockets[input.mac] = ws;
-                }else{
-                    sockets[input.mac] = ws;
-                    ws.send("sendSetupImage");
+                if (input.mac in sockets) {
+                } else {
+                    await ws.send("sendSetupImage");
                 }
+                sockets[input.mac] = ws;
+                mac = input.mac;
                 console.log(input.mac);
-            }
+
+                updateCameraStatus(mac, true);
+
+                if (pingInterval == null) {
+		// Start the ping heartbeat
+                    pingInterval = setInterval(async () => {
+                        await ws.send("ping");
+                        const ok = await new Promise(resolve => {
+                            pingResolve = resolve;
+                            setTimeout(() => {
+                                resolve(false);
+                            }, 10000);
+                        });
+                        /* await */ updateCameraStatus(mac, ok);
+                        if (!ok) {
+				console.log("pong failed")
+                            closedSocket();
+                        }
+                    }, 10000);
+                }
+            } 
         });
     });
 }
