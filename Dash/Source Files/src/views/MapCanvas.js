@@ -1,14 +1,6 @@
 import { SvgLoader } from "react-svgmt";
 import PageTitle from "../components/common/PageTitle";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  Button
-} from "shards-react";
+import { Container, Row, Col } from "shards-react";
 import React, { useState, useEffect } from "react";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "../components/map-canvas/ParkingSpot";
