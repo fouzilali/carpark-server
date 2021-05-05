@@ -1,51 +1,66 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { slideDown, slideUp } from './anim';
-import './style.css';
-
+import React from "react";
+import { render } from "react-dom";
+import { slideDown, slideUp } from "./anim";
+import "./style.css";
 
 function formatDate(str) {
   return str.substr(0, 10);
 }
 
 function capitalize(str) {
-  return str.split(' ').map(s => {
-    return s.charAt(0).toUpperCase() + s.substr(1);
-  }).join(' ');
+  return str
+    .split(" ")
+    .map(s => {
+      return s.charAt(0).toUpperCase() + s.substr(1);
+    })
+    .join(" ");
 }
 
-
 class UserTableRow extends React.Component {
-  state = { expanded: false }
+  state = { expanded: false };
 
-  toggleExpander = (e) => {
-    if (e.target.type === 'checkbox') return;
+  toggleExpander = e => {
+    if (e.target.type === "checkbox") return;
 
     if (!this.state.expanded) {
-      this.setState(
-        { expanded: true },
-        () => {
-          if (this.refs.expanderBody) {
-            slideDown(this.refs.expanderBody);
-          }
+      this.setState({ expanded: true }, () => {
+        if (this.refs.expanderBody) {
+          slideDown(this.refs.expanderBody);
         }
-      );
+      });
     } else {
       slideUp(this.refs.expanderBody, {
-        onComplete: () => { this.setState({ expanded: false }); }
+        onComplete: () => {
+          this.setState({ expanded: false });
+        }
       });
     }
-  }
+  };
 
   render() {
     const { user } = this.props;
     return [
       <tr key="main" onClick={this.toggleExpander}>
-        <td><input className="uk-checkbox" type="checkbox" /></td>
+        <td>
+          <input className="uk-checkbox" type="checkbox" />
+        </td>
         <td className="uk-text-nowrap">{this.props.index}.</td>
-        <td><img className="uk-preserve-width uk-border-circle" src={user.picture.thumbnail} width={48} alt="avatar" /></td>
-        <td>{capitalize(user.name.first + ' ' + user.name.last)}<br /><small>{user.email}</small></td>
-        <td>{capitalize(user.location.city)} ({user.nat})</td>
+        <td>
+          <img
+            className="uk-preserve-width uk-border-circle"
+            src={user.picture.thumbnail}
+            width={48}
+            alt="avatar"
+          />
+        </td>
+        <td>
+          {capitalize(user.name.first + " " + user.name.last)}
+          <br />
+          <small>{user.email}</small>
+        </td>
+        <td>
+          {capitalize(user.location.city)} ({user.nat})
+        </td>
         <td>{formatDate(user.registered)}</td>
       </tr>,
       this.state.expanded && (
@@ -53,20 +68,28 @@ class UserTableRow extends React.Component {
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">
               <div className="uk-width-1-4 uk-text-center">
-                <img className="uk-preserve-width uk-border-circle" src={user.picture.large} alt="avatar" />
+                <img
+                  className="uk-preserve-width uk-border-circle"
+                  src={user.picture.large}
+                  alt="avatar"
+                />
               </div>
               <div className="uk-width-3-4">
-                <h3>{capitalize(user.name.first + ' ' + user.name.last)}</h3>
+                <h3>{capitalize(user.name.first + " " + user.name.last)}</h3>
                 <p>
-                  Address:<br/>
+                  Address:
+                  <br />
                   <i>
-                    {capitalize(user.location.street)}<br/>
-                    {user.location.postcode} {capitalize(user.location.city)}<br/>
+                    {capitalize(user.location.street)}
+                    <br />
+                    {user.location.postcode} {capitalize(user.location.city)}
+                    <br />
                     {user.nat}
                   </i>
                 </p>
                 <p>
-                  E-mail: {user.email}<br/>
+                  E-mail: {user.email}
+                  <br />
                   Phone: {user.phone}
                 </p>
                 <p>Date of birth: {formatDate(user.dob)}</p>
@@ -79,15 +102,15 @@ class UserTableRow extends React.Component {
   }
 }
 
-
-
 class App extends React.Component {
-  state = { users: null }
+  state = { users: null };
 
   componentDidMount() {
-    fetch('https://randomuser.me/api/1.1/?results=15')
+    fetch("https://randomuser.me/api/1.1/?results=15")
       .then(response => response.json())
-      .then(data => { this.setState({users: data.results}) });
+      .then(data => {
+        this.setState({ users: data.results });
+      });
   }
 
   render() {
@@ -109,12 +132,17 @@ class App extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {isLoading
-                  ? <tr><td colSpan={6} className="uk-text-center"><em className="uk-text-muted">Loading...</em></td></tr>
-                  : users.map((user, index) =>
-                      <UserTableRow key={index} index={index + 1} user={user}/>
-                    )
-                }
+                {isLoading ? (
+                  <tr>
+                    <td colSpan={6} className="uk-text-center">
+                      <em className="uk-text-muted">Loading...</em>
+                    </td>
+                  </tr>
+                ) : (
+                  users.map((user, index) => (
+                    <UserTableRow key={index} index={index + 1} user={user} />
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -124,4 +152,4 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById("root"));

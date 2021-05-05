@@ -28,8 +28,8 @@ class Operations extends Component {
   }
 
   handleStop() {
-    console.log("stop button clicked")
-    axios.post("/operation/startAllCameras")
+    console.log("stop button clicked");
+    axios.post("/operation/startAllCameras");
   }
 
   componentDidMount() {
@@ -150,7 +150,12 @@ class Operations extends Component {
             Start Cams
           </Button>
           <Col sm="1" />
-          <Button justify="right" onClick={this.handleStop} theme="danger" outline>
+          <Button
+            justify="right"
+            onClick={this.handleStop}
+            theme="danger"
+            outline
+          >
             <StopRoundedIcon />
             Stop Cams
           </Button>

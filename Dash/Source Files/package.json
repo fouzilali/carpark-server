@@ -5,6 +5,7 @@
   "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@react-hook/resize-observer": "^1.2.0",
     "axios": "^0.21.1",
     "camelize": "^1.0.0",

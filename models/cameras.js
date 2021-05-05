@@ -1,27 +1,26 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var imageSchema = Schema({
     name: String,
     desc: String,
     date: Date,
-    img:
-    {
+    img: {
         data: Buffer,
-        contentType: String
-    }
+        contentType: String,
+    },
 });
 
 const cameraSchema = new Schema({
     cameraID: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
-    mac:{
+    mac: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     parkingSpots: {
         type: [String],
@@ -31,13 +30,13 @@ const cameraSchema = new Schema({
         default: false,
         updatedAt: {
             type: Date,
-            default: Date.now
+            default: Date.now,
         },
-        required: true
+        required: true,
     },
-    setupImg: { imageSchema }
+    setupImg: { imageSchema },
 });
 
-var Cameras = mongoose.model('Camera', cameraSchema)
+var Cameras = mongoose.model("Camera", cameraSchema);
 
 module.exports = Cameras;

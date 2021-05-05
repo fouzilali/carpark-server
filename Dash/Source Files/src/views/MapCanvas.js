@@ -124,7 +124,7 @@ export default function MapCanvas() {
         <SvgLoader
           width="1000px"
           height="898px"
-          path={require("../../images/LG5.svg")}
+          path={require("../images/LG5.svg")}
         ></SvgLoader>
         {(() => {
           return spots.array.map((spot, i) => {

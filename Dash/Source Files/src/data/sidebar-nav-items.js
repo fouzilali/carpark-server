@@ -7,7 +7,6 @@ export default function() {
     //   htmlAfter: ""
     // },
 
-
     // {
     //   title: "Camera Setup",
     //   htmlBefore: '<i class="material-icons">videocam</i>',
@@ -39,7 +38,7 @@ export default function() {
       title: "Map",
       htmlBefore: '<i class="material-icons">map</i>',
       to: "/parking-map"
-    },
+    }
     // {
     //   title: "Demo Page",
     //   htmlBefore: '<i class="material-icons">videocam</i>',

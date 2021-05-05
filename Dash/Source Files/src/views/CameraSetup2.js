@@ -1,42 +1,25 @@
-import React from 'react';
-import './styleCS3.css';
-import { easeBounceOut } from 'd3-ease';
-import { interpolateString } from 'd3-interpolate';
+import React from "react";
+import "./styleCS3.css";
+import { easeBounceOut } from "d3-ease";
+import { interpolateString } from "d3-interpolate";
 import PageTitle from "../components/common/PageTitle";
 import { FixedSizeList } from "react-window";
 import PropTypes from "prop-types";
 import {
-  CardTitle,
-  Form,
-  FormSelect,
-  FormGroup,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Container, Row, Col, Card, CardHeader, CardBody, FormInput,
-  textInput
+  Container,
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
 } from "shards-react";
 
 import { Button as ShardsButton } from "shards-react";
 
 import {
   Chip,
-  CssBaseline,
-  Typography,
-  Paper,
-  CardActions,
-  CardContent,
-  Grid,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-  Divider,
-  AccordionActions,
   ListItem,
-  ListItemText
 } from "@material-ui/core";
-
 
 function renderRow(props) {
   const { index, style } = props;
@@ -53,13 +36,18 @@ renderRow.propTypes = {
   style: PropTypes.object.isRequired
 };
 
-function startAnimationLoop({ onProgress, onComplete, duration, initialProgress }) {
+function startAnimationLoop({
+  onProgress,
+  onComplete,
+  duration,
+  initialProgress
+}) {
   let start = null;
   let requestId = null;
 
   const startTimeDiff = (initialProgress || 0) * duration;
 
-  const step = (timestamp) => {
+  const step = timestamp => {
     if (!start) start = timestamp - startTimeDiff;
     let progress = (timestamp - start) / duration;
     if (progress > 1) {
@@ -74,14 +62,14 @@ function startAnimationLoop({ onProgress, onComplete, duration, initialProgress 
         onComplete();
       }
     }
-  }
+  };
   requestId = window.requestAnimationFrame(step);
 
   return {
     stop() {
       cancelAnimationFrame(requestId);
     }
-  }
+  };
 }
 
 function getStyles(element, props) {
@@ -94,18 +82,22 @@ function getStyles(element, props) {
 /* custom animations */
 function slide(element, { duration, direction, onComplete }) {
   const collapsedStyles = {
-    marginTop: '0px',
-    marginBottom: '0px',
-    height: '0px',
-  }
+    marginTop: "0px",
+    marginBottom: "0px",
+    height: "0px"
+  };
   const props = Object.keys(collapsedStyles);
 
-  const [ startStyles, targetStyles ] = direction === 'DOWN'
-    ? [ collapsedStyles, getStyles(element, props) ]
-    : [ getStyles(element, props), collapsedStyles ]
-  const interpolators = new Map(props.map(
-    prop => [prop, interpolateString(startStyles[prop], targetStyles[prop])]
-  ));
+  const [startStyles, targetStyles] =
+    direction === "DOWN"
+      ? [collapsedStyles, getStyles(element, props)]
+      : [getStyles(element, props), collapsedStyles];
+  const interpolators = new Map(
+    props.map(prop => [
+      prop,
+      interpolateString(startStyles[prop], targetStyles[prop])
+    ])
+  );
 
   return startAnimationLoop({
     duration,
@@ -115,28 +107,25 @@ function slide(element, { duration, direction, onComplete }) {
       interpolators.forEach((interpolator, prop) => {
         element.style[prop] = interpolator(delta);
       });
-    },
+    }
   });
 }
 
 function slideDown(element, { duration = 750, onComplete } = {}) {
-  return slide(element, { direction: 'DOWN', duration, onComplete });
+  return slide(element, { direction: "DOWN", duration, onComplete });
 }
 
 function slideUp(element, { duration = 750, onComplete } = {}) {
-  return slide(element, { direction: 'UP', duration, onComplete });
+  return slide(element, { direction: "UP", duration, onComplete });
 }
 
 class UserTableRow extends React.Component {
-  state = { expanded: false,
-  value: '' }
+  state = { expanded: false, value: "" };
 
-  
   //classesAccordian = useStylesAccordian();
 
   // handleChange = this.handleChange.bind(this);
   // handleSubmit = this.handleSubmit.bind(this);
-
 
   // handleChange(event) {
   //   this.setState({value: event.target.value});
@@ -148,29 +137,27 @@ class UserTableRow extends React.Component {
   //   event.preventDefault();
   // }
 
-
-  toggleExpander = (e) => {
-    if (e.target.type === 'checkbox') return;
+  toggleExpander = e => {
+    if (e.target.type === "checkbox") return;
 
     if (!this.state.expanded) {
-      this.setState(
-        { expanded: true },
-        () => {
-          if (this.refs.expanderBody) {
-            slideDown(this.refs.expanderBody);
-          }
+      this.setState({ expanded: true }, () => {
+        if (this.refs.expanderBody) {
+          slideDown(this.refs.expanderBody);
         }
-      );
+      });
     } else {
       slideUp(this.refs.expanderBody, {
-        onComplete: () => { this.setState({ expanded: false }); }
+        onComplete: () => {
+          this.setState({ expanded: false });
+        }
       });
     }
-  }
+  };
 
   render() {
     const { camera } = this.props;
-    
+
     return [
       <tr key="main" onClick={this.toggleExpander}>
         <td className="uk-text-nowrap">{this.props.index}.</td>
@@ -179,9 +166,9 @@ class UserTableRow extends React.Component {
         <td>{camera.isActive}</td>
       </tr>,
       this.state.expanded && (
-        <tr className="expandable" key="tr-expander"> 
+        <tr className="expandable" key="tr-expander">
           <td className="uk-background-muted" colSpan={6}>
-            <div ref="expanderBody" className="inner uk-grid">                                           
+            <div ref="expanderBody" className="inner uk-grid">
               <div>
                 {/* <form onSubmit={this.handleSubmit}>
                   <label>
@@ -191,9 +178,14 @@ class UserTableRow extends React.Component {
                   <input type="submit" value="Submit" />
                 </form> */}
 
-                <input type="text" 
-                 placeholder="Write text" onChange={(e) => this.props.updateCID(e.target.value,this.props.index)} />
-                
+                <input
+                  type="text"
+                  placeholder="Write text"
+                  onChange={e =>
+                    this.props.updateCID(e.target.value, this.props.index)
+                  }
+                />
+
                 {/* /*<Row>
                   <Col>
                     <Form>
@@ -243,64 +235,83 @@ class UserTableRow extends React.Component {
                 </Row> */}
               </div>
             </div>
-        </td>
-      </tr>             
+          </td>
+        </tr>
       )
     ];
   }
 }
 
-
-
 class CameraSetup4 extends React.Component {
-
   constructor(props) {
-    super(props)
-    
-    this.state = { cameras: [{
-      cameraID : "LG2-RowA1",
-      isActive:  "Active",
-      mac:  "12:45:88:21:34",
-      spotID : ['LG2-PS1','LG2-PS2','LG2-PS3','LG2-PS4','LG2-PS5','LG2-PS6','LG2-PS7']
+    super(props);
 
-    },
-    {
-      cameraID : "LG5-RowC3",
-      isActive:  "Active",
-      mac:  "21:23:12:45:67",
-      spotID : ['LG5-PS1','LG5-PS2','LG5-PS3','LG5-PS4','LG5-PS5','LG5-PS6','LG5-PS7']
-    }
-  ]}
-  this.updateCID = this.updateCID;
-  this.addSpot = this.addSpot;
+    this.state = {
+      cameras: [
+        {
+          cameraID: "LG2-RowA1",
+          isActive: "Active",
+          mac: "12:45:88:21:34",
+          spotID: [
+            "LG2-PS1",
+            "LG2-PS2",
+            "LG2-PS3",
+            "LG2-PS4",
+            "LG2-PS5",
+            "LG2-PS6",
+            "LG2-PS7"
+          ]
+        },
+        {
+          cameraID: "LG5-RowC3",
+          isActive: "Active",
+          mac: "21:23:12:45:67",
+          spotID: [
+            "LG5-PS1",
+            "LG5-PS2",
+            "LG5-PS3",
+            "LG5-PS4",
+            "LG5-PS5",
+            "LG5-PS6",
+            "LG5-PS7"
+          ]
+        }
+      ]
+    };
+    this.updateCID = this.updateCID;
+    this.addSpot = this.addSpot;
   }
 
-  updateCID = (cid,index) => {
-    var {cameras} = Object.assign({}, this.state);
-    cameras[index-1].cameraID = cid;
-    this.setState({cameras});
-  }
+  updateCID = (cid, index) => {
+    var { cameras } = Object.assign({}, this.state);
+    cameras[index - 1].cameraID = cid;
+    this.setState({ cameras });
+  };
 
-  addSpot = (spot,index) => {
-    var {cameras} = Object.assign({}, this.state);
-    cameras[index-1].spotID.push(spot);
-    this.setState({cameras});
-  }
+  addSpot = (spot, index) => {
+    var { cameras } = Object.assign({}, this.state);
+    cameras[index - 1].spotID.push(spot);
+    this.setState({ cameras });
+  };
 
   render() {
     const { cameras } = this.state;
     const isLoading = cameras === null;
     return (
-
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-          <PageTitle sm="4" title="Camera Setup" subtitle="Dashboard" className="text-sm-left" />
+          <PageTitle
+            sm="4"
+            title="Camera Setup"
+            subtitle="Dashboard"
+            className="text-sm-left"
+          />
         </Row>
-      
+
         <Row>
           <Col>
             <Card small className="mb-4">
-              <CardHeader className="border-bottom"/>
+              <CardHeader className="border-bottom" />
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
                   <thead className="bg-light">
@@ -312,20 +323,30 @@ class CameraSetup4 extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {isLoading
-                      ? <tr><td colSpan={6} className="uk-text-center"><em className="uk-text-muted">Loading...</em></td></tr>
-                      : cameras.map((camera, index) =>
-                          <UserTableRow updateCID = {this.updateCID} addSpot = {this.addSpot} key={index} index={index + 1} camera={camera}/>
-                        )
-                    }
+                    {isLoading ? (
+                      <tr>
+                        <td colSpan={6} className="uk-text-center">
+                          <em className="uk-text-muted">Loading...</em>
+                        </td>
+                      </tr>
+                    ) : (
+                      cameras.map((camera, index) => (
+                        <UserTableRow
+                          updateCID={this.updateCID}
+                          addSpot={this.addSpot}
+                          key={index}
+                          index={index + 1}
+                          camera={camera}
+                        />
+                      ))
+                    )}
                   </tbody>
                 </table>
               </CardBody>
-            </Card>  
+            </Card>
           </Col>
         </Row>
       </Container>
-
     );
   }
 }
