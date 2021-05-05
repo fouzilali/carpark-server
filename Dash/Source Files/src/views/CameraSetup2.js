@@ -365,6 +365,10 @@ class CameraSetup4 extends React.Component {
             subtitle="Dashboard"
             className="text-sm-left"
           />
+          <ShardsButton justify="left" >
+            
+            Save
+          </ShardsButton>
         </Row>
 
         <Row>
