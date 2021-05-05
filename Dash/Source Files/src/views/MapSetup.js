@@ -64,7 +64,6 @@ function renderAllTabHeads(allCams, a11yProps) {
     );
   });
 }
-// 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
 function renderAllTabs(allCams, value, dir) {
   return allCams.map((cam, index) => {
     return (

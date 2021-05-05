@@ -1,4 +1,14 @@
 import { SvgLoader } from "react-svgmt";
+import PageTitle from "../components/common/PageTitle";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  Button
+} from "shards-react";
 import React, { useState, useEffect } from "react";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "../components/map-canvas/ParkingSpot";
@@ -64,10 +74,17 @@ const sortSpots = arr => {
   });
 };
 
-export default function MapCanvas() {
+export default function MapCanvas({ filename }) {
+  function isEmpty(str) {
+    return !str || str.length === 0;
+  }
+  if (isEmpty(filename)) {
+    filename = "LG5";
+  }
   // const spots = example.spots;
   const [spots, setSpots] = useState({ array: [] });
   const [scale, setScale] = useState(1);
+  const [svg, setSVG] = useState({ xml: "" });
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("/setup/allSpots");
@@ -79,39 +96,66 @@ export default function MapCanvas() {
       fetchData();
     }, 1000);
 
+    axios
+      .get("/setup/getCameraImage", { params: { filename: filename } })
+      .then(res => setSVG({ xml: res.data }));
+
     return () => {
       clearInterval(interval);
     };
   }, []);
 
+  console.log(svg.xml);
+
   return (
-    <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
-      <svg width="1000px" height="898px">
-        <SvgLoader
-          width="1000px"
-          height="898px"
-          path={require("../images/LG5.svg")}
-        ></SvgLoader>
-        {(() => {
-          return spots.array.map((spot, i) => {
-            if (!spot) {
-              return null;
-            }
-            const mapXY = spot.mapXY || { x: i * 10, y: i * 10 };
-            return (
-              <ParkingSpot
-                key={i}
-                x={mapXY.x}
-                y={mapXY.y}
-                scale={scale}
-                // scale={1}
-                id={spot.spotID}
-                spot={spot}
-              ></ParkingSpot>
-            );
-          });
-        })()}
-      </svg>
-    </MapInteractionCSS>
+    <Container fluid className="main-content-container px-4">
+      <Row noGutters className="page-header py-4">
+        <PageTitle sm="4" title="Car Park Map" className="text-sm-left" />
+      </Row>
+      <Row>
+        <Col>
+          {/* <Card small className="mb-4">
+            <CardHeader className="border-bottom"></CardHeader>
+            <CardBody className="p-0 pb-3"> */}
+          <center>
+            <MapInteractionCSS
+              setScale={setScale}
+              maxScale={10000}
+              minScale={1}
+            >
+              <svg width="1000px" height="898px">
+                <SvgLoader
+                  width="1000px"
+                  height="898px"
+                  svgXML={svg.xml}
+                  // path={require("../images/LG5.svg")}
+                ></SvgLoader>
+                {(() => {
+                  return spots.array.map((spot, i) => {
+                    if (!spot) {
+                      return null;
+                    }
+                    const mapXY = spot.mapXY || { x: i * 10, y: i * 10 };
+                    return (
+                      <ParkingSpot
+                        key={i}
+                        x={mapXY.x}
+                        y={mapXY.y}
+                        scale={scale}
+                        // scale={1}
+                        id={spot.spotID}
+                        spot={spot}
+                      ></ParkingSpot>
+                    );
+                  });
+                })()}
+              </svg>
+            </MapInteractionCSS>
+          </center>
+          {/* </CardBody>
+          </Card> */}
+        </Col>
+      </Row>
+    </Container>
   );
 }

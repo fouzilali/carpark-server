@@ -109,21 +109,6 @@ function slideUp(element, { duration = 750, onComplete } = {}) {
 class UserTableRow extends React.Component {
   state = { expanded: false, value: "" };
 
-  //classesAccordian = useStylesAccordian();
-
-  // handleChange = this.handleChange.bind(this);
-  // handleSubmit = this.handleSubmit.bind(this);
-
-  // handleChange(event) {
-  //   this.setState({value: event.target.value});
-  // }
-
-  // handleSubmit(event) {
-  //   console.log(this.props.index)
-  //   alert('A name was submitted: ' + this.state.value);
-  //   event.preventDefault();
-  // }
-
   toggleExpander = e => {
     if (e.target.type === "checkbox") return;
 
@@ -157,14 +142,6 @@ class UserTableRow extends React.Component {
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">
               <div>
-                {/* <form onSubmit={this.handleSubmit}>
-                  <label>
-                    Name:
-                  <input type="text" onChange = {(value) => this.props.updateCID(value,this.props.key)} />
-                  </label>
-                  <input type="submit" value="Submit" />
-                </form> */}
-
                 <input
                   type="text"
                   placeholder="Write text"
@@ -172,54 +149,6 @@ class UserTableRow extends React.Component {
                     this.props.updateCID(e.target.value, this.props.index)
                   }
                 />
-
-                {/* /*<Row>
-                  <Col>
-                    <Form>
-                      <FormGroup>
-                        <InputGroup className="mb-3">
-                          <FormInput type = "text" placeholder = "Enter Camera ID"/>
-                            <InputGroupAddon type="append">
-                              <ShardsButton theme="white">
-                                <i className="material-icons">lock</i>
-                              </ShardsButton>
-                            </InputGroupAddon>
-                        </InputGroup>
-                          <Row>
-                            <Col lg="5"></Col>
-                            <Col sm="12" lg="7">
-                              <ShardsButton type ="submit" justify="right"  onClick = {(value) => updateCID(value,index)}>
-                                Update Camera ID 
-                              </ShardsButton>
-                            </Col>
-                          </Row>
-                      </FormGroup>
-                      <FormGroup>
-                        <InputGroup className="mb-3">
-                          <FormInput placeholder="Add Parking Spot IDs " onChange={() => {}} />
-                        </InputGroup>
-                        <Row>
-                          <Col lg="8"></Col>
-                            <Col sm="12" lg="4">
-                              <ShardsButton outline justify="right">
-                                Add
-                              </ShardsButton>
-                            </Col>
-                        </Row>
-                      </FormGroup>
-                    </Form>
-                  </Col> 
-                  <Col>
-                    <ul className="list-group">
-                    {camera.spotID.map(listitem => (
-                      <ListItem>
-                      <Chip label={listitem} />
-                      </ListItem>
-
-                    ))}
-                    </ul>
-                  </Col>
-                </Row> */}
               </div>
             </div>
           </td>

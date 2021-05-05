@@ -4,18 +4,20 @@
 
 ```sh
 npm install
-cd Dash/Source\ Files/
+cd 'Dash/Source Files/'
 npm install --legacy-peer-deps
 ```
 
 ## Run the whole system
 
-Whole system can be deployed by:
+Whole system can be run by:
 ```sh
 sudo apt-get install tmux # make sure tmux is installed 
 ./tmux_start.bash
 ```
-This starts a tmux session running both servers required (backend and LPR)
+This starts a tmux session running all servers required (backend, dashboard and LPR)
+
+Configure the Pi with the correct address of the server to connect
 
 You can use environment variables to change some of the behaviour
 
@@ -32,9 +34,9 @@ Beware by using tmux the servers will continue running if you close the terminal
 
 ## Run the backend
 
-The backend can be run by just doing
+The backend can be run by doing
 ```
-cd Dash/Source\ Files/ && npm run build
+cd 'Dash/Source Files/' && npm run build
 node app.js
 # OR
 nodemon app.js # For restarting the server on file change
@@ -44,7 +46,7 @@ nodemon app.js # For restarting the server on file change
 
 The Dashboard runs on its own server from a subfolder, do:
 ```
-cd Dash/Source\ Files/
+cd 'Dash/Source Files/'
 npm run start
 ```
 This start a live development server for the frontend 
