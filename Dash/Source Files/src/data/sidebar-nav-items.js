@@ -8,17 +8,17 @@ export default function() {
     // },
 
 
-    {
-      title: "Camera Setup",
-      htmlBefore: '<i class="material-icons">videocam</i>',
-      to: "/cameraSetup"
-    },
-
     // {
-    //   title: "Camera Setup 2",
+    //   title: "Camera Setup",
     //   htmlBefore: '<i class="material-icons">videocam</i>',
-    //   to: "/cameraSetup2"
+    //   to: "/cameraSetup"
     // },
+
+    {
+      title: "Camera Setup 2",
+      htmlBefore: '<i class="material-icons">videocam</i>',
+      to: "/cameraSetup2"
+    },
 
     {
       title: "Parking Spots Setup",
