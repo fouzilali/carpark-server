@@ -2,10 +2,8 @@ import { SvgLoader, SvgProxy } from "react-svgmt";
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { MapInteraction } from "react-map-interaction";
-import ParkingSpot from "./ParkingSpot";
+import ParkingSpot from "../components/map-canvas/ParkingSpot";
 import axios from "axios";
-import mapdata from "./mapdata";
-import { randChoose, randomLP } from "./mapdata";
 
 const MapInteractionCSS = props => {
   return (

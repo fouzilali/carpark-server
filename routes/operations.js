@@ -7,28 +7,27 @@ const pointInQuad = require("../pointInQuad");
 const { startAllCameras, stopAllCameras } = require("../websock.js");
 
 async function whichSpot(lpr, mac) {
-  // {
-  //     'lp': lp,
-  //     'x': xywh[0],
-  //     'y': xywh[1],
-  //     'w': xywh[2],
-  //     'h': xywh[3],
-  // }
-  // var spots = await ParkingSpots.find({cameraID: mac}, {spotID: 1, boundingBox: 1}).exec();
-  let camera = await Cameras.findOne({ mac: mac }).select(["cameraID"]).exec();
-  let spots = await ParkingSpots.find({ cameraID: camera.cameraID })
-    .select(["spotID", "boundingBox"])
-    .exec();
+    // {
+    //     'lp': lp,
+    //     'x': xywh[0],
+    //     'y': xywh[1],
+    //     'w': xywh[2],
+    //     'h': xywh[3],
+    // }
+    // var spots = await ParkingSpots.find({cameraID: mac}, {spotID: 1, boundingBox: 1}).exec();
+    let camera = await Cameras.findOne({ mac: mac })
+        .select(["cameraID"])
+        .exec();
+    let spots = await ParkingSpots.find({ cameraID: camera.cameraID })
+        .select(["spotID", "boundingBox"])
+        .exec();
 
-  console.log("spotsbegin");
-  console.log(spots);
-  console.log("spotsend");
-  return spots.find((spot) => {
-    const bbox = spot.boundingBox;
-    const id = spot.spotID;
-    const inside = pointInQuad(bbox, lpr);
-    return inside;
-  });
+    return spots.find(spot => {
+        const bbox = spot.boundingBox;
+        const id = spot.spotID;
+        const inside = pointInQuad(bbox, lpr);
+        return inside;
+    });
 }
 
 /**
@@ -42,24 +41,23 @@ async function whichSpot(lpr, mac) {
  * @returns {Object} ParkingSpot
  */
 router.put("/spotFilled", async (req, res, next) => {
-  try {
-    spot = await whichSpot(req.body, req.body.mac);
-    console.log(spot.spotID);
-    spot.vacant = false;
-    spot.lpNumber = req.body.lp;
-    await spot.save().then((saved) => {
-      if (saved !== spot) {
-        throw Error("Failure during saving of Parking Spot document");
-      }
-    });
+    try {
+        spot = await whichSpot(req.body, req.body.mac);
+        spot.vacant = false;
+        spot.lpNumber = req.body.lp;
+        await spot.save().then(saved => {
+            if (saved !== spot) {
+                throw Error("Failure during saving of Parking Spot document");
+            }
+        });
 
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 /**
@@ -73,22 +71,22 @@ router.put("/spotFilled", async (req, res, next) => {
  * @returns {Object} ParkingSpot
  */
 router.put("/spotVacated", async (req, res, next) => {
-  try {
-    result = await ParkingSpots.findOne(
-      { lpNumber: req.body.lp },
-      async (err, doc) => {
-        doc.vacant = true;
-        doc.lpNumber = null;
-        doc.save();
-      }
-    );
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    try {
+        result = await ParkingSpots.findOne(
+            { lpNumber: req.body.lp },
+            async (err, doc) => {
+                doc.vacant = true;
+                doc.lpNumber = null;
+                doc.save();
+            }
+        );
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 /**
@@ -98,15 +96,15 @@ router.put("/spotVacated", async (req, res, next) => {
  * @returns {boolean} filled?
  */
 router.get("/isFilled", async (req, res, next) => {
-  try {
-    result = await ParkingSpots.findOne({ spotID: req.body.spotID });
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(!result.vacant);
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    try {
+        result = await ParkingSpots.findOne({ spotID: req.body.spotID });
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(!result.vacant);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 /**
@@ -118,15 +116,15 @@ router.get("/isFilled", async (req, res, next) => {
  * @returns {string} Licence_Plate_number
  */
 router.get("/getLPNumber", async (req, res, next) => {
-  try {
-    result = await ParkingSpots.findOne({ spotID: req.body.spotID });
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(result.licensePlate);
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    try {
+        result = await ParkingSpots.findOne({ spotID: req.body.spotID });
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result.licensePlate);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 /**
@@ -137,63 +135,60 @@ router.get("/getLPNumber", async (req, res, next) => {
  * @returns {boolean} vacancy
  */
 router.get("/isVacated", async (req, res, next) => {
-  // isVacated(ParkingSpot) -> bool
-  try {
-    result = await ParkingSpots.findOne({ spotID: req.body.spotID });
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(result.vacant);
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    // isVacated(ParkingSpot) -> bool
+    try {
+        result = await ParkingSpots.findOne({ spotID: req.body.spotID });
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result.vacant);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 router.get("/allSpots", async (req, res, next) => {
-  try {
-    console.log("called");
-    result = await ParkingSpots.find({});
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    try {
+        result = await ParkingSpots.find({});
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 router.post("/startAllCameras", async (req, res, next) => {
-  try {
-    console.log("called");
-    startAllCameras();
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    try {
+        startAllCameras();
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 router.post("/stopAllCameras", async (req, res, next) => {
-  try {
-    console.log("called");
-    stopAllCameras();
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
+    try {
+        stopAllCameras();
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
 });
 
 // These two are for further features that will be implemented after the initial integration
 //with the raspberry pi and front-end.
 
 router.get("/userProfile", async (req, res, next) => {
-  // userProfile(licensePlate)-> userProfile
+    // userProfile(licensePlate)-> userProfile
 });
 
 router.get("/getTimeSpent", async (req, res, next) => {
-  // getTimeSpent(licensePlate/userProfile)
+    // getTimeSpent(licensePlate/userProfile)
 });
 
 module.exports = router;

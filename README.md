@@ -1,6 +1,14 @@
 # Backend Server for FYP Smart Car Park
 
-# Run the whole system
+## Install Dependencies
+
+```sh
+npm install
+cd Dash/Source\ Files/
+npm install --legacy-peer-deps
+```
+
+## Run the whole system
 
 Whole system can be deployed by:
 ```sh
@@ -22,7 +30,7 @@ To view the console log use `tmux a -t SESSION`
 
 Beware by using tmux the servers will continue running if you close the terminal or the SSH connectino. This is by design for deploying.
 
-# Run the backend
+## Run the backend
 
 The backend can be run by just doing
 ```
@@ -32,7 +40,7 @@ node app.js
 nodemon app.js # For restarting the server on file change
 ```
 
-# Run the frontend Dashboard
+## Run the frontend Dashboard
 
 The Dashboard runs on its own server from a subfolder, do:
 ```
@@ -50,6 +58,8 @@ https://docs.google.com/document/d/1pIdR6F_JqRwzT5WQwP6-qQdHoFrq54f41aaOVLchKHk/
 The associated yolo based LPR model to run on a RasPi is found at 
 
 https://github.com/IndianBoy42/yolov5
+
+If you use this repository please checkout the `hklpr` branch
 
 To run the Yolo model as a server, checkout this repo:
 

@@ -38,7 +38,6 @@ const storage = new GridFsStorage({
                 }
                 //   buf.toString('hex') + path.extname(file.originalname)
                 const filename = file.originalname.split(".")[0];
-                console.log(req.body);
                 const fileInfo = {
                     filename: filename,
                     fileID: req.fileID,
@@ -126,7 +125,6 @@ setupRouter.post("/addCamera", async (req, res, next) => {
  */
 
 setupRouter.post("/addCameraImage", upload.single("file"), (req, res, next) => {
-    console.log(req.body);
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json({ msg: "connected" });
@@ -144,7 +142,6 @@ setupRouter.post("/addCameraImage", upload.single("file"), (req, res, next) => {
  */
 setupRouter.post("/addParkingSpot", async (req, res, next) => {
     try {
-        console.log(req);
         let ps = {
             spotID: req.body.spotID,
             cameraID: req.body.cameraID,
@@ -208,13 +205,10 @@ setupRouter.put("/updateCamera", async (req, res, next) => {
  * @returns {Object} Camera
  */
 setupRouter.put("/updateParkingSpot", async (req, res, next) => {
-    console.log(req.body.boundingBox);
     try {
-        console.log({ spotID: req.body.spotID });
         result = await ParkingSpots.findOne(
             { spotID: req.body.spotID },
             function (err, doc) {
-                console.log(err, doc);
                 if (doc) {
                     //doc.spotID = req.body.spotID,
                     //doc.cameraID = req.body.cameraID,
@@ -370,7 +364,6 @@ setupRouter.get("/allSpots", async (req, res, next) => {
 
 setupRouter.get("/getCameraImage", async (req, res, next) => {
     let filename = String(req.query.filename);
-    console.log(filename);
     gfs.find({ filename: filename }).toArray((err, files) => {
         if (!files[0] || files.length === 0) {
             return res.status(200).json({

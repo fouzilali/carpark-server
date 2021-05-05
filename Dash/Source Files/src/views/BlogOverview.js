@@ -9,7 +9,7 @@ import UsersByDevice from "./../components/blog/UsersByDevice";
 import NewDraft from "./../components/blog/NewDraft";
 import Discussions from "./../components/blog/Discussions";
 import TopReferrals from "./../components/common/TopReferrals";
-import MapCanvas  from "./../components/map-canvas/MapCanvas.js";
+import MapCanvas from "./../views/MapCanvas.js";
 
 const BlogOverview = ({ smallStats }) => (
   <Container fluid className="main-content-container px-4">

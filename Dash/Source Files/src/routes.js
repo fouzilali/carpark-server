@@ -16,7 +16,7 @@ import CameraSetup from "./views/CameraSetup";
 import Operations from "./views/Operations";
 // import ParkingSpotSetup from "./views/ParkingSpotSetup";
 import DemoPage from "./views/DemoPage";
-import MapCanvas from "./components/map-canvas/MapCanvas.js";
+import MapCanvas from "./views/MapCanvas.js";
 import CameraSetup2 from "./views/CameraSetup2.js";
 import MapSetup from "./views/MapSetup.js"
 

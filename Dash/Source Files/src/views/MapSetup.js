@@ -24,8 +24,6 @@ import axios from "axios";
 function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
   const handleSubmit = r => {
-    console.log(r.annotations[0].vertices);
-    console.log(r);
     const scale = r.imageScaleFactor;
     r.annotations.map((annotation, index) => {
       var x1 = annotation.vertices[0].x;
@@ -37,7 +35,6 @@ function TabPanel(props) {
           y: y1
         }
       };
-      console.log(spot);
       try {
         const res = axios.put(
           "http://localhost:12000/setup/updateParkingSpot",
@@ -87,7 +84,6 @@ function renderAllTabHeads(allCams, a11yProps) {
 // 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
 function renderAllTabs(allCams, value, dir) {
   return allCams.map((cam, index) => {
-    console.log(cam.parkingSpots);
     return (
       <TabPanel
         key={index}
@@ -131,7 +127,6 @@ const MapSetup = () => {
   async function fetchData() {
     try {
       const res = await axios.get("http://localhost:12000/setup/getAllCameras");
-      console.log(res.data);
       return [
         {
           mapRegion: "LG5",
@@ -163,10 +158,6 @@ const MapSetup = () => {
   useEffect(() => {
     fetchData().then(data => setAllCams({ array: data }));
   }, []);
-
-  useEffect(() => {
-    console.log(allCams);
-  }, [allCams]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

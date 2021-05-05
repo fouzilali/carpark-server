@@ -167,13 +167,6 @@ const CameraSetup = () => {
     fetchData();    
   },[]);
 
-  useEffect( ()=>{
-    console.log(allCams);
-  },[allCams]);
-
-  
-
-
 
   return (
     <React.Fragment>
