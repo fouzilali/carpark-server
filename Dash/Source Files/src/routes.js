@@ -12,13 +12,12 @@ import { DefaultLayout } from "./layouts";
 // import ComponentsOverview from "./views/ComponentsOverview";
 // import Tables from "./views/Tables";
 // import BlogPosts from "./views/BlogPosts";
-import CameraSetup from "./views/CameraSetup";
 import Operations from "./views/Operations";
 // import ParkingSpotSetup from "./views/ParkingSpotSetup";
-import DemoPage from "./views/DemoPage";
-import MapCanvas from "./components/map-canvas/MapCanvas.js";
+import ParkingSpotSetup from "./views/ParkingSpotSetup";
+import MapCanvas from "./views/MapCanvas.js";
 import CameraSetup2 from "./views/CameraSetup2.js";
-import MapSetup from "./views/MapSetup.js"
+import MapSetup from "./views/MapSetup.js";
 
 export default [
   {
@@ -32,11 +31,6 @@ export default [
   //   layout: DefaultLayout,
   //   component: BlogOverview
   // },
-  {
-    path: "/cameraSetup",
-    layout: DefaultLayout,
-    component: CameraSetup
-  },
 
   {
     path: "/cameraSetup2",
@@ -49,15 +43,16 @@ export default [
     layout: DefaultLayout,
     component: Operations
   },
+
   {
     path: "/MapSetup",
     layout: DefaultLayout,
     component: MapSetup
   },
   {
-    path: "/DemoPage",
+    path: "/ParkingSpotSetup",
     layout: DefaultLayout,
-    component: DemoPage
+    component: ParkingSpotSetup
   },
   // {
   //   path: "/ParkingSpotSetup",

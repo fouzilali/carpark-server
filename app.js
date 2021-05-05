@@ -6,7 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("./logger.js");
 var fs = require("fs");
-var {websocketServer} = require("./websock.js");
+var { websocketServer } = require("./websock.js");
 const methodOverride = require("method-override");
 const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
@@ -15,7 +15,7 @@ var app = express();
 var server = require("http").createServer(app);
 
 //setup Websocket
-websocketServer(server)
+websocketServer(server);
 
 app.use(cors());
 
@@ -53,7 +53,6 @@ app.use(
     })
 );
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -65,11 +64,9 @@ routers(app);
 var error_handlers = require("./error_handler");
 error_handlers(app);
 
-
 const port = process.env.PORT || "12000";
 server.listen(port, () => {
     logger.info(`App listening at http://localhost:${port}`);
 });
-
 
 module.exports = app;

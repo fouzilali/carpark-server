@@ -1,11 +1,8 @@
-import { SvgLoader, SvgProxy } from "react-svgmt";
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import { SvgLoader } from "react-svgmt";
+import React, { useState, useEffect } from "react";
 import { MapInteraction } from "react-map-interaction";
-import ParkingSpot from "./ParkingSpot";
+import ParkingSpot from "../components/map-canvas/ParkingSpot";
 import axios from "axios";
-import mapdata from "./mapdata";
-import { randChoose, randomLP } from "./mapdata";
 
 const MapInteractionCSS = props => {
   return (
@@ -69,13 +66,7 @@ const sortSpots = arr => {
 
 export default function MapCanvas() {
   // const spots = example.spots;
-  const [spots, setSpots] = useState(
-    // (() => {
-    //   sortSpots(mapdata.array);
-    //   return mapdata;
-    // })()
-    { array: [] }
-  );
+  const [spots, setSpots] = useState({ array: [] });
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
@@ -88,45 +79,18 @@ export default function MapCanvas() {
       fetchData();
     }, 1000);
 
-    // JUST FOR TESTING
-    // setInterval(() => {
-    //   const spot = randChoose(spots.array);
-    //   spot.lpNumber = spot.lpNumber ? "" : randomLP();
-    //   const data = {
-    //     array: spots.array
-    //   };
-    //   setSpots(data); // force update
-    // }, 1000);
-    // const demo = setInterval(() => {
-    //   spots.array.find(spot => spot.spotID === "PS25").lpNumber = "SN7319";
-    //   const data = {
-    //     array: spots.array
-    //   };
-    //   setSpots(data); // force update
-    //   clearInterval(demo);
-
-    //   const interval2 = setInterval(() => {
-    //     spots.array.find(spot => spot.spotID === "PS25").lpNumber = "";
-    //     const data = {
-    //       array: spots.array
-    //     };
-    //     setSpots(data); // force update
-    //     clearInterval(interval2);
-    //   }, 10000);
-    // }, 10000);
-
     return () => {
       clearInterval(interval);
     };
   }, []);
+
   return (
     <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
-      {/* <svg width="100%" height="100%"> */}
       <svg width="1000px" height="898px">
         <SvgLoader
           width="1000px"
           height="898px"
-          path={require("../../images/LG5.svg")}
+          path={require("../images/LG5.svg")}
         ></SvgLoader>
         {(() => {
           return spots.array.map((spot, i) => {

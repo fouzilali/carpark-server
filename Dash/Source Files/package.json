@@ -5,6 +5,7 @@
   "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@react-hook/resize-observer": "^1.2.0",
     "axios": "^0.21.1",
     "camelize": "^1.0.0",
@@ -16,7 +17,7 @@
     "json-loader": "^0.5.7",
     "lodash.find": "^4.6.0",
     "react": "^16.6.3",
-    "react-annotation-tool": "file:../react-annotation-tool-master/react-annotation-tool-1.1.5.tgz",
+    "react-annotation-tool": "^1",
     "react-dom": "^16.6.3",
     "react-ga": "^2.5.6",
     "react-map-interaction": "^2.0.0",
