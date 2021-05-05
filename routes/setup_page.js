@@ -229,6 +229,13 @@ setupRouter.put("/updateParkingSpot", async (req, res, next) => {
         res.json(err);
     }
 });
+async function updateCameraStatus(mac, isActive) {
+    return await Cameras.findOne({ mac: mac }, function (err, doc) {
+        doc.isActive = isActive;
+        doc.save();
+        return doc;
+    });
+}
 
 /**
  * This function is for updating the information
@@ -242,14 +249,7 @@ setupRouter.put("/updateParkingSpot", async (req, res, next) => {
  */
 setupRouter.put("/updateCameraStatus", async (req, res, next) => {
     try {
-        result = await Cameras.findOne(
-            { cameraID: req.body.cameraID },
-            function (err, doc) {
-                doc.isActive = req.body.isActive;
-                doc.save();
-                return doc;
-            }
-        );
+        updateCameraStatus(req.body.mac, req.body.isActive);
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json(result);
@@ -405,4 +405,7 @@ setupRouter.get("/getCameraStatus", async (req, res, next) => {
     }
 });
 
-module.exports = setupRouter;
+module.exports = {
+    setupRouter: setupRouter,
+    updateCameraStatus: updateCameraStatus,
+};
