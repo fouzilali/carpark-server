@@ -41,17 +41,17 @@ async function whichSpot(lpr, mac) {
  * @returns {Object} ParkingSpot
  */
 router.put("/spotFilled", async (req, res, next) => {
-  try {
-    spot = await whichSpot(req.body, req.body.mac);
-    console.log(spot.spotID);
-    spot.vacant = false;
-    spot.lpNumber = req.body.lp;
-    spot.timeEntered = new Date();
-    await spot.save().then((saved) => {
-      if (saved !== spot) {
-        throw Error("Failure during saving of Parking Spot document");
-      }
-    });
+    try {
+        spot = await whichSpot(req.body, req.body.mac);
+        console.log(spot.spotID);
+        spot.vacant = false;
+        spot.lpNumber = req.body.lp;
+        spot.timeEntered = new Date();
+        await spot.save().then(saved => {
+            if (saved !== spot) {
+                throw Error("Failure during saving of Parking Spot document");
+            }
+        });
 
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");

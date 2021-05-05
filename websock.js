@@ -21,24 +21,24 @@ function websocketServer(server) {
 
         let mac = null;
 
-	function closedSocket() {
-		console.log("disconnected from " + mac);
+        function closedSocket() {
+            console.log("disconnected from " + mac);
             clearInterval(pingInterval);
-                updateCameraStatus(mac, false);
+            updateCameraStatus(mac, false);
             delete sockets[mac];
-	}
+        }
 
         ws.on("close", closedSocket);
 
-        ws.on("message", async (message) => {
-	console.log(">" + message)
-	    if (message == "pong") {
+        ws.on("message", async message => {
+            console.log(">" + message);
+            if (message == "pong") {
                 if (pingResolve) {
                     pingResolve(true);
                     pingResolve = null;
                 }
-		return;
-	    }
+                return;
+            }
             var input = JSON.parse(message);
             if (input.msg == "mac") {
                 if (input.mac in sockets) {
@@ -52,7 +52,7 @@ function websocketServer(server) {
                 updateCameraStatus(mac, true);
 
                 if (pingInterval == null) {
-		// Start the ping heartbeat
+                    // Start the ping heartbeat
                     pingInterval = setInterval(async () => {
                         await ws.send("ping");
                         const ok = await new Promise(resolve => {
@@ -63,12 +63,12 @@ function websocketServer(server) {
                         });
                         /* await */ updateCameraStatus(mac, ok);
                         if (!ok) {
-				console.log("pong failed")
+                            console.log("pong failed");
                             closedSocket();
                         }
                     }, 10000);
                 }
-            } 
+            }
         });
     });
 }
