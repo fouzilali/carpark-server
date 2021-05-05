@@ -1,4 +1,5 @@
 import React from "react";
+import ListGroup from "react-bootstrap/ListGroup";
 import {
   Container,
   Row,
@@ -19,7 +20,8 @@ class Operations extends Component {
     super(props); //since we are extending class Table so we have to use super in order to override Component class constructor
     this.state = {
       //state is by default an object
-      parkingSpots: []
+      parkingSpots: [],
+      cameras: []
     };
   }
 
@@ -38,6 +40,15 @@ class Operations extends Component {
         .get("/setup/allSpots")
         .then(response => {
           this.setState({ parkingSpots: response.data });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      axios
+        .get("/setup/getAllCameras")
+        .then(response => {
+          this.setState({ cameras: response.data });
         })
         .catch(error => {
           console.log(error);
@@ -135,6 +146,34 @@ class Operations extends Component {
     });
   }
 
+  renderCameraStatus() {
+    return this.state.cameras.map(camera => {
+      const cameraID = camera.cameraID;
+      const isActive = camera.isActive ? (
+        <Button disabled> Active </Button>
+      ) : (
+        <Button disabled theme="danger">
+          Inactive
+        </Button>
+      );
+
+      return (
+        <ListGroup.Item>
+          <Card className="mb-4">
+            <CardBody>
+              <Row>
+                <Col>
+                  <h5>{cameraID}</h5>
+                </Col>
+                <Col>{isActive}</Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </ListGroup.Item>
+      );
+    });
+  }
+
   render() {
     return (
       <Container fluid className="main-content-container px-4">
@@ -160,7 +199,11 @@ class Operations extends Component {
             Stop Cams
           </Button>
         </Row>
-        <Row></Row>
+        <div class="overflow-auto">
+          <ListGroup horizontal class="bg-transparent" variant="flush">
+            {this.renderCameraStatus()}
+          </ListGroup>
+        </div>
         <Row>
           <Col>
             <Card small className="mb-4">
