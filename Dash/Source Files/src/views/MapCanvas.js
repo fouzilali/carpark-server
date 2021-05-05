@@ -64,10 +64,17 @@ const sortSpots = arr => {
   });
 };
 
-export default function MapCanvas() {
+export default function MapCanvas({ filename }) {
+  function isEmpty(str) {
+    return !str || str.length === 0;
+  }
+  if (isEmpty(filename)) {
+    filename = "LG5";
+  }
   // const spots = example.spots;
   const [spots, setSpots] = useState({ array: [] });
   const [scale, setScale] = useState(1);
+  const [svg, setSVG] = useState({ xml: "" });
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("/setup/allSpots");
@@ -79,10 +86,16 @@ export default function MapCanvas() {
       fetchData();
     }, 1000);
 
+    axios
+      .get("/setup/getCameraImage", { params: { filename: filename } })
+      .then(res => setSVG({ xml: res.data }));
+
     return () => {
       clearInterval(interval);
     };
   }, []);
+
+  console.log(svg.xml);
 
   return (
     <MapInteractionCSS setScale={setScale} maxScale={10000} minScale={1}>
@@ -90,7 +103,8 @@ export default function MapCanvas() {
         <SvgLoader
           width="1000px"
           height="898px"
-          path={require("../images/LG5.svg")}
+          svgXML={svg.xml}
+          // path={require("../images/LG5.svg")}
         ></SvgLoader>
         {(() => {
           return spots.array.map((spot, i) => {
