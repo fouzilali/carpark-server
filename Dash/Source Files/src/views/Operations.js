@@ -58,13 +58,16 @@ class Operations extends Component {
 
   renderTableData() {
     function get_time_diff(datetime) {
-      if (typeof datetime === "undefined") {
+      console.log(datetime);
+      if (typeof datetime !== "undefined") {
         var datetime = datetime;
       } else {
         return null;
       }
       var datetime = new Date(datetime).getTime();
       var now = new Date().getTime();
+
+      console.log(datetime);
 
       if (isNaN(datetime)) {
         return "";
@@ -92,7 +95,8 @@ class Operations extends Component {
         timeDiff = timeDiff + String(date_diff.getUTCHours()) + " Hours ";
         // timeDiff = timeDiff + String(date_diff.getHours() - 8) + " Hours ";
       }
-      return timeDiff + date_diff.getUTCMinutes() + " Mins ";
+      timeDiff = timeDiff + date_diff.getUTCMinutes() + " Mins ";
+      return timeDiff;
     }
 
     function get_time(datetime) {
@@ -161,12 +165,18 @@ class Operations extends Component {
         <ListGroup.Item>
           <Card className="mb-4">
             <CardBody>
-              <Row>
+              <center>
+                <Row>
+                  <h5>{cameraID}</h5>
+                </Row>
+                <Row>{isActive}</Row>
+              </center>
+              {/* <Row>
                 <Col>
                   <h5>{cameraID}</h5>
                 </Col>
                 <Col>{isActive}</Col>
-              </Row>
+              </Row> */}
             </CardBody>
           </Card>
         </ListGroup.Item>
@@ -200,7 +210,7 @@ class Operations extends Component {
           </Button>
         </Row>
         <div class="overflow-auto">
-          <ListGroup horizontal class="bg-transparent" variant="flush">
+          <ListGroup horizontal className="bg-transparent">
             {this.renderCameraStatus()}
           </ListGroup>
         </div>
