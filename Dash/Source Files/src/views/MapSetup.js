@@ -25,29 +25,28 @@ function TabPanel(props) {
   const { value, index, PSpotOptions, url, ...other } = props;
   const handleSubmit = r => {
     console.log(r.annotations[0].vertices);
-    // let data = [];
-    // r.annotations.map((annotation, index)=>{
-    //   data.push({spotID: annotation.selectedOptions[1].value,
-    //              boundingBox: {
-    //                     x1: annotation.vertices[0].x,
-    //                     y1: annotation.vertices[0].y,
-    //                     x2: annotation.vertices[1].x,
-    //                     y2: annotation.vertices[1].y,
-    //                     x3: annotation.vertices[2].x,
-    //                     y3: annotation.vertices[2].y,
-    //                     x4: annotation.vertices[3].x,
-    //                     y4: annotation.vertices[3].y
-    //              }
-    //   })
-    // });
-    // data.forEach( spot => {
-    //   try{
-    //     const res = axios.put('http://localhost:12000/setup/updateParkingSpot',spot);
-    //   }
-    //   catch (err){
-    //     console.log(err)
-    //   }
-    // });
+    console.log(r);
+    const scale = r.imageScaleFactor;
+    r.annotations.map((annotation, index) => {
+      var x1 = annotation.vertices[0].x / scale;
+      var y1 = annotation.vertices[0].y / scale;
+      const spot = {
+        spotID: annotation.selectedOptions[1].value,
+        mapXY: {
+          x1: x1,
+          y1: y1
+        }
+      };
+      console.log(spot);
+      try {
+        const res = axios.put(
+          "http://localhost:12000/setup/updateParkingSpot",
+          spot
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    });
   };
   return (
     <div
@@ -79,7 +78,7 @@ function renderAllTabHeads(allCams, a11yProps) {
     return (
       <Tab
         key={index}
-        label={`REGION: ${cam.cameraID}`}
+        label={`REGION: ${cam.mapRegion}`}
         {...a11yProps(index)}
       />
     );
@@ -88,7 +87,7 @@ function renderAllTabHeads(allCams, a11yProps) {
 // 'http://localhost:12000/setup/getCameraImage?filename=wallpaper2'
 function renderAllTabs(allCams, value, dir) {
   return allCams.map((cam, index) => {
-    // console.log(cam.parkingSpots)
+    console.log(cam.parkingSpots)
     return (
       <TabPanel
         key={index}
@@ -128,7 +127,7 @@ const MapSetup = () => {
   const [allCams, setAllCams] = React.useState({
     array: [
       {
-        cameraID: "LG1",
+        mapRegion: "LG1",
         parkingSpots: {
           id: "0",
           value: "root",
@@ -147,7 +146,7 @@ const MapSetup = () => {
         }
       },
       {
-        cameraID: "LG2",
+        mapRegion: "LG2",
         parkingSpots: {
           id: "0",
           value: "root",
@@ -166,7 +165,7 @@ const MapSetup = () => {
         }
       },
       {
-        cameraID: "LG5",
+        mapRegion: "LG5",
         parkingSpots: {
           id: "0",
           value: "root",
@@ -187,40 +186,46 @@ const MapSetup = () => {
     ]
   });
 
-  // async function fetchData() {
-  //   try {
-  //     const res = await axios.get("http://localhost:12000/setup/getAllCameras");
-  //     // console.log(res.data);
-  //     let cams = [];
-  //     for (var cam of res.data){
-  //       cams.push({
-  //         cameraID: cam.cameraID,
-  //         parkingSpots: {
-  //         id: "0",
-  //         value: "root",
-  //         children: cam.parkingSpots.map((spot,index) => {
-  //           return({
-  //             id: `${index+1}`,
-  //             value: spot,
-  //             children: []
-  //           });
-  //         })
-  //       }
-  //       })
-  //     }
-  //     return cams;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async function fetchData() {
+    try {
+      const res = await axios.get("http://localhost:12000/setup/getAllCameras");
+      console.log(res.data);
+      return [
+        {
+          mapRegion: "LG5",
+          parkingSpots: {
+            id: "1",
+            value: "root",
+            children: res.data
+              .flatMap(cam =>
+                cam.parkingSpots.map((spot, i) => {
+                  return {
+                    id: `0`,
+                    value: spot,
+                    children: []
+                  };
+                })
+              )
+              .map((c, i) => {
+                c.id = `${i + 1}`;
+                console.log(c);
+                return c;
+              })
+          }
+        }
+      ];
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // useEffect(() => {
-  //   fetchData().then(data=>setAllCams({array: data}));
-  // },[]);
+  useEffect(() => {
+    fetchData().then(data => setAllCams({ array: data }));
+  }, []);
 
-  // useEffect( ()=>{
-  //   console.log(allCams);
-  // },[allCams]);
+  useEffect(() => {
+    console.log(allCams);
+  }, [allCams]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

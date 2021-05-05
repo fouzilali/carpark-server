@@ -210,15 +210,21 @@ setupRouter.put("/updateCamera", async (req, res, next) => {
 setupRouter.put("/updateParkingSpot", async (req, res, next) => {
     console.log(req.body.boundingBox);
     try {
+        console.log({ spotID: req.body.spotID });
         result = await ParkingSpots.findOne(
             { spotID: req.body.spotID },
             function (err, doc) {
-                //doc.spotID = req.body.spotID,
-                //doc.cameraID = req.body.cameraID,
-                //doc.vacant = req.body.vacant,
-                //doc.licensePlate = req.body.licensePlate,
-                doc.boundingBox = req.body.boundingBox;
-                doc.save();
+                console.log(err, doc);
+                if (doc) {
+                    //doc.spotID = req.body.spotID,
+                    //doc.cameraID = req.body.cameraID,
+                    //doc.vacant = req.body.vacant,
+                    //doc.licensePlate = req.body.licensePlate,
+                    if (req.body.boundingBox)
+                        doc.boundingBox = req.body.boundingBox;
+                    if (req.body.mapXY) doc.mapXY = req.body.mapXY;
+                    doc.save();
+                }
             }
         );
         res.statusCode = 200;
