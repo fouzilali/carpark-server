@@ -305,6 +305,14 @@ class CameraSetup4 extends React.Component {
     console.log(cameras[index - 1].parkingSpots);
   };
 
+  updateBack = () => {
+    var cams = this.state.cameras;
+    axios.put("/setup/updateAllCameras", {cameras : cams})
+    .then((res)=>{console.log(res);});
+  }
+
+
+
   render() {
     const { cameras } = this.state;
     const isLoading = cameras === null;
@@ -317,6 +325,9 @@ class CameraSetup4 extends React.Component {
             subtitle="Dashboard"
             className="text-sm-left"
           />
+          <ShardsButton justify="left" onClick = {this.updateBack}>            
+            Save
+          </ShardsButton>
         </Row>
 
         <Row>
