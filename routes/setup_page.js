@@ -341,6 +341,7 @@ setupRouter.get("/getAllCameras", async (req, res, next) => {
         result = await Cameras.find({});
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
+        res.setHeader("Access-Control-Allow-Origin", `http://http://35.241.86.83:3000`);
         res.json(result);
     } catch (err) {
         console.error(err);
@@ -372,7 +373,8 @@ setupRouter.get("/allSpots", async (req, res, next) => {
         result = await ParkingSpots.find({});
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.json(result);
+        res.setHeader("Access-Control-Allow-Origin", `http://http://35.241.86.83:3000`);
+                res.json(result);
     } catch (err) {
         console.error(err);
         res.json(err);
@@ -422,6 +424,7 @@ setupRouter.get("/getCameraStatus", async (req, res, next) => {
         result = await Cameras.findOne({ cameraID: req.body.cameraID });
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
+        res.setHeader("Access-Control-Allow-Origin", `http://http://35.241.86.83:3000`);
         res.json(result.isActive);
     } catch (err) {
         console.error(err);

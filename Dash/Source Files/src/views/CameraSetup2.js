@@ -5,6 +5,7 @@ import { interpolateString } from "d3-interpolate";
 import PageTitle from "../components/common/PageTitle";
 import PropTypes from "prop-types";
 import axios from "axios";
+var url = require('../url');
 
 import {
   Form,
@@ -281,7 +282,7 @@ class CameraSetup4 extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/setup/getAllCameras").then(res => {
+    axios.get(url+"/setup/getAllCameras").then(res => {
       console.log(res.data);
       this.setState({ cameras: res.data });
     });
@@ -307,7 +308,7 @@ class CameraSetup4 extends React.Component {
 
   updateBack = () => {
     var cams = this.state.cameras;
-    axios.put("/setup/updateAllCameras", {cameras : cams})
+    axios.put(url+"/setup/updateAllCameras", {cameras : cams})
     .then((res)=>{console.log(res);});
   }
 
