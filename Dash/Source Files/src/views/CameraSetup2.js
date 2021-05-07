@@ -5,8 +5,6 @@ import { interpolateString } from "d3-interpolate";
 import PageTitle from "../components/common/PageTitle";
 import PropTypes from "prop-types";
 import axios from "axios";
-var url = require('../url');
-
 import {
   Form,
   FormGroup,
@@ -23,6 +21,9 @@ import {
 import { Button as ShardsButton } from "shards-react";
 
 import { Chip, ListItem } from "@material-ui/core";
+var url = require('../url');
+
+
 
 function renderRow(props) {
   const { index, style } = props;
