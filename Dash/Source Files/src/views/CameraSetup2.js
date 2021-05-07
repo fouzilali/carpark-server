@@ -281,7 +281,7 @@ class CameraSetup4 extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:12000/setup/getAllCameras").then(res => {
+    axios.get("/setup/getAllCameras").then(res => {
       console.log(res.data);
       this.setState({ cameras: res.data });
     });

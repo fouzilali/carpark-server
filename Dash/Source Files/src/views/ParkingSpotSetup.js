@@ -39,7 +39,7 @@ function TabPanel(props) {
     });
     data.forEach(spot => {
       try {
-        axios.put("http://localhost:12000/setup/updateParkingSpot", spot);
+        axios.put("/setup/updateParkingSpot", spot);
       } catch (err) {}
     });
   };

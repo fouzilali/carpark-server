@@ -194,6 +194,30 @@ setupRouter.put("/updateCamera", async (req, res, next) => {
     }
 });
 
+setupRouter.put("/updateAllCameras", async (req, res, next) => {
+    try {
+        let cams = req.body.cameras;
+        var results=[];
+        cams.forEach(async (cam)=>{
+            result = await Cameras.findOne({ mac: cam.mac }, function (err, doc) {
+                if(doc){
+                doc.cameraID = cam.cameraID;
+                doc.parkingSpots = cam.parkingSpots;
+                doc.save();
+                }
+            });
+            results.push(result);
+        })
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.json(err);
+    }
+});
+
+
 /**
  * This function is for updating the information
  * of an existing parking spot
