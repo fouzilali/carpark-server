@@ -90,7 +90,7 @@ function renderAllTabs(allCams, value, dir) {
         value={value}
         index={index}
         PSpotOptions={cam.parkingSpots}
-        url={`${url}/setup/getCameraImage?filename=${cam.cameraID}`}
+        url={`${url}/setup/getCameraImage?filename=${cam.mac}`}
         dir={dir}
       />
     );
@@ -202,6 +202,7 @@ const ParkingSpotSetup = () => {
       for (var cam of res.data) {
         cams.push({
           cameraID: cam.cameraID,
+          mac: cam.mac,
           parkingSpots: {
             id: "0",
             value: "root",
