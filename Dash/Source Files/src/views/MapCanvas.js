@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "../components/map-canvas/ParkingSpot";
 import axios from "axios";
-var url = require('../url');
+import url from "../url.js";
 
 const MapInteractionCSS = props => {
   return (

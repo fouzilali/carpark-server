@@ -14,7 +14,7 @@ import PageTitle from "../components/common/PageTitle";
 import axios from "axios";
 import PlayArrowOutlinedIcon from "@material-ui/icons/PlayArrowOutlined";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
-var url = require('../url');
+import url from "../url.js";
 
 
 class Operations extends Component {

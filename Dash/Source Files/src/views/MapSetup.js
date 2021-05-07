@@ -7,7 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import axios from "axios";
-var url = require('../url');
+import url from "../url.js";
 
 
 function TabPanel(props) {

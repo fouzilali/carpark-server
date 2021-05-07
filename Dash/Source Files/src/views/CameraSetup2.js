@@ -21,7 +21,7 @@ import {
 import { Button as ShardsButton } from "shards-react";
 
 import { Chip, ListItem } from "@material-ui/core";
-var url = require('../url');
+import url from "../url.js";
 
 
 
