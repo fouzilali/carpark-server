@@ -199,7 +199,7 @@ setupRouter.put("/updateAllCameras", async (req, res, next) => {
         let cams = req.body.cameras;
         var results=[];
         cams.forEach(async (cam)=>{
-            result = await Cameras.findOne({ mac: cam.mac }, function (err, doc) {
+            let result = await Cameras.findOne({ mac: cam.mac }, function (err, doc) {
                 if(doc){
                 doc.cameraID = cam.cameraID;
                 doc.parkingSpots = cam.parkingSpots;
@@ -207,6 +207,31 @@ setupRouter.put("/updateAllCameras", async (req, res, next) => {
                 }
             });
             results.push(result);
+            // cam.parkingSpots.forEach(async (spot)=>{
+            //     let ps = {
+            //         spotID: spot,
+            //         cameraID: cam.cameraID,
+            //         vacant: true,
+            //         lpNumber: null,
+            //         reserved: false,
+            //         boundingBox: {
+            //             x1: 0,
+            //             x2: 0,
+            //             x3: 0,
+            //             x4: 0,
+            //             y1: 0,
+            //             y2: 0,
+            //             y3: 0,
+            //             y4: 0,
+            //     }
+            //     }
+            //     try{
+            //     let resul = await ParkingSpots.create(ps);
+            //     }
+            //     catch(err){
+            //         console.log(err);
+            //     }
+            // });
         })
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");

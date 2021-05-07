@@ -311,6 +311,16 @@ class CameraSetup4 extends React.Component {
     var cams = this.state.cameras;
     axios.put(url+"/setup/updateAllCameras", {cameras : cams})
     .then((res)=>{console.log(res);});
+    cams.forEach((cam)=>{
+      cam.parkingSpots.forEach((spot)=>{
+        axios.post(url+"/setup/addParkingSpot",{        
+          "spotID" : spot,
+          "cameraID": cam.cameraID,
+          "vacant": "true",
+          "reserved" : "false"      
+        })
+      })
+    })
   }
 
 
