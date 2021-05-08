@@ -258,7 +258,7 @@ setupRouter.put("/updateParkingSpot", async (req, res, next) => {
         result = await ParkingSpots.findOne(
             { spotID: req.body.spotID },
             function (err, doc) {
-                if (doc) {
+                
                     //doc.spotID = req.body.spotID,
                     //doc.cameraID = req.body.cameraID,
                     //doc.vacant = req.body.vacant,
@@ -267,7 +267,7 @@ setupRouter.put("/updateParkingSpot", async (req, res, next) => {
                         doc.boundingBox = req.body.boundingBox;
                     if (req.body.mapXY) doc.mapXY = req.body.mapXY;
                     doc.save();
-                }
+                
             }
         );
         res.statusCode = 200;
