@@ -1,0 +1,1680 @@
+npm WARN npm npm does not support Node.js v10.24.0
+npm WARN npm You should probably upgrade to a newer version of node as we
+npm WARN npm can't make any promises that npm will work with this version.
+npm WARN npm Supported releases of Node.js are the latest release of 4, 6, 7, 8, 9.
+npm WARN npm You can find the latest version at https://nodejs.org/
+
+> carpark-server@0.0.0 start /home/rohanmed123/carpark-server
+> node ./bin/www
+
+info: Example app listening at http://localhost:12000 {"service":"user-service"}
+(node:15825) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(node:15825) DeprecationWarning: Listening to events on the Db class has been deprecated and will be removed in the next major version.
+(node:15825) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+DB: Connected to mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority
+npm WARN npm npm does not support Node.js v10.24.0
+npm WARN npm You should probably upgrade to a newer version of node as we
+npm WARN npm can't make any promises that npm will work with this version.
+npm WARN npm Supported releases of Node.js are the latest release of 4, 6, 7, 8, 9.
+npm WARN npm You can find the latest version at https://nodejs.org/
+
+> carpark-server@0.0.0 start /home/rohanmed123/carpark-server
+> node ./bin/www
+
+info: Example app listening at http://localhost:12000 {"service":"user-service"}
+(node:15848) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(node:15848) DeprecationWarning: Listening to events on the Db class has been deprecated and will be removed in the next major version.
+(node:15848) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+DB: Connected to mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority
+[0mGET / [36m304 [0m158.647 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.345 ms - -[0m
+[0mGET /favicon.ico [33m404 [0m10.843 ms - 1771[0m
+[0mGET / [36m304 [0m7.579 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.295 ms - -[0m
+{ MongoError: E11000 duplicate key error collection: carpark-db.cameras index: cameraID_1 dup key: { cameraID: "dca632a237f4" }
+    at Function.create (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/error.js:57:12)
+    at toError (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/utils.js:123:22)
+    at coll.s.topology.insert (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/operations/common_functions.js:258:39)
+    at handler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/topology.js:944:24)
+    at fn (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection_pool.js:350:13)
+    at handleOperationResult (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/server.js:558:5)
+    at MessageStream.messageHandler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection.js:277:5)
+    at MessageStream.emit (events.js:198:13)
+    at processIncomingData (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:144:12)
+    at MessageStream._write (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:42:5)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+    at MessageStream.Writable.write (_stream_writable.js:299:11)
+    at TLSSocket.ondata (_stream_readable.js:710:20)
+    at TLSSocket.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+  driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { cameraID: 1 },
+  keyValue: { cameraID: 'dca632a237f4' } }
+[0mPOST /setup/announceCamera [32m200 [0m35.337 ms - 125[0m
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[0mPOST /setup/addCameraImage [32m200 [0m594.412 ms - 11[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 10,
+     y1: 323.8000030517578,
+     x2: 139,
+     y2: 311.8000030517578,
+     x3: 166,
+     y3: 487.8000030517578,
+     x4: 8,
+     y4: 507.8000030517578 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ 10, 323.8000030517578 ],
+  [ 139, 311.8000030517578 ],
+  [ 166, 487.8000030517578 ],
+  [ 8, 507.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '140.9999942779541', '544.4999957084656' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m20.427 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:15848) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+[0mPUT /operation/spotVacated [32m200 [0m7.942 ms - 4[0m
+{ MongoError: E11000 duplicate key error collection: carpark-db.cameras index: cameraID_1 dup key: { cameraID: "dca632a237f4" }
+    at Function.create (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/error.js:57:12)
+    at toError (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/utils.js:123:22)
+    at coll.s.topology.insert (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/operations/common_functions.js:258:39)
+    at handler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/topology.js:944:24)
+    at fn (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection_pool.js:350:13)
+    at handleOperationResult (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/server.js:558:5)
+    at MessageStream.messageHandler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection.js:277:5)
+    at MessageStream.emit (events.js:198:13)
+    at processIncomingData (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:144:12)
+    at MessageStream._write (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:42:5)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+    at MessageStream.Writable.write (_stream_writable.js:299:11)
+    at TLSSocket.ondata (_stream_readable.js:710:20)
+    at TLSSocket.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+  driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { cameraID: 1 },
+  keyValue: { cameraID: 'dca632a237f4' } }
+[0mPOST /setup/announceCamera [32m200 [0m11.084 ms - 125[0m
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[0mPOST /setup/addCameraImage [32m200 [0m429.504 ms - 11[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1086.500015258789', '744.5000052452087' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m11.875 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
+[0mPUT /operation/spotVacated [32m200 [0m4.864 ms - 4[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1102.5', '781.5000057220459' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m11.160 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 3)
+[0mPUT /operation/spotVacated [32m200 [0m4.493 ms - 4[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1137.0000457763672', '703.000009059906' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m11.663 ms - 2[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1138.0000305175781', '697.5000107288361' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m10.471 ms - 2[0m
+[0mPUT /operation/spotVacated [32m200 [0m4.525 ms - 4[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 4)
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1139.000015258789', '697.5000107288361' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m12.402 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 5)
+[0mPUT /operation/spotVacated [32m200 [0m4.524 ms - 4[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1137.5000381469727', '698.5000133514404' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m11.997 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 6)
+[0mPUT /operation/spotVacated [32m200 [0m4.649 ms - 4[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 7)
+[0mPUT /operation/spotVacated [32m200 [0m4.359 ms - 4[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1141.4999771118164', '701.4999890327454' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m11.035 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 8)
+[0mPUT /operation/spotVacated [32m200 [0m4.382 ms - 4[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1140.999984741211', '700.499986410141' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m9.672 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 9)
+[0mPUT /operation/spotVacated [32m200 [0m5.018 ms - 4[0m
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 607402d8f6feec123bce06ed,
+  spotID: 'B5' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740301f6feec123bce06ee,
+  spotID: 'B4' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 60740305f6feec123bce06ef,
+  spotID: 'B3' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: null,
+     x2: null,
+     x3: null,
+     x4: null,
+     y1: null,
+     y2: null,
+     y3: null,
+     y4: null },
+  _id: 6074030af6feec123bce06f0,
+  spotID: 'B2' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 561.4749908447266,
+     y1: 174.79999923706055,
+     x2: 699.4749908447266,
+     y2: 165.79999923706055,
+     x3: 737.4749908447266,
+     y3: 281.79999923706055,
+     x4: 573.4749908447266,
+     y4: 296.79999923706055 },
+  _id: 6074030ef6feec123bce06f1,
+  spotID: 'B1' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ 561.4749908447266, 174.79999923706055 ],
+  [ 699.4749908447266, 165.79999923706055 ],
+  [ 737.4749908447266, 281.79999923706055 ],
+  [ 573.4749908447266, 296.79999923706055 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 514.7875061035156,
+     y1: 95.80000305175781,
+     x2: 528,
+     y2: 263.8000030517578,
+     x3: 368,
+     y3: 267.8000030517578,
+     x4: 341,
+     y4: 103.80000305175781 },
+  _id: 607444cc34161114824d7850,
+  spotID: 'Q' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ 514.7875061035156, 95.80000305175781 ],
+  [ 528, 263.8000030517578 ],
+  [ 368, 267.8000030517578 ],
+  [ 341, 103.80000305175781 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 161,
+     y1: 311.8000030517578,
+     x2: 346,
+     y2: 286.8000030517578,
+     x3: 385,
+     y3: 451.8000030517578,
+     x4: 196,
+     y4: 483.8000030517578 },
+  _id: 607444d234161114824d7851,
+  spotID: 'W' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ 161, 311.8000030517578 ],
+  [ 346, 286.8000030517578 ],
+  [ 385, 451.8000030517578 ],
+  [ 196, 483.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 581.7875061035156,
+     y1: 292.8000030517578,
+     x2: 618,
+     y2: 426.8000030517578,
+     x3: 436,
+     y3: 457.8000030517578,
+     x4: 406,
+     y4: 315.8000030517578 },
+  _id: 607444d734161114824d7852,
+  spotID: 'E' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ 581.7875061035156, 292.8000030517578 ],
+  [ 618, 426.8000030517578 ],
+  [ 436, 457.8000030517578 ],
+  [ 406, 315.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+info: { boundingBox:
+   { x1: 797,
+     y1: 428.8000030517578,
+     x2: 788,
+     y2: 281.8000030517578,
+     x3: 639,
+     y3: 280.8000030517578,
+     x4: 645,
+     y4: 426.8000030517578 },
+  _id: 607444dd34161114824d7853,
+  spotID: 'R' } {"service":"user-service"}
+[ '1143.4999465942383', '697.9999959468842' ] [ [ 797, 428.8000030517578 ],
+  [ 788, 281.8000030517578 ],
+  [ 639, 280.8000030517578 ],
+  [ 645, 426.8000030517578 ] ]
+info: Inside? false {"service":"user-service"}
+TypeError: Cannot read property 'spotID' of undefined
+    at whichSpot (/home/rohanmed123/carpark-server/routes/operations.js:26:7)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[0mPUT /operation/spotFilled [32m200 [0m9.595 ms - 2[0m
+(node:15848) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'vacant' of null
+    at ParkingSpots.findOne (/home/rohanmed123/carpark-server/routes/operations.js:81:28)
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4875:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+    at /home/rohanmed123/carpark-server/node_modules/mongoose/lib/model.js:4898:21
+    at _hooks.execPost (/home/rohanmed123/carpark-server/node_modules/mongoose/lib/query.js:4447:11)
+    at /home/rohanmed123/carpark-server/node_modules/kareem/index.js:136:16
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+(node:15848) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 10)
+[0mPUT /operation/spotVacated [32m200 [0m4.844 ms - 4[0m
+{ MongoError: E11000 duplicate key error collection: carpark-db.cameras index: cameraID_1 dup key: { cameraID: "dca632a237f4" }
+    at Function.create (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/error.js:57:12)
+    at toError (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/utils.js:123:22)
+    at coll.s.topology.insert (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/operations/common_functions.js:258:39)
+    at handler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/topology.js:944:24)
+    at fn (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection_pool.js:350:13)
+    at handleOperationResult (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/server.js:558:5)
+    at MessageStream.messageHandler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection.js:277:5)
+    at MessageStream.emit (events.js:198:13)
+    at processIncomingData (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:144:12)
+    at MessageStream._write (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:42:5)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+    at MessageStream.Writable.write (_stream_writable.js:299:11)
+    at TLSSocket.ondata (_stream_readable.js:710:20)
+    at TLSSocket.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+  driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { cameraID: 1 },
+  keyValue: { cameraID: 'dca632a237f4' } }
+[0mPOST /setup/announceCamera [32m200 [0m10.651 ms - 125[0m
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[0mPOST /setup/addCameraImage [32m200 [0m1802.254 ms - 11[0m
+{ MongoError: E11000 duplicate key error collection: carpark-db.cameras index: cameraID_1 dup key: { cameraID: "dca632a237f4" }
+    at Function.create (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/error.js:57:12)
+    at toError (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/utils.js:123:22)
+    at coll.s.topology.insert (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/operations/common_functions.js:258:39)
+    at handler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/topology.js:944:24)
+    at fn (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection_pool.js:350:13)
+    at handleOperationResult (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/server.js:558:5)
+    at MessageStream.messageHandler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection.js:277:5)
+    at MessageStream.emit (events.js:198:13)
+    at processIncomingData (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:144:12)
+    at MessageStream._write (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:42:5)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+    at MessageStream.Writable.write (_stream_writable.js:299:11)
+    at TLSSocket.ondata (_stream_readable.js:710:20)
+    at TLSSocket.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+  driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { cameraID: 1 },
+  keyValue: { cameraID: 'dca632a237f4' } }
+[0mPOST /setup/announceCamera [32m200 [0m6.849 ms - 125[0m
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[0mPOST /setup/addCameraImage [32m200 [0m1026.000 ms - 11[0m
+{ MongoError: E11000 duplicate key error collection: carpark-db.cameras index: cameraID_1 dup key: { cameraID: "dca632a237f4" }
+    at Function.create (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/error.js:57:12)
+    at toError (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/utils.js:123:22)
+    at coll.s.topology.insert (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/operations/common_functions.js:258:39)
+    at handler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/topology.js:944:24)
+    at fn (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection_pool.js:350:13)
+    at handleOperationResult (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/server.js:558:5)
+    at MessageStream.messageHandler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection.js:277:5)
+    at MessageStream.emit (events.js:198:13)
+    at processIncomingData (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:144:12)
+    at MessageStream._write (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:42:5)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+    at MessageStream.Writable.write (_stream_writable.js:299:11)
+    at TLSSocket.ondata (_stream_readable.js:710:20)
+    at TLSSocket.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+  driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { cameraID: 1 },
+  keyValue: { cameraID: 'dca632a237f4' } }
+[0mPOST /setup/announceCamera [32m200 [0m8.560 ms - 125[0m
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[0mPOST /setup/addCameraImage [32m200 [0m1407.588 ms - 11[0m
+{ MongoError: E11000 duplicate key error collection: carpark-db.cameras index: cameraID_1 dup key: { cameraID: "dca632a237f4" }
+    at Function.create (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/error.js:57:12)
+    at toError (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/utils.js:123:22)
+    at coll.s.topology.insert (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/operations/common_functions.js:258:39)
+    at handler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/topology.js:944:24)
+    at fn (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection_pool.js:350:13)
+    at handleOperationResult (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/core/sdam/server.js:558:5)
+    at MessageStream.messageHandler (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/connection.js:277:5)
+    at MessageStream.emit (events.js:198:13)
+    at processIncomingData (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:144:12)
+    at MessageStream._write (/home/rohanmed123/carpark-server/node_modules/mongodb/lib/cmap/message_stream.js:42:5)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+    at MessageStream.Writable.write (_stream_writable.js:299:11)
+    at TLSSocket.ondata (_stream_readable.js:710:20)
+    at TLSSocket.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+  driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { cameraID: 1 },
+  keyValue: { cameraID: 'dca632a237f4' } }
+[0mPOST /setup/announceCamera [32m200 [0m10.119 ms - 125[0m
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[Object: null prototype] { mac: 'dca632a237f4', name: 'name', desc: 'desc' }
+[0mPOST /setup/addCameraImage [32m200 [0m528.576 ms - 11[0m
+npm WARN npm npm does not support Node.js v10.24.0
+npm WARN npm You should probably upgrade to a newer version of node as we
+npm WARN npm can't make any promises that npm will work with this version.
+npm WARN npm Supported releases of Node.js are the latest release of 4, 6, 7, 8, 9.
+npm WARN npm You can find the latest version at https://nodejs.org/
+
+> carpark-server@0.0.0 start /home/rohanmed123/carpark-server
+> node ./bin/www
+
+info: Example app listening at http://localhost:12000 {"service":"user-service"}
+(node:24184) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(node:24184) DeprecationWarning: Listening to events on the Db class has been deprecated and will be removed in the next major version.
+(node:24184) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+DB: Connected to mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority
