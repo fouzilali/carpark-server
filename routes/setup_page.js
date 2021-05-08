@@ -265,8 +265,8 @@ setupRouter.put("/updateParkingSpot", async (req, res, next) => {
                     //doc.licensePlate = req.body.licensePlate,
                     if (req.body.boundingBox)
                         doc.boundingBox = req.body.boundingBox;
-                    if (req.body.mapXY) doc.mapXY = req.body.mapXY;
-                    doc.save();
+                    // if (req.body.mapXY) doc.mapXY = req.body.mapXY;
+                    // doc.save();
                 
             }
         );
