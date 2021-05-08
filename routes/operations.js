@@ -77,9 +77,11 @@ router.put("/spotVacated", async (req, res, next) => {
         result = await ParkingSpots.findOne(
             { lpNumber: req.body.lp },
             async (err, doc) => {
+                if(doc){
                 doc.vacant = true;
                 doc.lpNumber = null;
                 doc.save();
+                }
             }
         );
         res.statusCode = 200;
