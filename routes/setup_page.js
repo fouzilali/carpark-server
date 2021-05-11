@@ -28,8 +28,7 @@ const logger = require("../logger");
 //imageupload helpers
 
 const storage = new GridFsStorage({
-    url:
-        "mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority",
+    url: "mongodb+srv://smartCarPark:fyp2021@carparkcluster.lnhjd.mongodb.net/carpark-db?retryWrites=true&w=majority",
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
@@ -197,15 +196,18 @@ setupRouter.put("/updateCamera", async (req, res, next) => {
 setupRouter.put("/updateAllCameras", async (req, res, next) => {
     try {
         let cams = req.body.cameras;
-        var results=[];
-        cams.forEach(async (cam)=>{
-            let result = await Cameras.findOne({ mac: cam.mac }, function (err, doc) {
-                if(doc){
-                doc.cameraID = cam.cameraID;
-                doc.parkingSpots = cam.parkingSpots;
-                doc.save();
+        var results = [];
+        cams.forEach(async cam => {
+            let result = await Cameras.findOne(
+                { mac: cam.mac },
+                function (err, doc) {
+                    if (doc) {
+                        doc.cameraID = cam.cameraID;
+                        doc.parkingSpots = cam.parkingSpots;
+                        doc.save();
+                    }
                 }
-            });
+            );
             results.push(result);
             // cam.parkingSpots.forEach(async (spot)=>{
             //     let ps = {
@@ -232,7 +234,7 @@ setupRouter.put("/updateAllCameras", async (req, res, next) => {
             //         console.log(err);
             //     }
             // });
-        })
+        });
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json(result);
@@ -241,7 +243,6 @@ setupRouter.put("/updateAllCameras", async (req, res, next) => {
         res.json(err);
     }
 });
-
 
 /**
  * This function is for updating the information
@@ -258,16 +259,14 @@ setupRouter.put("/updateParkingSpot", async (req, res, next) => {
         result = await ParkingSpots.findOne(
             { spotID: req.body.spotID },
             function (err, doc) {
-                
-                    //doc.spotID = req.body.spotID,
-                    //doc.cameraID = req.body.cameraID,
-                    //doc.vacant = req.body.vacant,
-                    //doc.licensePlate = req.body.licensePlate,
-                    if (req.body.boundingBox)
-                        doc.boundingBox = req.body.boundingBox;
-                    // if (req.body.mapXY) doc.mapXY = req.body.mapXY;
-                    // doc.save();
-                
+                //doc.spotID = req.body.spotID,
+                //doc.cameraID = req.body.cameraID,
+                //doc.vacant = req.body.vacant,
+                //doc.licensePlate = req.body.licensePlate,
+                if (req.body.boundingBox)
+                    doc.boundingBox = req.body.boundingBox;
+                // if (req.body.mapXY) doc.mapXY = req.body.mapXY;
+                // doc.save();
             }
         );
         res.statusCode = 200;
@@ -366,7 +365,7 @@ setupRouter.get("/getAllCameras", async (req, res, next) => {
         result = await Cameras.find({});
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.setHeader("Access-Control-Allow-Origin", `http://http://35.241.86.83:3000`);
+        res.setHeader("Access-Control-Allow-Origin", `*`); // FIXME: so insecure
         res.json(result);
     } catch (err) {
         console.error(err);
@@ -398,8 +397,11 @@ setupRouter.get("/allSpots", async (req, res, next) => {
         result = await ParkingSpots.find({});
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.setHeader("Access-Control-Allow-Origin", `http://http://35.241.86.83:3000`);
-                res.json(result);
+        res.setHeader(
+            "Access-Control-Allow-Origin",
+            `http://http://35.241.86.83:3000`
+        );
+        res.json(result);
     } catch (err) {
         console.error(err);
         res.json(err);
@@ -449,7 +451,10 @@ setupRouter.get("/getCameraStatus", async (req, res, next) => {
         result = await Cameras.findOne({ cameraID: req.body.cameraID });
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.setHeader("Access-Control-Allow-Origin", `http://http://35.241.86.83:3000`);
+        res.setHeader(
+            "Access-Control-Allow-Origin",
+            `http://http://35.241.86.83:3000`
+        );
         res.json(result.isActive);
     } catch (err) {
         console.error(err);
