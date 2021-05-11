@@ -1,5 +1,23 @@
 # Backend Server for FYP Smart Car Park
 
+To run using Docker:
+
+Clone the Repositories like so:
+```
+carpark-docker/
+├─ carpark-server/
+├─ fyp-lpr-gcp-functions/
+```
+Then build the container using
+```sh
+cp carpark-server/Dockerfile
+docker build -t username/carpark-server .
+```
+Then you can run the docker image:
+```sh
+docker run -it -d -p 8000:8000 -p 3000:3000 -p 12000:12000 amedhi/carpark-server:latest
+```
+
 ## Install Dependencies
 
 ```sh
