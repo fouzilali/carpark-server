@@ -10,7 +10,6 @@ tmux new-session -d -s $SESSION
 tmux rename-window -t $SESSION:0 "lpr"
 tmux new-window -t $SESSION:1 -n 'back'
 tmux new-window -t $SESSION:2 -n 'dash'
-tmux new-window -t $SESSION:3 -n 'htop'
 
 tmux send-keys -t "lpr" 'bash' C-m 'clear' C-m 
 tmux send-keys -t "lpr" "cd ${LPR_SERVER_DIR}" C-m 
@@ -25,5 +24,7 @@ tmux send-keys -t "dash" 'bash' C-m 'clear' C-m
 tmux send-keys -t "dash" "cd ${DASH_SERVER_DIR}" C-m 
 tmux send-keys -t "dash" 'npm run start' C-m 
 
-tmux send-keys -t "htop" 'bash' C-m 'clear' C-m 
-tmux send-keys -t "htop" "htop" C-m 
+while sleep 60; do
+    ps aux | grep node
+    ps aux | grep python
+done
