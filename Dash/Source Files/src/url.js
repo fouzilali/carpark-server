@@ -1,2 +1,2 @@
-const url = `http://${window.location.hostname}:12000`;
-export default url;
+const MASTER_URL = `http://${window.location.hostname}:12000`;
+export default MASTER_URL;

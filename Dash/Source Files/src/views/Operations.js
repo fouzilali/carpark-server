@@ -14,7 +14,7 @@ import PageTitle from "../components/common/PageTitle";
 import axios from "axios";
 import PlayArrowOutlinedIcon from "@material-ui/icons/PlayArrowOutlined";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
-import url from "../url.js";
+import MASTER_URL from "../url.js";
 
 
 class Operations extends Component {
@@ -28,18 +28,18 @@ class Operations extends Component {
   }
 
   handleStart() {
-    axios.post(url+"/operation/startAllCameras");
+    axios.post(MASTER_URL+"/operation/startAllCameras");
   }
 
   handleStop() {
     console.log("stop button clicked");
-    axios.post(url+"/operation/startAllCameras");
+    axios.post(MASTER_URL+"/operation/startAllCameras");
   }
 
   componentDidMount() {
     setInterval(() => {
       axios
-        .get(url+"/setup/allSpots")
+        .get(MASTER_URL+"/setup/allSpots")
         .then(response => {
           this.setState({ parkingSpots: response.data });
         })
@@ -48,7 +48,7 @@ class Operations extends Component {
         });
 
       axios
-        .get(url+"/setup/getAllCameras")
+        .get(MASTER_URL+"/setup/getAllCameras")
         .then(response => {
           this.setState({ cameras: response.data });
         })

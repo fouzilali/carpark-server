@@ -21,7 +21,7 @@ import {
 import { Button as ShardsButton } from "shards-react";
 
 import { Chip, ListItem } from "@material-ui/core";
-import url from "../url.js";
+import MASTER_URL from "../url.js";
 
 
 
@@ -283,7 +283,7 @@ class CameraSetup4 extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(url+"/setup/getAllCameras").then(res => {
+    axios.get(MASTER_URL+"/setup/getAllCameras").then(res => {
       console.log(res.data);
       this.setState({ cameras: res.data });
     });
@@ -309,11 +309,11 @@ class CameraSetup4 extends React.Component {
 
   updateBack = () => {
     var cams = this.state.cameras;
-    axios.put(url+"/setup/updateAllCameras", {cameras : cams})
+    axios.put(MASTER_URL+"/setup/updateAllCameras", {cameras : cams})
     .then((res)=>{console.log(res);});
     cams.forEach((cam)=>{
       cam.parkingSpots.forEach((spot)=>{
-        axios.post(url+"/setup/addParkingSpot",{        
+        axios.post(MASTER_URL+"/setup/addParkingSpot",{        
           "spotID" : spot,
           "cameraID": cam.cameraID,
           "vacant": "true",

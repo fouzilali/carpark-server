@@ -7,7 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import axios from "axios";
-import url from "../url.js";
+import MASTER_URL from "../url.js";
 
 
 function TabPanel(props) {
@@ -24,7 +24,7 @@ function TabPanel(props) {
         }
       };
       try {
-        axios.put(url+"/setup/updateParkingSpot", spot);
+        axios.put(MASTER_URL+"/setup/updateParkingSpot", spot);
       } catch (err) {
         console.log(err);
       }
@@ -110,7 +110,7 @@ const MapSetup = () => {
 
   async function fetchData() {
     try {
-      const res = await axios.get(url+"/setup/getAllCameras");
+      const res = await axios.get(MASTER_URL+"/setup/getAllCameras");
       return [
         {
           mapRegion: "LG5",

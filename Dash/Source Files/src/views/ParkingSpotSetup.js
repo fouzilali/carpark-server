@@ -7,7 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import axios from "axios";
-import url from "../url.js";
+import MASTER_URL from "../url.js";
 
 
 function TabPanel(props) {
@@ -43,7 +43,7 @@ function TabPanel(props) {
     data.forEach(spot => {
       try {
         console.log(spot)
-        axios.put("http://35.241.86.83:12000/setup/updateParkingSpot", spot);
+        axios.put(MASTER_URL + "/setup/updateParkingSpot", spot);
       } catch (err) {}
     });
   };
@@ -92,7 +92,7 @@ function renderAllTabs(allCams, value, dir) {
         value={value}
         index={index}
         PSpotOptions={cam.parkingSpots}
-        url={`${url}/setup/getCameraImage?filename=${cam.mac}`}
+        url={`${MASTER_URL}/setup/getCameraImage?filename=${cam.mac}`}
         dir={dir}
       />
     );
@@ -199,7 +199,7 @@ const ParkingSpotSetup = () => {
 
   async function fetchData() {
     try {
-      const res = await axios.get(url+"/setup/getAllCameras");
+      const res = await axios.get(MASTER_URL+"/setup/getAllCameras");
       let cams = [];
       for (var cam of res.data) {
         cams.push({

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { MapInteraction } from "react-map-interaction";
 import ParkingSpot from "../components/map-canvas/ParkingSpot";
 import axios from "axios";
-import url from "../url.js";
+import MASTER_URL from "../url.js";
 
 const MapInteractionCSS = props => {
   return (
@@ -80,7 +80,7 @@ export default function MapCanvas({ filename }) {
   const [svg, setSVG] = useState({ xml: "" });
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(url+"/setup/allSpots");
+      const result = await axios.get(MASTER_URL+"/setup/allSpots");
       sortSpots(result.data);
       setSpots({ array: result.data });
     };
@@ -90,7 +90,7 @@ export default function MapCanvas({ filename }) {
     }, 1000);
 
     axios
-      .get(url+"/setup/getCameraImage", { params: { filename: filename } })
+      .get(MASTER_URL+"/setup/getCameraImage", { params: { filename: filename } })
       .then(res => setSVG({ xml: res.data }));
 
     return () => {
@@ -127,6 +127,9 @@ export default function MapCanvas({ filename }) {
                   return spots.array.map((spot, i) => {
                     if (!spot) {
                       return null;
+                    }
+                    if (!spot.mapXY){
+                      return null
                     }
                     const mapXY = spot.mapXY || { x: i * 10, y: i * 10 };
                     return (
