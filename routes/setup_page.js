@@ -397,10 +397,7 @@ setupRouter.get("/allSpots", async (req, res, next) => {
         result = await ParkingSpots.find({});
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.setHeader(
-            "Access-Control-Allow-Origin",
-            `http://http://35.241.86.83:3000`
-        );
+        res.setHeader("Access-Control-Allow-Origin", `*`);
         res.json(result);
     } catch (err) {
         console.error(err);
