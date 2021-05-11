@@ -39,8 +39,10 @@ function TabPanel(props) {
       });
       return data;
     });
+    console.log(data);
     data.forEach(spot => {
       try {
+        console.log(spot)
         axios.put("http://35.241.86.83:12000/setup/updateParkingSpot", spot);
       } catch (err) {}
     });
